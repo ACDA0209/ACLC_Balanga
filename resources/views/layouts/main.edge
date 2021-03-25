@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @include('layouts/header')
+</head>
+<style> </style>
+
+<body>
+  
+  @include('layouts/top-bar')
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container d-flex">
+
+      <div class="logo mr-auto">
+        {{--  <h1 class="text-light"><a href="index.html"><span>ACLC Balanga</span></a></h1>  --}}
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="/"><img src="aclc_logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      @include('layouts/nav-menu')
+
+    </div>
+  </header><!-- End Header -->
+
+  @!section('content')
+
+  @include('layouts/footer')
+</body>
+
+</html>
