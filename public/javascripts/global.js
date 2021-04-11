@@ -2,6 +2,7 @@
 var APP_URL = 'http://localhost:3333'
 var wsConnId = ''
 var ajax_var_request;
+
 function ajaxRequest(url, data) {
   if (ajax_var_request && ajax_var_request.readyState != 4)
   {

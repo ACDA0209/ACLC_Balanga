@@ -3,7 +3,7 @@ var currentPage = 1;
 
 
 $(() => {
-    console.log("connected to admission js")
+
     $(document).on('click', '#btn_submit', () => {
         storeUser()
       })
@@ -14,9 +14,20 @@ function storeUser() {
     ajaxRequestForm(`${URL}/submission`, $('#form_admission'))
     .then(response => {
         hideOverlay()
-     
+        
+        Swal.fire({
+            icon: response.icon,
+            title: response.title,
+            text: response.text,
+          })
+
     })
     .catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+        })
       console.log(err)
     })
   }
