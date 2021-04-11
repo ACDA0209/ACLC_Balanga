@@ -17,4 +17,6 @@
 const Route = use('Route')
 
 Route.on('/').render('client.home.index')
-Route.on('/admission').render('client.admission.index')
+Route.get('/admission', 'Student/AdmissionController.index')
+Route.post('/admission/submission', 'Student/AdmissionController.submission')
+

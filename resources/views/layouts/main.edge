@@ -6,6 +6,7 @@
 <style> </style>
 
 <body>
+  <div id="overlay" class=""></div>
   
   @include('layouts/top-bar')
   <!-- ======= Header ======= -->
@@ -24,6 +25,8 @@
   </header><!-- End Header -->
 
   @!section('content')
+
+  @!section('javascripts')
 
   @include('layouts/footer')
 </body>

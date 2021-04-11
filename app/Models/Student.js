@@ -2,10 +2,12 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
+const Database = use('Database')
+const Encryption = use('Encryption')
 
 class Student extends Model {
     static get table () {
-        return 'admin_users'
+        return 'students'
     } 
 
     static get createdAtColumn () {
@@ -30,6 +32,8 @@ class Student extends Model {
     }
     /*Setters*/
 
+
+    
 
 }
 

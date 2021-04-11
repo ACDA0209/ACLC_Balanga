@@ -19,7 +19,7 @@ class StudentsSchema extends Schema {
       table.string('contact', 16).nullable()
       table.integer('admission_status_id').unsigned().notNullable().references('admission_statuses.id')
       table.text('note').nullable()
-      table.integer('updated_by').unsigned().notNullable().references('admin_users.id')
+      table.integer('updated_by').unsigned().nullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
     })
   }
