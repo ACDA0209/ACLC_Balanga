@@ -16,7 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('client.home.index')
+Route.on('/').render('Student.home.index')
 Route.get('/admission', 'Student/AdmissionController.index')
 Route.post('/admission/submission', 'Student/AdmissionController.submission')
 
