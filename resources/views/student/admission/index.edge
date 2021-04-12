@@ -54,7 +54,7 @@
 
         <div class="row">
           <div class="col-lg-12">
-            <form method="post" role="form" class="php-email-form" id="form_admission">
+            <form method="post" role="form" class="php-email-form" id="form_admission" enctype="multipart/form-data" >
               <label for="">Personal Info:</label>
               <div class="form-row">
                 <div class="col form-group">
@@ -257,10 +257,9 @@
                 <label for="">File Attachment:</label>
                 <input  type="file" 
                         class="form-control" 
-                        name="file_attachment" 
-                        id="subject" 
+                        name="file_attachments[]" 
                         placeholder="BC, F137, F138, PSA, High School Diploma, etc.." 
-                        data-rule="" data-msg="Invalid File" />
+                        multiple />
                 <div class="validate"></div>
               </div>
 

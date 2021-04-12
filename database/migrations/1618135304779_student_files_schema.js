@@ -10,7 +10,7 @@ class StudentFilesSchema extends Schema {
       table.string('filename', 254).nullable()
       table.string('file_type', 10).nullable()
       table.integer('student_id').unsigned().notNullable().references('students.id')
-      table.integer('created_by').unsigned().notNullable().references('admin_users.id')
+      table.integer('updated_by').unsigned().nullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
 
     })

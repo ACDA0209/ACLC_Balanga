@@ -1,5 +1,6 @@
 'use strict'
 const Student = use('App/Models/Student')
+const StudentFile = use('App/Models/StudentFile')
 
 
 class AdmissionController {
@@ -8,7 +9,10 @@ class AdmissionController {
     }
 
     async submission({request, response}){
+        console.log(request.file('file_attachment'))
+        console.log("-------------")
         console.log(request.body)
+
         const checkEmail = await Student
                                 .query()
                                 .where('email', request.body.email)
@@ -24,6 +28,13 @@ class AdmissionController {
         const newStudent = await Student.addStudent(request)
 
         if(newStudent){
+            
+            const studentFiles = request.file('file_attachments', {
+                types: ['image']
+            })
+
+            const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, newStudent.id)
+
             return response.json({
                 err: '0',
                 icon: 'success',

@@ -80,8 +80,8 @@ class Student extends Model {
             console.log("new mother id: " + motherInfo.id)
             console.log("new father id: " + fatherInfo.id)
           await trx.commit()
-        //   return newStudent.id
-          return true
+          return newStudent
+        //   return true
         } catch (err) {
             console.log("error in addStudent")
             console.log(err)
