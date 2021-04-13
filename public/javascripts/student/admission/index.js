@@ -15,11 +15,16 @@ function storeUser() {
     .then(response => {
         hideOverlay()
         
-        Swal.fire({
+        if (response.validator) {
+          validatorMessages(response.validator, $('#add-validator'))
+        
+        }else{
+          Swal.fire({
             icon: response.icon,
             title: response.title,
             text: response.text,
           })
+        }
 
     })
     .catch(err => {

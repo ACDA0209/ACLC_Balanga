@@ -1,4 +1,4 @@
-@layout('layouts/main')
+@layout('student/layouts/main')
 
 @section('javascripts')
 {{ script('javascripts/student/admission/index.js') }}
@@ -63,7 +63,7 @@
                           name="firstname" 
                           class="form-control" 
                           placeholder="Enter First Name" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-firstname"></div>
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Middle Name:</small></label>
@@ -71,7 +71,7 @@
                           class="form-control" 
                           name="middlename" 
                           placeholder="Enter Middle Name" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-middlename"></div>
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Last Name:</small></label>
@@ -79,7 +79,7 @@
                           class="form-control" 
                           name="lastname" 
                           placeholder="Enter Last Name" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-lastname"></div>
                 </div>
               </div>
 
@@ -87,11 +87,11 @@
                 <div class="col-4 form-group">
                   <label for="">Gender:</label>
                   <select class="form-control" name="gender">
-                    <option disabled>Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-gender"></div>
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Address:</small></label>
@@ -99,7 +99,7 @@
                           class="form-control" 
                           name="address" 
                           placeholder="Enter Complete Address" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-address"></div>
                 </div>
               </div>
 
@@ -110,7 +110,7 @@
                           name="birthdate" 
                           class="form-control" 
                           placeholder="Enter Birth Date" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-birthdate"></div>
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Birth Place:</small></label>
@@ -118,7 +118,7 @@
                           class="form-control" 
                           name="birth_place" 
                           placeholder="Enter Birth Place" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-birth_place"></div>
                 </div>
               </div>
 
@@ -129,7 +129,7 @@
                           class="form-control" 
                           name="email" 
                           placeholder="Enter Email Adress" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-email"></div>
                 </div>
                 <div class="col-4 form-group">
                   <label for=""><small>Contact:</small></label>
@@ -137,7 +137,7 @@
                           name="contact" 
                           class="form-control" 
                           placeholder="Enter Contact" />
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-contact"></div>
                 </div>
               </div>
 
@@ -152,7 +152,7 @@
                           name="f_firstname" 
                           class="form-control" 
                           placeholder="Enter First Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-f_firstname"></div>          
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Middle Name:</small></label>
@@ -160,7 +160,7 @@
                           class="form-control" 
                           name="f_middlename" 
                           placeholder="Enter Middle Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-f_middlename"></div>        
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Last Name:</small></label>
@@ -168,7 +168,7 @@
                           class="form-control" 
                           name="f_lastname" 
                           placeholder="Enter Last Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-f_lastname"></div> 
                 </div>
               </div>
 
@@ -176,14 +176,14 @@
                 <div class="col form-group">
                   <label for="">Occupation:</label>
                   <select class="form-control" name="f_occupation">
-                    <option disabled>Select Occupation</option>
+                    <option value="">Select Occupation</option>
                     <option>Occupation 1</option>
                     <option>Occupation 2</option>
                     <option>Occupation 3</option>
                     <option>Occupation 4</option>
                     <option>Occupation 5</option>
                   </select>
-                  <div class="validate"></div>
+                  <div class="validate" id="validate-f_occupation"></div> 
                 </div>
                 <div class="col-4 form-group">
                   <label for=""><small>Contact:</small></label>
@@ -191,7 +191,7 @@
                           name="f_contact" 
                           class="form-control" 
                           placeholder="Enter Contact" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-f_contact"></div> 
                 </div>
               </div>
               
@@ -206,7 +206,7 @@
                           name="m_firstname" 
                           class="form-control" 
                           placeholder="Enter First Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-m_firstname"></div> 
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Middle Name:</small></label>
@@ -214,7 +214,7 @@
                           class="form-control" 
                           name="m_middlename" 
                           placeholder="Enter Middle Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-m_middlename"></div> 
                 </div>
                 <div class="col form-group">
                   <label for=""><small>Last Name:</small></label>
@@ -222,7 +222,7 @@
                           class="form-control" 
                           name="m_lastname" 
                           placeholder="Enter Last Name" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-m_lastname"></div> 
                 </div>
               </div>
 
@@ -230,14 +230,14 @@
                 <div class="col form-group">
                   <label for="">Occupation:</label>
                   <select class="form-control" name="m_occupation">
-                    <option disabled>Select Occupation</option>
+                    <option value="">Select Occupation</option>
                     <option>Occupation 1</option>
                     <option>Occupation 2</option>
                     <option>Occupation 3</option>
                     <option>Occupation 4</option>
                     <option>Occupation 5</option>
                   </select>
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-m_occupation"></div> 
                 </div>
                 <div class="col-4 form-group">
                   <label for=""><small>Contact:</small></label>
@@ -245,7 +245,7 @@
                           name="m_contact" 
                           class="form-control" 
                           placeholder="Enter Contact" />
-                  <div class="validate"></div>
+                    <div class="validate" id="validate-m_contact"></div> 
                 </div>
               </div>
               
@@ -260,7 +260,7 @@
                         name="file_attachments[]" 
                         placeholder="BC, F137, F138, PSA, High School Diploma, etc.." 
                         multiple />
-                <div class="validate"></div>
+                  <div class="validate" id="validate-file_attachments"></div> 
               </div>
 
 
@@ -278,6 +278,7 @@
                 </button>
               </div>
             </form>
+            <div id="add-validator"></div>
           </div>
 
         </div>

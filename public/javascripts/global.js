@@ -56,10 +56,13 @@ function ajaxFormRequestWithData(url, form, data, id) {
 }
 
 function validatorMessages(validator, elem) {
-  elem.html('')
+  // elem.html('')
+  $(".validate").hide()
   $.each(validator, (key, value) => {
-    elem.append(value['message'] + '<br>')
+    $(`#validate-${value["field"]}`).text(value['message']).show()
+    // elem.append(value['message'] + '<br>')
   })
+
 }
 
 function clearHtmlElement(keyword) {

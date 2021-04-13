@@ -1,0 +1,35 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/approval/index.js') }}
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Email campaign chart -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Student List</h4>
+             <!-- Button trigger modal -->
+
+          </div>
+          <div class="table-responsive" id="table_students">
+            @include('admin/approval/table-students')
+          </div>
+
+          <div class="modal fade" id="student_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            @include('admin/approval/modal-student-details')
+          </div>
+      </div>
+  </div>
+  </div>
+
+</div>
+
+@endsection

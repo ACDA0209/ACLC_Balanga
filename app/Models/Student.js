@@ -36,6 +36,24 @@ class Student extends Model {
     /*Setters*/
 
 
+    parents() {
+        return this.hasMany('App/Models/Parent', 'id', 'student_id')
+      }
+
+    admissionStatus() {
+        return this.hasOne('App/Models/AdmissionStatus', 'admission_status_id', 'id')
+      }
+
+    static async checkReferenceNo (referenceNo) {
+      const result = await this
+      .query()
+      .where('reference_no','=', referenceNo)
+      .first()
+      
+      return result ? true : false
+
+    }
+
     static async addStudent (request) {
         console.log("enter addStudent")
 
