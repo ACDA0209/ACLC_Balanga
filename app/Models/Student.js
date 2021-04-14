@@ -71,6 +71,7 @@ class Student extends Model {
               gender: request.body.gender,
               address: request.body.address,
               birthdate: request.body.birthdate,
+              birth_place: request.body.birth_place,
               email: request.body.email,
               contact: request.body.contact,
               admission_status_id: 1

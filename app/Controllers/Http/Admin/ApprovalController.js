@@ -13,7 +13,6 @@ class ApprovalController {
     .where('id','=','1')
     .first()
 
-    // return student
     return view.render('admin.approval.index')
   }
 
