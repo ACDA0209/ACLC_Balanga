@@ -29,7 +29,7 @@
           <td>{{student.contact}}</td>
           <td>{{moment(student.date_created).format('YYYY-MM-DD') }}</td>
           <td>
-            <span class="badge badge-{{ student.admissionStatus.id != 2 ? 'warning' : 'success' }}">{{student.admissionStatus.status_name}}</span>
+            <span class="badge badge-{{ student.admissionStatus.id == 1 ? 'warning' : student.admissionStatus.id == 3 ? 'danger': 'success' }}">{{student.admissionStatus.status_name}}</span>
           </td>
           <td>
               <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getStudentDetails({{student.id}})">

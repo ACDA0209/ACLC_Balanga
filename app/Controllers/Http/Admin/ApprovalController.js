@@ -1,6 +1,7 @@
 'use strict'
 const Student = use('App/Models/Student')
 const AdmissionStatus = use('App/Models/AdmissionStatus')
+const StudentFile = use('App/Models/StudentFile')
 
 const perPage = 100
 
@@ -32,6 +33,9 @@ class ApprovalController {
   async getStudentDetails ({ request, view }) {
     const student = await Student
     .query()
+    .with('parents')
+    .with('admissionStatus')
+    .with('studentFiles')
     .where('id','=', request.body.student_id)
     .first()
 
@@ -52,7 +56,7 @@ class ApprovalController {
     const result = await Student
     .query()
     .where('id', '=',request.body.student_id)
-    .update({ admission_status_id: 2, updated_by: 1,reference_no:reference_no })           
+    .update({ admission_status_id: request.body.status_id, updated_by: 1,reference_no:reference_no })           
 
     return result
   }

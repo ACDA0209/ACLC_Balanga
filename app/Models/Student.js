@@ -44,6 +44,9 @@ class Student extends Model {
         return this.hasOne('App/Models/AdmissionStatus', 'admission_status_id', 'id')
       }
 
+    studentFiles() {
+      return this.hasMany('App/Models/StudentFile', 'id', 'student_id')
+    }
     static async checkReferenceNo (referenceNo) {
       const result = await this
       .query()

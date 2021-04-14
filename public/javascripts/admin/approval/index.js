@@ -55,6 +55,8 @@ function updateStudentStatus(student_id, status_id) {
       .then(res => {
 
         $("#student_details").modal("hide")
+        if(status_id == 3)
+        alert('Status of student will be rejected and email will be sent to the student')
         getStudents(1)
 
       })
