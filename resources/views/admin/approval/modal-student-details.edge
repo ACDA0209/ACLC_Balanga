@@ -285,9 +285,11 @@
         </form>
       </div>
       <div class="modal-footer">
-        @if(student.admission_status_id != 2)
+        @if(student.admission_status_id == 1)
         <button type="button" class="btn btn-danger" onClick="updateStudentStatus({{student.id}}, 3)">Reject</button>
         <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Approve</button>
+        @elseif(student.admission_status_id == 3)
+          <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Update and Approve</button>
         @endif
         @if(student.admission_status_id == 2)
         <small>Reference No: </small> <span class="badge badge-pill badge-danger">{{student.reference_no}}</span>

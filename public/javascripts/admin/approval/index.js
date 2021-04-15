@@ -2,6 +2,9 @@ const URL = `${APP_URL}/admin/approval`
 var currentPage = 1;
 
 
+$("#page_title").text("Student Approval")
+$("#breadcrumb_item").text("Student Approval")
+
 $(() => {
   getStudents(1)
 })

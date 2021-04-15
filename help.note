@@ -1,2 +1,16 @@
 danger-color: #EC1C24
 primary-color: #2E3191
+
+
+
+--pag pull ng mga updates sa git
+git pull origin main
+
+--pag install ng mga packages na ginamit
+npm install 
+
+-- pagcreate ng database sa phpmyadmin, pag nirun to magrereset yung mga data sa database
+adonis migration:refresh --seed
+
+--pag ira-run na yung project, pa-open din yung xampp para ma-access yung database
+nodemon

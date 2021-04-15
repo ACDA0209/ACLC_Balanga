@@ -1,0 +1,51 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/profile/index.js') }}
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+        <div class="card card-body">
+            <form class="form-horizontal mt-4" method="post" id="form_profile">
+              <input type="hidden" name="admin_id" value="{{admin.id}}" />
+                <div class="form-group">
+                    <label>Fullname</label>
+                    <input type="text" class="form-control" name="fullname" value="{{admin.name}}">
+                    <small class="validate" id="validate-fullname"></small> 
+                </div>
+
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" class="form-control" name="current_password" value="">
+                     <small class="validate" id="validate-current_password"></small> 
+                </div>
+
+                <div class="form-group">
+                  <label>New Password</label>
+                  <input type="password" class="form-control" name="new_password" value="">
+                   <small class="validate" id="validate-new_password"></small> 
+                </div>
+
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" name="new_password_confirmation" value="">
+                 <small class="validate" id="validate-new_password_confirmation"></small> 
+              </div>
+
+                <button type="button" class="btn btn-primary" onClick="updateMyProfile({{admin.id}})">Update My Info</button>
+               
+            </form>
+            <div id="add-validator"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+@endsection

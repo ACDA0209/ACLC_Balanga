@@ -44,7 +44,7 @@ class ApprovalController {
       })
   }
 
-  async updateStudentStatus ({ request, view }) {
+  async updateStudentStatus ({ request, view, auth }) {
     let reference_no = Math.random().toString(20).substr(2, 10).toUpperCase();  
     let check_reference_no = await Student.checkReferenceNo(reference_no)
     while(check_reference_no){
@@ -55,7 +55,7 @@ class ApprovalController {
     const result = await Student
     .query()
     .where('id', '=',request.body.student_id)
-    .update({ admission_status_id: request.body.status_id, updated_by: 1,reference_no:reference_no })           
+    .update({ admission_status_id: request.body.status_id, updated_by: auth.user.id ,reference_no:reference_no })           
 
     return result
   }
