@@ -27,7 +27,9 @@ class Student extends Model {
     }
 
     setMiddlename (middlename) {
-        return  middlename.charAt(0).toUpperCase() + middlename.slice(1)
+      if(!middlename)
+      return ""
+      return  middlename.charAt(0).toUpperCase() + middlename.slice(1)
     }
 
     setLastname (lastname) {
@@ -62,7 +64,7 @@ class Student extends Model {
 
         const trx = await Database.beginTransaction()
         try {
-          const newStudent =
+          const studentInfo =
           await this
             .create({
               firstname: request.body.firstname,
@@ -85,7 +87,7 @@ class Student extends Model {
                     occupation: request.body.m_occupation,
                     contact: request.body.m_contact,
                     type: "mother",
-                    student_id: newStudent.id
+                    student_id: studentInfo.id
                 }, trx)
             const fatherInfo =
                 await Parent
@@ -96,16 +98,75 @@ class Student extends Model {
                     occupation: request.body.f_occupation,
                     contact: request.body.f_contact,
                     type: "father",
-                    student_id: newStudent.id
+                    student_id: studentInfo.id
                 }, trx)
-            console.log("new student id: " + newStudent.id)
-            console.log("new mother id: " + motherInfo.id)
-            console.log("new father id: " + fatherInfo.id)
+            console.log("student id: " + studentInfo.id)
+            console.log("mother id: " + motherInfo.id)
+            console.log("father id: " + fatherInfo.id)
           await trx.commit()
-          return newStudent
+          return studentInfo
         //   return true
         } catch (err) {
             console.log("error in addStudent")
+            console.log(err)
+          await trx.rollback()
+          return false
+        }
+      }
+
+      static async updateStudent (request) {
+        console.log("enter updateStudent")
+
+        const trx = await Database.beginTransaction()
+        try {
+          const studentInfo =
+          await this
+          .query()
+            .where('id', '=', request.body.student_id)
+            .update({
+              firstname: request.body.firstname,
+              middlename: request.body.middlename,
+              lastname: request.body.lastname,
+              gender: request.body.gender,
+              address: request.body.address,
+              birthdate: request.body.birthdate,
+              birth_place: request.body.birth_place,
+              email: request.body.email,
+              contact: request.body.contact,
+              admission_status_id: request.body.admission_status_id,
+              reference_no: request.body.reference_no,
+              note: request.body.note,
+            }, trx)
+            const motherInfo =
+                await Parent
+                .create({
+                    firstname: request.body.m_firstname,
+                    middlename: request.body.m_middlename,
+                    lastname: request.body.m_lastname,
+                    occupation: request.body.m_occupation,
+                    contact: request.body.m_contact,
+                    type: "mother",
+                    student_id: studentInfo.id
+                }, trx)
+            const fatherInfo =
+                await Parent
+                .create({
+                    firstname: request.body.f_firstname,
+                    middlename: request.body.f_middlename,
+                    lastname: request.body.f_lastname,
+                    occupation: request.body.f_occupation,
+                    contact: request.body.f_contact,
+                    type: "father",
+                    student_id: studentInfo.id
+                }, trx)
+            console.log("student id: " + studentInfo.id)
+            console.log("mother id: " + motherInfo.id)
+            console.log("father id: " + fatherInfo.id)
+          await trx.commit()
+          return result
+        //   return true
+        } catch (err) {
+            console.log("error in updateStudent")
             console.log(err)
           await trx.rollback()
           return false

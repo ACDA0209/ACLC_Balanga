@@ -1,4 +1,4 @@
-const URL = `${APP_URL}/admin/myProfile`
+const URL = `${APP_URL}/admin/user`
 var currentPage = 1;
 
 
@@ -13,6 +13,35 @@ function updateMyProfile(admin_id) {
   showOverlay();
   $(".validate").text("")
   ajaxRequestForm(`${URL}/update`, $('#form_profile'))
+  .then(response => {
+      hideOverlay()
+      
+      if (response.validator) {
+        validatorMessages(response.validator, $('#add-validator'))
+        $(".validate").css("color", "#EC1C24")
+      }else{
+        Swal.fire({
+          icon: response.icon,
+          title: response.title,
+          text: response.text,
+        })
+      }
+
+  })
+  .catch(err => {
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+      })
+    console.log(err)
+  })
+}
+
+function addAdminUser() {
+  showOverlay();
+  $(".validate").text("")
+  ajaxRequestForm(`${URL}/addNewAdmin`, $('#form_add_admin'))
   .then(response => {
       hideOverlay()
       

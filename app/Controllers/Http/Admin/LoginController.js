@@ -3,11 +3,11 @@ const AdminUser = use('App/Models/AdminUser')
 
 
 class LoginController {
-  async index({view, auth}) {
+  async index({view, auth, response}) {
     return view.render('admin.login.index')
   }
 
-  async onLogin({ auth, request }) {
+  async onLogin({ auth, request, response }) {
     const username = request.input('username')
     const password = request.input('password')
     const adminUser = await AdminUser
@@ -17,11 +17,17 @@ class LoginController {
       .first()
 
     if (!adminUser) {
-      return 'Failed'
+      return response.json({
+        result: false,
+        message: 'Credentials does not match'
+      })
     }  
 
     await auth.login(adminUser)
-    return 'Success'
+    return response.json({
+      result: true,
+      message: ''
+    })
   }
 
   async onLogout({ auth, response }) {

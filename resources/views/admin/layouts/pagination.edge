@@ -1,0 +1,34 @@
+<div class="row px-4">
+  <div class="col-md-4" style="margin-top: 10px;">
+   <strong> Total Result: {{ result.total }} </strong>  
+  </div>
+  <div class="col-md-8">
+    <ul class="pagination float-right">
+      <li
+        style="margin-top: 8px;">
+        Total ({{ result.data.length }} entries)&nbsp;&nbsp;
+      </li>
+      <li 
+        style="margin-top: 8px;">
+        Page {{ result.page }} of {{ result.lastPage }}&nbsp;&nbsp;
+      </li>
+      <li 
+        class="page-item"
+        onclick="{{function_name}}({{ result.page != 1 ? (result.page - 1) : 0 }})">
+        <a 
+          class="page-link">
+          Prev
+        </a>
+      </li>
+      <li 
+        class="page-item"
+        onclick="{{function_name}}({{ result.lastPage > result.page ? (result.page + 1) : 0 }})" href="#">
+        <a 
+          class="page-link">
+          Next
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+

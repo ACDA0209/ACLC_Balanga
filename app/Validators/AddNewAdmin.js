@@ -1,6 +1,6 @@
 'use strict'
 
-class UpdateProfile {
+class AddNewAdmin {
   get validateAll () {
     return true
   }
@@ -9,7 +9,6 @@ class UpdateProfile {
     return{
       fullname: 'escape|trim',
       username: 'escape|trim',
-      current_password: 'escape|trim',
       new_password: 'escape|trim',
       new_password_confirmation: 'escape|trim'
     }
@@ -18,8 +17,7 @@ class UpdateProfile {
   get rules () {
     return{
       fullname: 'required',
-      username: 'required',
-      current_password: 'required',
+      username: 'required|unique: admin_users,username',
       new_password: 'required|min:5|confirmed',
       new_password_confirmation: 'required|min:5',
     }
@@ -27,14 +25,14 @@ class UpdateProfile {
 
    get messages () {
      return{
-      'fullname.required'    : 'Name must not be empty!',
-      'username.required'    : 'Username must not be empty!',
-      'current_password.required'    : 'required!',
-      'new_password.required'    : 'required!',
-      'new_password.min'    : 'Atleast 5 letters',
-      'new_password.confirmed'    : 'Password not match!',
+      'fullname.required'                     : 'Name must not be empty!',
+      'username.required'                     : 'Username must not be empty!',
+      'username.unique'                       : 'Username not available!',
+      'new_password.required'                 : 'required!',
+      'new_password.min'                      : 'Atleast 5 letters',
+      'new_password.confirmed'                : 'Password not match!',
       'new_password_confirmation.required'    : 'required!',
-      'new_password_confirmation.min'    : 'Atleast 5 letters',
+      'new_password_confirmation.min'         : 'Atleast 5 letters',
      }
    }
 
@@ -45,4 +43,4 @@ class UpdateProfile {
   }
 }
 
-module.exports = UpdateProfile
+module.exports = AddNewAdmin

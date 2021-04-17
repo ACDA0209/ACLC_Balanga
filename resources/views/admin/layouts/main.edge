@@ -95,7 +95,7 @@
                                   {{auth.user.name}}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/admin/myProfile"><i class="ti-settings me-1 ms-1"></i> &nbsp;
+                                <a class="dropdown-item" href="/admin/user/myProfile"><i class="ti-settings me-1 ms-1"></i> &nbsp;
                                     My Profile
                                 </a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email me-1 ms-1"></i> &nbsp;
@@ -103,7 +103,7 @@
                                 </a>
                                 @if(auth.user.id == 1)
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-plus me-1 ms-1"></i> &nbsp;
+                                    <a class="dropdown-item" href="/admin/user/addNewAdmin"><i class="ti-plus me-1 ms-1"></i> &nbsp;
                                         Add New Admin
                                     </a>
                                 @endif

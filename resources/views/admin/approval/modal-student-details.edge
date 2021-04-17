@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         
-        <form method="post" role="form" class="php-email-form" id="form_admission" enctype="multipart/form-data" >
+        <form method="post" role="form" class="php-email-form" id="form_approval" enctype="multipart/form-data" >
 
           <div id="accordion">
             <div class="card">
@@ -289,8 +289,8 @@
         <button type="button" class="btn btn-danger" onClick="updateStudentStatus({{student.id}}, 3)">Reject</button>
         <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Approve</button>
         @elseif(student.admission_status_id == 3)
-          <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Update and Approve</button>
-        @endif
+          <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 4)">Update and Approve</button>
+        @endif  
         @if(student.admission_status_id == 2)
         <small>Reference No: </small> <span class="badge badge-pill badge-danger">{{student.reference_no}}</span>
         @endif

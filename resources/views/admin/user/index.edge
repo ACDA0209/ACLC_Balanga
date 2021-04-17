@@ -2,7 +2,7 @@
 @layout('admin/layouts/main')
 
 @section('javascripts')
-{{ script('javascripts/admin/profile/index.js') }}
+{{ script('javascripts/admin/user/index.js') }}
 @endsection
 
 @section('content')
@@ -19,6 +19,12 @@
                     <input type="text" class="form-control" name="fullname" value="{{admin.name}}">
                     <small class="validate" id="validate-fullname"></small> 
                 </div>
+
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" name="username" value="{{admin.username}}">
+                  <small class="validate" id="validate-username"></small> 
+              </div>
 
                 <div class="form-group">
                     <label>Current Password</label>

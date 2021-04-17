@@ -1,13 +1,20 @@
 
+$(() => {
+  $("#validate-login").text("").hide()
+})
+
 function onLogin(){
+  $("#validate-login").text("").hide()
   ajaxRequest(APP_URL + '/onLogin', {
     username: $("#username").val(),
     password: $("#password").val()
   })
     .then(res => {
       console.log(res)
-      if (res === 'Success') {
+      if (res.result) {
         window.location.reload()
+      }else{
+        $("#validate-login").text(res.message).show()
       }
     })
     .catch(err => {

@@ -25,8 +25,10 @@ Route.get('/login', 'Admin/LoginController.index').middleware('isAuthenticated')
 Route.post('/onLogin', 'Admin/LoginController.onLogin')
 Route.get('/onLogout', 'Admin/LoginController.onLogout')
 
-Route.get('/admin/myProfile', 'Admin/ProfileController.index').middleware('isNotAuthenticated')
-Route.post('/admin/myProfile/update', 'Admin/ProfileController.update').validator('UpdateProfile')   
+Route.get('/admin/user/myProfile', 'Admin/UserController.myProfile').middleware('isNotAuthenticated')
+Route.post('/admin/user/update', 'Admin/UserController.update').validator('UpdateProfile')   
+Route.get('/admin/user/addNewAdmin', 'Admin/UserController.addNewAdminIndex').middleware('isNotAuthenticated')
+Route.post('/admin/user/addNewAdmin', 'Admin/UserController.addNewAdmin').validator('AddNewAdmin')   
 
 Route.get('/admin', 'Admin/DashboardController.index')
      .middleware('isNotAuthenticated')

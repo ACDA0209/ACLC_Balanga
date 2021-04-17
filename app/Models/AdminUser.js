@@ -24,6 +24,34 @@ class AdminUser extends Model {
         return  name.charAt(0).toUpperCase() + name.slice(1)
     }
     /*Setters*/
+
+    
+    static async addAdmin (request, auth) {
+        console.log("enter addAdmin")
+
+        const trx = await Database.beginTransaction()
+        try {
+          const result =
+          await this
+            .create({
+              name: request.body.fullname,
+              username: request.body.username,
+              password: request.body.new_password,
+              created_by: auth.user.id
+            }, trx)
+
+          await trx.commit()
+          return result
+        //   return true
+        } catch (err) {
+            console.log("error in addAdmin")
+            console.log(err)
+          await trx.rollback()
+          return false
+        }
+      }
+
+
 }
 
 module.exports = AdminUser
