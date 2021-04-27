@@ -14,3 +14,7 @@ adonis migration:refresh --seed
 
 --pag ira-run na yung project, pa-open din yung xampp para ma-access yung database
 nodemon
+
+--for nodemailer
+https://myaccount.google.com/lesssecureapps
+Allow less secure apps: ON

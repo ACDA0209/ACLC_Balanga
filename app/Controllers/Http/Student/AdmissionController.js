@@ -1,7 +1,7 @@
 'use strict'
 const Student = use('App/Models/Student')
 const StudentFile = use('App/Models/StudentFile')
-
+const Nodemailer = use('App/Helpers/Nodemailer')
 
 class AdmissionController {
     async index({view}){
@@ -34,6 +34,13 @@ class AdmissionController {
             })
 
             const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, newStudent.id)
+
+            let sendTo = 'macamoonlight05@gmail.com'
+            let title = 'ACLC Admission Application'
+            let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
+                            Your application was successfully submitted. </p>
+                            <p>Please wait for the confirmation result.</p>`
+            const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
 
             return response.json({
                 err: '0',

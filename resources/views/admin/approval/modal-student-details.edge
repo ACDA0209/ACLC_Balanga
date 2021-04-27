@@ -286,7 +286,7 @@
       </div>
       <div class="modal-footer">
         @if(student.admission_status_id == 1)
-        <button type="button" class="btn btn-danger" onClick="updateStudentStatus({{student.id}}, 3)">Reject</button>
+        <button type="button" class="btn btn-danger" onClick="reasonOfRejection({{student.id}}, 3)">Reject</button>
         <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Approve</button>
         @elseif(student.admission_status_id == 3)
           <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 4)">Update and Approve</button>

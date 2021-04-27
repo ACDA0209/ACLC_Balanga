@@ -114,7 +114,7 @@ class Student extends Model {
         }
       }
 
-      static async updateStudent (request) {
+      static async updateStudent (request, admin_id) {
         console.log("enter updateStudent")
 
         const trx = await Database.beginTransaction()
@@ -136,34 +136,41 @@ class Student extends Model {
               admission_status_id: request.body.admission_status_id,
               reference_no: request.body.reference_no,
               note: request.body.note,
+              updated_by: admin_id
             }, trx)
-            const motherInfo =
-                await Parent
-                .create({
-                    firstname: request.body.m_firstname,
-                    middlename: request.body.m_middlename,
-                    lastname: request.body.m_lastname,
-                    occupation: request.body.m_occupation,
-                    contact: request.body.m_contact,
-                    type: "mother",
-                    student_id: studentInfo.id
-                }, trx)
-            const fatherInfo =
-                await Parent
-                .create({
-                    firstname: request.body.f_firstname,
-                    middlename: request.body.f_middlename,
-                    lastname: request.body.f_lastname,
-                    occupation: request.body.f_occupation,
-                    contact: request.body.f_contact,
-                    type: "father",
-                    student_id: studentInfo.id
-                }, trx)
-            console.log("student id: " + studentInfo.id)
-            console.log("mother id: " + motherInfo.id)
-            console.log("father id: " + fatherInfo.id)
+          const motherInfo =
+          await Parent 
+          .query()
+            .where('student_id', '=', studentInfo)
+            .where('type', '=', "mother")
+            .update({
+                firstname: request.body.m_firstname,
+                middlename: request.body.m_middlename,
+                lastname: request.body.m_lastname,
+                occupation: request.body.m_occupation,
+                contact: request.body.m_contact,
+                student_id: studentInfo,
+                updated_by: admin_id
+            }, trx)
+          const fatherInfo =
+          await Parent
+          .query()
+            .where('student_id', '=', studentInfo)
+            .where('type', '=', "father")
+            .update({
+                firstname: request.body.f_firstname,
+                middlename: request.body.f_middlename,
+                lastname: request.body.f_lastname,
+                occupation: request.body.f_occupation,
+                contact: request.body.f_contact,
+                student_id: studentInfo,
+                updated_by: admin_id
+            }, trx)
+        console.log("student id: " + studentInfo)
+        console.log("mother id: " + motherInfo)
+        console.log("father id: " + fatherInfo)
           await trx.commit()
-          return result
+          return studentInfo
         //   return true
         } catch (err) {
             console.log("error in updateStudent")
