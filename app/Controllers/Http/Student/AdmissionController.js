@@ -35,7 +35,8 @@ class AdmissionController {
 
             const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, newStudent.id)
 
-            let sendTo = 'macamoonlight05@gmail.com'
+            // let sendTo = 'macamoonlight05@gmail.com'
+            let sendTo = newStudent.email
             let title = 'ACLC Admission Application'
             let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
                             Your application was successfully submitted. </p>

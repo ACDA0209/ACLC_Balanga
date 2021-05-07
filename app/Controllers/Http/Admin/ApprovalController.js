@@ -7,13 +7,13 @@ const perPage = 10
 
 class ApprovalController {
   async index({view}){
-    const result = await Student.findBy('id', 1) 
-    result.admission_status_id = 3
-    await result.save()
-    const student = await Student
-    .query()
-    .where('id','=','1')
-    .first()
+    // const result = await Student.findBy('id', 1) 
+    // result.admission_status_id = 3
+    // await result.save()
+    // const student = await Student
+    // .query()
+    // .where('id','=','1')
+    // .first()
 
     return view.render('admin.approval.index')
   }
@@ -76,7 +76,8 @@ class ApprovalController {
 
     if(result){
       const student = await Student.findBy('id', request.body.student_id) 
-      let sendTo = 'macamoonlight05@gmail.com'
+      // let sendTo = 'macamoonlight05@gmail.com'
+      let sendTo = student.email
       let title = 'ACLC Admission Application'
       let message = ` <p>Hi ${student.firstname} ${student.lastname}! Your application has been approved.</p>
                       <p>Your reference number is ${student.reference_no}</p>`
