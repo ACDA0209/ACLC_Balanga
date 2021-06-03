@@ -1,0 +1,70 @@
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_add_course" enctype="multipart/form-data" >
+
+          <div id="div_course_info" >
+            <div class="card-body">
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Course</label>:</label>
+                  <input  type="text" 
+                          class="form-control" 
+                          name="course" 
+                          placeholder="Enter Course" />
+                  <div class="validate" id="validate-course"></div>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Description:</label>
+                  <textarea  type="text" 
+                          class="form-control" 
+                          name="description" 
+                          rows="5"
+                          placeholder="Enter Description" ></textarea>
+                  <div class="validate" id="validate-description"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Course Type:</label>
+                  <select class="form-control" name="course_type_id">
+                    <option value="">Select Course Type</option>
+                    @each(type in course_types)
+                      <option value="{{type.id}}">{{type.course_type}}</option>
+                    @endeach
+                  </select>
+                  <div class="validate" id="validate-course_type_id"></div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          </div>
+          
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onClick="addCourse()">
+            Add Course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+</script>

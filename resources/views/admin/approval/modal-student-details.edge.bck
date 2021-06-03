@@ -1,0 +1,352 @@
+
+@set('mother_info', student.parents[0])
+@set('father_info', student.parents[1])
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Student Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_approval" enctype="multipart/form-data" >
+
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#div_personal_info" aria-expanded="true" aria-controls="collapseOne">
+                    Personal Info {{test}}
+                  </button>
+                </h5>
+              </div>
+          
+              <div id="div_personal_info" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text" 
+                              value="{{student.firstname}}"
+                              class="form-control" 
+                              name="firstname" 
+                              placeholder="Enter First Name" />
+                      <div class="validate" id="validate-firstname"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value="{{student.middlename}}"                      
+                              class="form-control" 
+                              name="middlename" 
+                              placeholder="Enter Middle Name" />
+                      <div class="validate" id="validate-middlename"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value="{{student.lastname}}"  
+                              class="form-control" 
+                              name="lastname" 
+                              placeholder="Enter Last Name" />
+                      <div class="validate" id="validate-lastname"></div>
+                    </div>
+                  </div>
+
+                    <div class="form-row">
+                      <div class="col-4 form-group">
+                        <label for="">Gender:</label>
+                        <select class="form-control" name="gender">
+                          <option value="">Select Gender</option>
+                          <option value="Male" {{student.gender == 'Male' ? "selected" : ""}}>Male</option>
+                          <option value="Female" {{student.gender == 'Female' ? "selected" : ""}}>Female</option>
+                        </select>
+                        <div class="validate" id="validate-gender"></div>
+                      </div>
+                      <div class="col form-group">
+                        <label for=""><small>Address:</small></label>
+                        <input  type="text" 
+                                value="{{student.address}}"                          
+                                class="form-control" 
+                                name="address" 
+                                placeholder="Enter Complete Address" />
+                        <div class="validate" id="validate-address"></div>
+                      </div>
+                    </div>
+
+                  <div class="form-row">
+                    <div class="col-4 form-group">
+                      <label for=""><small>Birth Date:</small></label>
+                      <input  type="date" 
+                              value="{{moment(student.birthdate).format('YYYY-MM-DD')}}"  
+                              name="birthdate" 
+                              class="form-control" 
+                              placeholder="Enter Birth Date" />
+                      <div class="validate" id="validate-birthdate"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Birth Place:</small></label>
+                      <input  type="text" 
+                              value="{{student.birth_place}}"  
+                              class="form-control" 
+                              name="birth_place" 
+                              placeholder="Enter Birth Place" />
+                      <div class="validate" id="validate-birth_place"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>Email Address:</small></label>
+                      <input  type="email" 
+                              value="{{student.email}}"                       
+                              class="form-control" 
+                              name="email" 
+                              placeholder="Enter Email Adress" />
+                        <div class="validate" id="validate-email"></div>
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text"
+                              value="{{student.contact}}"  
+                              name="contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                      <div class="validate" id="validate-contact"></div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+  
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_father_info" aria-expanded="false" aria-controls="collapseTwo">
+                    Father's Info
+                  </button>
+                </h5>
+              </div>
+              <div id="div_father_info" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text"
+                              value="{{father_info.firstname}}" 
+                              name="f_firstname" 
+                              class="form-control" 
+                              placeholder="Enter First Name" />
+                        <div class="validate" id="validate-f_firstname"></div>          
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value="{{father_info.middlename}}"                       
+                              class="form-control" 
+                              name="f_middlename" 
+                              placeholder="Enter Middle Name" />
+                        <div class="validate" id="validate-f_middlename"></div>        
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value="{{father_info.lastname}}"     
+                              class="form-control" 
+                              name="f_lastname" 
+                              placeholder="Enter Last Name" />
+                        <div class="validate" id="validate-f_lastname"></div> 
+                    </div>
+                  </div>
+    
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Occupation:</label>
+                      <select class="form-control" name="f_occupation">
+                        <option value="">Select Occupation</option>
+                        <option>Occupation 1</option>
+                        <option>Occupation 2</option>
+                        <option>Occupation 3</option>
+                        <option>Occupation 4</option>
+                        <option>Occupation 5</option>
+                      </select>
+                      <div class="validate" id="validate-f_occupation"></div> 
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text" 
+                              value="{{father_info.contact}}"     
+                              name="f_contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                        <div class="validate" id="validate-f_contact"></div> 
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+  
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_mother_info" aria-expanded="false" aria-controls="collapseThree">
+                    Mother's Info
+                  </button>
+                </h5>
+              </div>
+              <div id="div_mother_info" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text" 
+                              value="{{mother_info.firstname}}"     
+                              name="m_firstname" 
+                              class="form-control" 
+                              placeholder="Enter First Name" />
+                        <div class="validate" id="validate-m_firstname"></div> 
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value="{{mother_info.middlename}}"     
+                              class="form-control" 
+                              name="m_middlename" 
+                              placeholder="Enter Middle Name" />
+                        <div class="validate" id="validate-m_middlename"></div> 
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value="{{mother_info.lastname}}"     
+                              class="form-control" 
+                              name="m_lastname" 
+                              placeholder="Enter Last Name" />
+                        <div class="validate" id="validate-m_lastname"></div> 
+                    </div>
+                  </div>
+    
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Occupation:</label>
+                      <select class="form-control" name="m_occupation">
+                        <option value="">Select Occupation</option>
+                        <option>Occupation 1</option>
+                        <option>Occupation 2</option>
+                        <option>Occupation 3</option>
+                        <option>Occupation 4</option>
+                        <option>Occupation 5</option>
+                      </select>
+                        <div class="validate" id="validate-m_occupation"></div> 
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text" 
+                              value="{{mother_info.contact}}"     
+                              name="m_contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                        <div class="validate" id="validate-m_contact"></div> 
+                    </div>
+                  </div>  
+
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_student_files" aria-expanded="false" aria-controls="collapseFour">
+                    Student Files
+                  </button>
+                </h5>
+              </div>
+              <div id="div_student_files" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body">
+                  @each(file in student.studentFiles)
+                  <img src="/student_files/{{file.filename}}" alt="..." class="img-thumbnail">
+                  @endeach
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        @if(student.admission_status_id == 1)
+        <button type="button" class="btn btn-danger" onClick="reasonOfRejection({{student.id}}, 3)">Reject</button>
+        <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Approve</button>
+        @elseif(student.admission_status_id == 3)
+          <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 4)">Update and Approve</button>
+        @endif  
+        @if(student.admission_status_id == 2)
+        <small>Reference No: </small> <span class="badge badge-pill badge-danger">{{student.reference_no}}</span>
+        @endif
+      </div>
+    </div>
+  </div>
+  <div class="file-loading">
+    <input id="input-pr" name="input-pr[]" type="file"  data-show-upload="false" multiple>
+</div>
+<script>
+$("#input-pr").fileinput({
+    theme: "fa",
+    uploadUrl: "/file-upload-batch/1",
+    uploadAsync: false,
+    showUpload: false,
+    showDownload: false,
+    showZoom: false,
+    minFileCount: 2,
+    maxFileCount: 5,
+    overwriteInitial: true,
+    initialPreview: [
+        // IMAGE RAW MARKUP
+        '<img src="https://picsum.photos/id/239/1920/1080" class="kv-preview-data file-preview-image">',
+        // IMAGE RAW MARKUP
+        '<img src="https://picsum.photos/id/279/1920/1080" class="kv-preview-data file-preview-image">',
+        // TEXT RAW MARKUP
+        '<img src="https://picsum.photos/id/279/1920/1080" class="kv-preview-data file-preview-image">'
+    ],
+    initialPreviewAsData: false, // allows you to set a raw markup
+    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+    initialPreviewDownloadUrl: 'https://picsum.photos/id/{key}/1920/1080', // includes the dynamic key tag to be replaced for each config
+    initialPreviewConfig: [
+        {type: "image", caption: "Image-1.jpg", size: 847000, url: "/site/file-delete", key: 1},
+        {type: "image", caption: "Image-2.jpg", size: 817000, url: "/site/file-delete", key: 2},  // set as raw markup
+        {type: "image", caption: "Image-3.jpg", size: 817000, url: "/site/file-delete", key: 3}  // set as raw markup
+        // {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/site/file-delete", key: 3, downloadUrl: false} // do not show download
+    ],
+    uploadExtraData: {
+        img_key: "1000",
+        img_keywords: "happy, nature"
+    }, 
+    fileActionSettings: {
+    showDrag: false,
+    showZoom: true,
+    showDownload: false,
+    showUpload: false,
+    showDelete: true,
+    }
+}).on('filesorted', function(e, params) {
+    console.log('File sorted params', params);
+    
+}).on('fileuploaded', function(e, params) {
+    console.log('File uploaded params', params);
+});
+
+      $('#student_details').on('shown.bs.modal', function () {
+        alert({{mother_info.contact}})
+      });
+    </script>

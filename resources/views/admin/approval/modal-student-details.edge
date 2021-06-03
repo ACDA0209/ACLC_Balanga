@@ -1,7 +1,4 @@
 
-@set('mother_info', student.parents[0])
-@set('father_info', student.parents[1])
-
 <!-- Modal -->
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -20,7 +17,7 @@
               <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#div_personal_info" aria-expanded="true" aria-controls="collapseOne">
-                    Personal Info {{test}}
+                    Personal Info 
                   </button>
                 </h5>
               </div>
@@ -32,7 +29,7 @@
                     <div class="col form-group">
                       <label for=""><small>First Name:</small></label>
                       <input  type="text" 
-                              value="{{student.firstname}}"
+                              value=""
                               class="form-control" 
                               name="firstname" 
                               placeholder="Enter First Name" />
@@ -41,7 +38,7 @@
                     <div class="col form-group">
                       <label for=""><small>Middle Name:</small></label>
                       <input  type="text" 
-                              value="{{student.middlename}}"                      
+                              value=""                      
                               class="form-control" 
                               name="middlename" 
                               placeholder="Enter Middle Name" />
@@ -50,7 +47,7 @@
                     <div class="col form-group">
                       <label for=""><small>Last Name:</small></label>
                       <input  type="text" 
-                              value="{{student.lastname}}"  
+                              value=""  
                               class="form-control" 
                               name="lastname" 
                               placeholder="Enter Last Name" />
@@ -63,15 +60,15 @@
                         <label for="">Gender:</label>
                         <select class="form-control" name="gender">
                           <option value="">Select Gender</option>
-                          <option value="Male" {{student.gender == 'Male' ? "selected" : ""}}>Male</option>
-                          <option value="Female" {{student.gender == 'Female' ? "selected" : ""}}>Female</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                         </select>
                         <div class="validate" id="validate-gender"></div>
                       </div>
                       <div class="col form-group">
                         <label for=""><small>Address:</small></label>
                         <input  type="text" 
-                                value="{{student.address}}"                          
+                                value=""                          
                                 class="form-control" 
                                 name="address" 
                                 placeholder="Enter Complete Address" />
@@ -83,7 +80,7 @@
                     <div class="col-4 form-group">
                       <label for=""><small>Birth Date:</small></label>
                       <input  type="date" 
-                              value="{{moment(student.birthdate).format('YYYY-MM-DD')}}"  
+                              value=""  
                               name="birthdate" 
                               class="form-control" 
                               placeholder="Enter Birth Date" />
@@ -92,7 +89,7 @@
                     <div class="col form-group">
                       <label for=""><small>Birth Place:</small></label>
                       <input  type="text" 
-                              value="{{student.birth_place}}"  
+                              value=""  
                               class="form-control" 
                               name="birth_place" 
                               placeholder="Enter Birth Place" />
@@ -104,7 +101,7 @@
                     <div class="col form-group">
                       <label for=""><small>Email Address:</small></label>
                       <input  type="email" 
-                              value="{{student.email}}"                       
+                              value=""                       
                               class="form-control" 
                               name="email" 
                               placeholder="Enter Email Adress" />
@@ -113,7 +110,7 @@
                     <div class="col-4 form-group">
                       <label for=""><small>Contact:</small></label>
                       <input  type="text"
-                              value="{{student.contact}}"  
+                              value=""  
                               name="contact" 
                               class="form-control" 
                               placeholder="Enter Contact" />
@@ -140,7 +137,7 @@
                     <div class="col form-group">
                       <label for=""><small>First Name:</small></label>
                       <input  type="text"
-                              value="{{father_info.firstname}}" 
+                              value="" 
                               name="f_firstname" 
                               class="form-control" 
                               placeholder="Enter First Name" />
@@ -149,7 +146,7 @@
                     <div class="col form-group">
                       <label for=""><small>Middle Name:</small></label>
                       <input  type="text" 
-                              value="{{father_info.middlename}}"                       
+                              value=""                       
                               class="form-control" 
                               name="f_middlename" 
                               placeholder="Enter Middle Name" />
@@ -158,7 +155,7 @@
                     <div class="col form-group">
                       <label for=""><small>Last Name:</small></label>
                       <input  type="text" 
-                              value="{{father_info.lastname}}"     
+                              value=""     
                               class="form-control" 
                               name="f_lastname" 
                               placeholder="Enter Last Name" />
@@ -182,7 +179,7 @@
                     <div class="col-4 form-group">
                       <label for=""><small>Contact:</small></label>
                       <input  type="text" 
-                              value="{{father_info.contact}}"     
+                              value=""     
                               name="f_contact" 
                               class="form-control" 
                               placeholder="Enter Contact" />
@@ -209,7 +206,7 @@
                     <div class="col form-group">
                       <label for=""><small>First Name:</small></label>
                       <input  type="text" 
-                              value="{{mother_info.firstname}}"     
+                              value=""     
                               name="m_firstname" 
                               class="form-control" 
                               placeholder="Enter First Name" />
@@ -218,7 +215,7 @@
                     <div class="col form-group">
                       <label for=""><small>Middle Name:</small></label>
                       <input  type="text" 
-                              value="{{mother_info.middlename}}"     
+                              value=""     
                               class="form-control" 
                               name="m_middlename" 
                               placeholder="Enter Middle Name" />
@@ -227,7 +224,7 @@
                     <div class="col form-group">
                       <label for=""><small>Last Name:</small></label>
                       <input  type="text" 
-                              value="{{mother_info.lastname}}"     
+                              value=""    
                               class="form-control" 
                               name="m_lastname" 
                               placeholder="Enter Last Name" />
@@ -251,7 +248,7 @@
                     <div class="col-4 form-group">
                       <label for=""><small>Contact:</small></label>
                       <input  type="text" 
-                              value="{{mother_info.contact}}"     
+                              value=""     
                               name="m_contact" 
                               class="form-control" 
                               placeholder="Enter Contact" />
@@ -273,9 +270,9 @@
               </div>
               <div id="div_student_files" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                 <div class="card-body">
-                  @each(file in student.studentFiles)
-                  <img src="/student_files/{{file.filename}}" alt="..." class="img-thumbnail">
-                  @endeach
+                  <div class="file-loading">
+                    <input id="file_attachments" name="file_attachments[]" type="file"  data-show-upload="false" multiple>
+                  </div>
                 </div>
               </div>
             </div>
@@ -285,15 +282,21 @@
         </form>
       </div>
       <div class="modal-footer">
-        @if(student.admission_status_id == 1)
-        <button type="button" class="btn btn-danger" onClick="reasonOfRejection({{student.id}}, 3)">Reject</button>
-        <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 2)">Approve</button>
-        @elseif(student.admission_status_id == 3)
-          <button type="button" class="btn btn-primary" onClick="updateStudentStatus({{student.id}}, 4)">Update and Approve</button>
-        @endif  
-        @if(student.admission_status_id == 2)
-        <small>Reference No: </small> <span class="badge badge-pill badge-danger">{{student.reference_no}}</span>
-        @endif
+        {{--  @if(student.admission_status_id == 1)  --}}
+        <button type="button" class="btn btn-danger" id="btn-reject" onClick="">Reject</button>
+        <button type="button" class="btn btn-primary" id="btn-approve" onClick="">Approve</button>
+        {{--  @elseif(student.admission_status_id == 3)  --}}
+        <button type="button" class="btn btn-primary" id="btn-update-approve" onClick="" >Update and Approve</button>
+        {{--  @endif    --}}
+        {{--  @if(student.admission_status_id == 2)  --}}
+        <div id="reference-area">
+          <small>Reference No: </small> <span class="badge badge-pill badge-danger"></span>
+        </div>
+        {{--  @endif  --}}
       </div>
     </div>
   </div>
+
+<script>
+
+</script>

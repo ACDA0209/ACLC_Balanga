@@ -5,6 +5,10 @@ const StudentFile = use('App/Models/StudentFile')
 const Nodemailer = use('App/Helpers/Nodemailer')
 const perPage = 10
 
+const Drive = use('Drive')
+const Helpers = use('Helpers')
+
+
 class ApprovalController {
   async index({view}){
     // const result = await Student.findBy('id', 1) 
@@ -32,7 +36,7 @@ class ApprovalController {
       })
   }
 
-  async getStudentDetails ({ request, view }) {
+  async getStudentDetails ({ request, view, response }) {
     const student = await Student
     .query()
     .with('parents')
@@ -41,6 +45,10 @@ class ApprovalController {
     .where('id','=', request.body.student_id)
     .first()
 
+    return response.json({
+      student: student.toJSON()
+    })
+
     return view
       .render('admin.approval.modal-student-details', {
         student: student.toJSON()
@@ -48,6 +56,26 @@ class ApprovalController {
   }
 
   async updateStudentStatus ({ request, view, auth }) {
+    var data = JSON.parse(request.body.data)
+    request.body.student_id = data[0].student_id
+    request.body.status_id = data[1].status_id
+    request.body.note = data[2].note
+    request.body.uploaded_files = data[3].uploaded_files
+    // console.log(request.file('file_attachments'))
+
+    var check_student_files = await StudentFile
+    .query()
+    .where('student_id', request.body.student_id)
+    .whereNotIn('id', request.body.uploaded_files).fetch()
+
+    let delete_id = []
+    for(let data of check_student_files.toJSON()){
+      await Drive.delete(Helpers.publicPath('student_files/' + data.filename))
+      delete_id.push(data.id)
+    }
+
+    await StudentFile.query().whereIn('id', delete_id).delete()
+
     request.body.admission_status_id = request.body.status_id
 
     let reference_no = Math.random().toString(20).substr(2, 10).toUpperCase();  
@@ -66,6 +94,11 @@ class ApprovalController {
       request.body.note = "update and approved"
       var result = await Student.updateStudent(request, auth.user.id)
     }else{
+
+      const studentFiles = request.file('file_attachments', {
+        types: ['image']
+      })
+      const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, request.body.student_id)
       var result = await Student.findBy('id', request.body.student_id) 
       result.admission_status_id = request.body.admission_status_id
       result.updated_by = auth.user.id

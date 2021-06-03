@@ -59,30 +59,6 @@
                 <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
                     <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-start me-auto">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                    <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-end">
@@ -94,7 +70,7 @@
                                 <i class="ti-user me-1 ms-1"></i> 
                                   {{auth.user.name}}
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown" id="dropdown-profile">
                                 <a class="dropdown-item" href="/admin/user/myProfile"><i class="ti-settings me-1 ms-1"></i> &nbsp;
                                     My Profile
                                 </a>
@@ -120,6 +96,7 @@
                     </ul>
                 </div>
             </nav>
+            
         </header>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
@@ -171,7 +148,11 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
 
-
+    <script>
+        $('#navbarDropdown').click(function(){
+            $("#dropdown-profile").toggle();
+        });
+    </script>
     @!section('javascripts')
 
     @include('admin/layouts/footer')

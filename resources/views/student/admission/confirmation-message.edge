@@ -1,0 +1,38 @@
+@layout('student/layouts/main')
+
+@section('javascripts')
+<script type="text/javascript">
+$(() => {
+  $("#footer").remove()
+  $("#navBar").remove()
+})</script>
+@endsection
+
+@section('content')
+
+<main id="main">
+  <!-- ======= About Section ======= -->
+  <center>
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row center">
+        <div class="col-lg-12 pt-4 pt-lg-5 content">
+          <h3>   
+            <i class="icofont-info-square"></i> 
+            Application Submitted Successfully!
+          </h3>
+          <p>
+            Hi <b>{{student_name}}!</b>  We will email you about your approval.
+          </p>
+          
+          <a class="btn btn-danger mt-lg-5" href="/admission" role="button">Go Back to Admission Page</a>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+</center>
+
+</main>
+
+@endsection

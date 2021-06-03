@@ -44,6 +44,7 @@ class StudentFile extends Model {
 
 
     static async uploadStudentFiles(student_files, student_id) {
+        if (!student_files) return true;
         await student_files.moveAll(Helpers.publicPath('student_files'), (file) => {
             let randomString = Math.random().toString(20).substr(2, 6);
             let temp_screenshot = `${student_id}_${this.getDateTimeString()}_${randomString}.${file.subtype}`;

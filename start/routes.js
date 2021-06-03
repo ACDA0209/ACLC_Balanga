@@ -15,11 +15,40 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+const Course = use('App/Models/Course')
 
-Route.on('/').render('Student.home.index')
+Route.get('/', async ({ view }) => {
+     const courses = await Course
+     .query()
+     .with('courseType')
+     .paginate(1,6)
+     return view
+     .render('Student.home.index', {
+          courses:courses.toJSON().data
+     })
+})
+Route.on('/about/history').render('Student.about.history') 
+Route.on('/about/missionvision').render('Student.about.missionvision') 
+Route.on('/about/hymn').render('Student.about.hymn') 
+Route.on('/about/personnel').render('Student.about.personnel')  
+
+Route.on('/contact').render('Student.contact.index')  
+
+Route.get('/courses', async ({ view }) => {
+     const courses = await Course
+     .query()
+     .with('courseType')
+     .fetch()
+
+     return view
+     .render('student.courses.index', {
+          courses:courses.toJSON()
+     })
+})
 
 Route.get('/admission', 'Student/AdmissionController.index')
 Route.post('/admission/submission', 'Student/AdmissionController.submission').validator('AdmissionApplication')   
+Route.get('/admission/confirmation', 'Student/AdmissionController.confirmation')
 
 Route.get('/login', 'Admin/LoginController.index').middleware('isAuthenticated')
 Route.post('/onLogin', 'Admin/LoginController.onLogin')
@@ -38,4 +67,12 @@ Route.get('/admin/approval', 'Admin/ApprovalController.index')
 Route.post('/admin/approval/fetchStudents', 'Admin/ApprovalController.fetchStudents')
 Route.post('/admin/approval/getStudentDetails', 'Admin/ApprovalController.getStudentDetails')
 Route.post('/admin/approval/updateStudentStatus', 'Admin/ApprovalController.updateStudentStatus')
+
+
+Route.get('/admin/courses', 'Admin/CourseController.index')
+     .middleware('isNotAuthenticated')
+Route.post('/admin/courses/fetchCourses', 'Admin/CourseController.fetchCourses')
+Route.post('/admin/courses/getCourseDetails', 'Admin/CourseController.getCourseDetails')
+Route.post('/admin/courses/addCourse', 'Admin/CourseController.addCourse').validator('AddCourse')   
+Route.post('/admin/courses/updateCourse', 'Admin/CourseController.updateCourse')
 

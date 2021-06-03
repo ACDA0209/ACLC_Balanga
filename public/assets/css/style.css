@@ -2186,3 +2186,21 @@ section {
   font-size: 13px;
   color: #fff;
 }
+
+#btn_submit {
+  background: #EC1C24;
+  border: 0;
+  border-radius: 50px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+#btn_submit:hover {
+  background: #EC1C24;
+}
+
+
+.file-caption-name{
+  padding: 0px !important;
+}

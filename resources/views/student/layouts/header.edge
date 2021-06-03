@@ -10,8 +10,8 @@
 
 
 <!-- Favicons -->
-<link href="assets/img/aclc_icon.png" rel="icon">
-<link href="assets/img/aclc_icon.png" rel="aclc_logo">
+<link href="/assets/img/aclc_icon.png" rel="icon">
+<link href="/assets/img/aclc_icon.png" rel="aclc_logo">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -27,7 +27,7 @@
 
 
 <!-- Template Main CSS File -->
-{{ style('assets/css/style.css') }}
+{{ style('/assets/css/style.css') }}
 <link href="assets/css/style.css" rel="stylesheet">
 
 {{ style('stylesheets/overlay.css') }}
@@ -35,3 +35,17 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 {{ script('javascripts/global.js') }}
+
+<!-- File Input -->
+{{style('bower_components/bootstrap-fileinput/css/fileinput.css')}}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+
+{{style('bower_components/bootstrap-fileinput/themes/explorer-fa/theme.css')}}
+{{script('bower_components/bootstrap/dist/js/bootstrap.bundle.min.js')}}
+{{script('bower_components/bootstrap-fileinput/js/plugins/piexif.js')}}
+{{script('bower_components/bootstrap-fileinput/js/plugins/sortable.js')}}
+{{script('bower_components/bootstrap-fileinput/js/fileinput.js')}}
+{{script('bower_components/bootstrap-fileinput/js/locales/fr.js')}}
+{{script('bower_components/bootstrap-fileinput/js/locales/es.js')}}
+{{script('bower_components/bootstrap-fileinput/themes/fa/theme.js')}}
+<!-- File Input -->

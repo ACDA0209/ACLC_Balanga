@@ -32,5 +32,48 @@
   </div>
 
 </div>
+<script>
+   var $el4 = $('#file_attachments'), initPlugin = function(initialPreviews) {
+  $el4.fileinput('destroy');
+  $el4.fileinput({
+        theme: "fa",
+        uploadUrl: "/file-upload-batch/1",
+        uploadAsync: false,
+        showUpload: false,
+        showDownload: false,
+        showZoom: false,
+        minFileCount: 2,
+        maxFileCount: 5,
+        overwriteInitial: false,
+        initialPreview:initialPreviews,
+        // [
+        //     "<img class='kv-preview-data file-preview-image' src='/student_files/1_202148171210334_f4h15g.png' id='12' name='uploaded_files[]'>",
+        //     "<img class='kv-preview-data file-preview-image' src='https://picsum.photos/id/261/1920/1080' name='uploaded_files[]'>",
+        // ],
+        uploadExtraData: {
+            img_key: "1000",
+            img_keywords: "happy, nature"
+        }, 
+        fileActionSettings: {
+        showDrag: false,
+        showZoom: true,
+        showDownload: false,
+        showUpload: false,
+        showDelete: true,
+        }
+    }).on('filesorted', function(e, params) {
+        console.log('File sorted params', params);
+        
+    }).on('fileuploaded', function(e, params) {
+        console.log('File uploaded params', params);
+    }).on('filesuccessremove', function(e, id) {
+        console.log('file success remove', e, id);
+    });
+    $el4.fileinput('_initFileActions');
 
+    
+};
+
+        </script>
 @endsection
+

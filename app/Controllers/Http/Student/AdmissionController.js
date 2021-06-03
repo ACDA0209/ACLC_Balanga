@@ -8,6 +8,13 @@ class AdmissionController {
         return view.render('student.admission.index')
     }
 
+    async confirmation({view}){
+        return view
+        .render('student.admission.confirmation-message', {
+          student_name: "First Last"
+        })
+    }
+
     async submission({request, response}){
         console.log(request.file('file_attachment'))
         console.log("-------------")
@@ -41,7 +48,7 @@ class AdmissionController {
             let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
                             Your application was successfully submitted. </p>
                             <p>Please wait for the confirmation result.</p>`
-            const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+            // const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
 
             return response.json({
                 err: '0',
