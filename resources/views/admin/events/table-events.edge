@@ -1,0 +1,33 @@
+@if(result)
+@include('/admin/layouts/pagination')
+@endif
+<table class="table table-hover">
+  <thead>
+      <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Event Date</th>
+          <th scope="col">Date Created</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    @each(event in result.data)
+
+      <tr>
+          <th scope="row">{{event.id}}</th>
+          <td>{{event.title}}</td>
+          <td>{{event.description}}</td>
+          <td>{{moment(event.event_date).format('YYYY-MM-DD') }}</td>
+          <td>{{moment(event.date_created).format('YYYY-MM-DD') }}</td>
+          <td>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getEventDetails({{event.id}})">
+              <i class="me-2 mdi mdi-eye"></i>
+            </button>
+          </td>
+      </tr>
+      @endeach
+  </tbody>
+</table>
+

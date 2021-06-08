@@ -1,0 +1,45 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/events/index.js') }}
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Event List</h4>
+             <!-- Button trigger modal -->
+
+          </div>
+          
+          <div class="row p-20 pt-0">
+            <div class="col-md-4 offset-md-8">
+              <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modal_add_event">Add Event</button>
+            </div>
+          </div>
+          <div class="table-responsive" id="table_events">
+            @include('admin/events/table-events')
+          </div>
+
+          <div class="modal fade" id="modal_add_event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            @include('admin/events/modal-add-event')
+          </div>
+
+          <div class="modal fade" id="event_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            @include('admin/events/modal-event-details')
+          </div>
+      </div>
+  </div>
+  </div>
+
+
+</div>
+
+@endsection
+

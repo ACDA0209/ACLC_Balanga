@@ -10,7 +10,7 @@ class EventsSchema extends Schema {
       table.string('title', 254).nullable()
       table.string('cover_photo', 254).nullable()
       table.text('description').nullable()
-      table.datetime('date_until').nullable()
+      table.datetime('event_date').nullable()
       table.integer('created_by').unsigned().notNullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
     })

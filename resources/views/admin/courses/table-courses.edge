@@ -8,6 +8,7 @@
           <th scope="col">Course</th>
           <th scope="col">Description</th>
           <th scope="col">Type</th>
+          <th scope="col">Status</th>
           <th scope="col">Date Created</th>
           <th scope="col">Action</th>
       </tr>
@@ -20,6 +21,9 @@
           <td>{{course.course}}</td>
           <td>{{course.description}}</td>
           <td>{{course.courseType.course_type}}</td>
+          <td>
+            <span class="badge badge-{{course.status==1?'success':'danger'}}">{{course.status==1? 'Active':'Inactive'}}</span>
+          </td>
           <td>{{moment(course.date_created).format('YYYY-MM-DD') }}</td>
           <td>
             <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getCourseDetails({{course.id}})">

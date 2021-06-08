@@ -65,6 +65,16 @@ function validatorMessages(validator, elem) {
 
 }
 
+function validatorMessagesUpdate(validator, elem) {
+  // elem.html('')
+  $(".validate").hide()
+  $.each(validator, (key, value) => {
+    $(`#validate-update-${value["field"]}`).text(value['message']).show()
+    // elem.append(value['message'] + '<br>')
+  })
+
+}
+
 function clearHtmlElement(keyword) {
   $('[id^="' + keyword + '"]').each((index, elem) => {
     $(elem).val('')

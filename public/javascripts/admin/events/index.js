@@ -1,25 +1,41 @@
-const URL = `${APP_URL}/admin/courses`
+const URL = `${APP_URL}/admin/events`
 var currentPage = 1;
+var cover_photo_src = ""
 
-
-$("#page_title").text("Courses")
-$("#breadcrumb_item").text("Courses")
+$("#page_title").text("Events")
+$("#breadcrumb_item").text("Events")
 
 $(() => {
   clearAddForm()
-  getCourses(1)
+  getEvents(1)
+
+  var imgInp = $("#cover_photo")
+  $(document).on('change', imgInp, function() {
+    var file = $("#cover_photo").get(0).files[0];
+    if(file){
+        var reader = new FileReader();
+        reader.onload = function(){
+            $("#cover_photo_prev").attr("src", reader.result);
+        }
+        reader.readAsDataURL(file);
+      }
+  });
+  $(document).on('click', $("#btn-reset-cover-photo"), function() {
+    $("#cover_photo_prev").attr("src", cover_photo_src);
+  });
+
 })
 
-function getCourses(page) {
+function getEvents(page) {
   if (page) {
     showOverlay()
     currentPage = page
-    ajaxRequest(`${URL}/fetchCourses`, {
+    ajaxRequest(`${URL}/fetchEvents`, {
       page: page
     })
       .then(res => {
         currentPage = page
-        $('#table_courses').html(res)
+        $('#table_events').html(res)
         hideOverlay()
       })
       .catch(err => {
@@ -31,16 +47,17 @@ function getCourses(page) {
 }
 
 
-function getCourseDetails(course_id) {
-  if (course_id) {
+function getEventDetails(event_id) {
+  if (event_id) {
     showOverlay()
-    ajaxRequest(`${URL}/getCourseDetails`, {
-      course_id: course_id
+    ajaxRequest(`${URL}/getEventDetails`, {
+      event_id: event_id
     })
       .then(res => {
-        $('#course_details').html(res)
+        $('#event_details').html(res)
         // $.fn.modal.Constructor.prototype._enforceFocus = function() {};
-        $("#course_details").modal("show")
+        $("#event_details").modal("show")
+        cover_photo_src = $("#cover_photo_prev").attr("src");
         // $('#table-students').html(res)
         // hideOverlay()
 
@@ -54,13 +71,12 @@ function getCourseDetails(course_id) {
   }
 }
 
-function addCourse() {
+function addEvent() {
   showOverlay();
   $(".validate").text("")
-  ajaxRequestForm(`${URL}/addCourse`, $('#form_add_course'))
+  ajaxRequestForm(`${URL}/addEvent`, $('#form_add_event'))
   .then(response => {
       hideOverlay()
-      
       if (response.validator) {
         validatorMessages(response.validator, $('#add-validator'))
         $(".validate").css("color", "#EC1C24")
@@ -70,10 +86,10 @@ function addCourse() {
           title: response.title,
           text: response.text,
         })
-        $("#modal_add_course").modal("hide")
+        $("#modal_add_event").modal("hide")
         $('.modal-backdrop').remove();
         clearAddForm();
-        getCourses(1);
+        getEvents(1);
       }
 
   })
@@ -88,15 +104,16 @@ function addCourse() {
 }
 
 function clearAddForm(){
-  $('#form_add_course').find("input[name=course]").val("");
-  $('#form_add_course').find("textarea[name=description]").val("");
-  $('#form_add_course').find("select[name=course_type_id]").val("");
+  $('#form_add_event').find("input[name=title]").val("");
+  $('#form_add_event').find("textarea[name=description]").val("");
+  $('#form_add_event').find("input[name=event_date]").val("");
+  $('#form_add_event').find("file[name=cover_photo]").val("");
 }
 
-function updateCourse() {
+function updateEvent() {
   showOverlay();
   $(".validate").text("")
-  ajaxRequestForm(`${URL}/updateCourse`, $('#form_course'))
+  ajaxRequestForm(`${URL}/updateEvent`, $('#form_event'))
   .then(response => {
       hideOverlay()
       
@@ -109,8 +126,8 @@ function updateCourse() {
           title: response.title,
           text: response.text,
         })
-        $("#course_details").modal("hide")
-        getCourses(currentPage);
+        $("#event_details").modal("hide")
+        getEvents(currentPage);
       }
 
   })

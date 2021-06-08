@@ -23,7 +23,7 @@
                           class="form-control" 
                           name="course" 
                           placeholder="Enter Course" />
-                  <div class="validate" id="validate-course"></div>
+                  <div class="validate" id="validate-update-course"></div>
                 </div>
               </div>
               
@@ -35,7 +35,7 @@
                           name="description" 
                           rows="5"
                           placeholder="Enter First Name" > {{course.description}}</textarea>
-                  <div class="validate" id="validate-description"></div>
+                  <div class="validate" id="validate-update-description"></div>
                 </div>
               </div>
 
@@ -48,7 +48,7 @@
                       <option value="{{type.id}}" {{course.course_type_id == type.id ? "selected" : ""}}>{{type.course_type}}</option>
                     @endeach
                   </select>
-                  <div class="validate" id="validate-course_type_id"></div>
+                  <div class="validate" id="validate-update-course_type_id"></div>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@
                     <option value="1"  {{course.status == '1' ? "selected" : ""}}>Active</option>
                     <option value="0" {{course.status == '0' ? "selected" : ""}}>Inactive</option>
                   </select>
-                  <div class="validate" id="validate-status"></div>
+                  <div class="validate" id="validate-update-status"></div>
                 </div>
               </div>
               

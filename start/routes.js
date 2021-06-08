@@ -37,6 +37,7 @@ Route.on('/contact').render('Student.contact.index')
 Route.get('/courses', async ({ view }) => {
      const courses = await Course
      .query()
+     .where('status',true)
      .with('courseType')
      .fetch()
 
@@ -74,5 +75,12 @@ Route.get('/admin/courses', 'Admin/CourseController.index')
 Route.post('/admin/courses/fetchCourses', 'Admin/CourseController.fetchCourses')
 Route.post('/admin/courses/getCourseDetails', 'Admin/CourseController.getCourseDetails')
 Route.post('/admin/courses/addCourse', 'Admin/CourseController.addCourse').validator('AddCourse')   
-Route.post('/admin/courses/updateCourse', 'Admin/CourseController.updateCourse')
+Route.post('/admin/courses/updateCourse', 'Admin/CourseController.updateCourse').validator('UpdateCourse')   
 
+
+Route.get('/admin/events', 'Admin/EventController.index')
+     .middleware('isNotAuthenticated')
+Route.post('/admin/events/fetchEvents', 'Admin/EventController.fetchEvents')
+Route.post('/admin/events/getEventDetails', 'Admin/EventController.getEventDetails')
+Route.post('/admin/events/addEvent', 'Admin/EventController.addEvent')
+Route.post('/admin/events/updateEvent', 'Admin/EventController.updateEvent')
