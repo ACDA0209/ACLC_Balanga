@@ -54,7 +54,8 @@ class AdmissionApplication {
       m_contact: 'required',
       m_occupation: 'required',
       
-      file_attachments: 'required',
+      "file_attachments": 'required',
+      "file_attachments.*": 'required|file_ext:jpg,jpeg,png',
     }
   }
 

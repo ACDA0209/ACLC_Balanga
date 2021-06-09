@@ -5,81 +5,56 @@
     @include('student/layouts/carousel')
 
     <main id="main">
-      <!-- ======= Featured Section ======= -->
-      <section id="featured" class="featured">
-        <div class="container">
-
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="icon-box">
-                <i class="icofont-computer"></i>
-                <h3><a href="">Sample Events</a></h3>
-                <p>
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                </p>
-              </div>
-            </div>
-            <div class="col-lg-4 mt-4 mt-lg-0">
-              <div class="icon-box">
-                <i class="icofont-image"></i>
-                <h3><a href="">Sample Events</a></h3>
-                <p>
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                </p>
-              </div>
-            </div>
-            <div class="col-lg-4 mt-4 mt-lg-0">
-              <div class="icon-box">
-                <i class="icofont-tasks-alt"></i>
-                <h3><a href="">Calendar Events</a></h3>
-                <p>
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section><!-- End Featured Section -->
 
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
         <div class="container">
-
+          <div class="section-title" data-aos="fade-up">
+            <h2>Our Events</h2>
+          </div>
           <div class="row">
             <div class="col-lg-6">
-              <img src="assets/img/about.jpg" class="img-fluid" alt="">
+              <img src="{{main_event.cover_photo ? '/events/'+main_event.cover_photo : ''}}" class="img-fluid" alt="">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 content">
-              <h3>Sample Information 3</h3>
+              <h3>{{main_event.title}}</h3>
               <p class="font-italic">
                 sample text sample text sample text sample text sample text
                 sample text sample text sample text sample text sample text
                 sample text sample text sample text sample text sample text
               </p>
-              <ul>
-                <li><i class="icofont-check-circled"></i> Sample List 1</li>
-                <li><i class="icofont-check-circled"></i> Sample List 2</li>
-                <li><i class="icofont-check-circled"></i> Sample List 3</li>
-              </ul>
               <p>
-                sample text sample text sample text sample text sample text
-                sample text sample text sample text sample text sample text
-                sample text sample text sample text sample text sample text
-                sample text sample text sample text sample text sample text
-                sample text sample text sample text sample text sample text
+                {{main_event.description}}
               </p>
             </div>
           </div>
 
         </div>
       </section><!-- End About Section -->
+
+      <!-- ======= Featured Section ======= -->
+      <section id="featured" class="featured">
+        <div class="container">
+
+          <div class="row">
+            @each(event in other_events)
+          <div class="col-lg-4 mt-4 mt-lg-0">
+              <div class="icon-box">
+                <img src="{{event.cover_photo ? '/events/'+event.cover_photo : ''}}" class="img-fluid" alt="">
+                <h3><a href="">{{event.title}}</a></h3>
+                <p>
+                  {{event.description}}
+                </p>
+              </div>
+          </div>
+          @endeach
+
+          </div>
+
+        </div>
+      </section><!-- End Featured Section -->
+
+
 
       <!-- ======= Services Section ======= -->
       <section id="services" class="services">

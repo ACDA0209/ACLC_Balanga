@@ -31,6 +31,8 @@ class NodeMailer{
 
     return Env.get('GMAIL_USERNAME')
   }
+
+
 }
 
 module.exports = NodeMailer

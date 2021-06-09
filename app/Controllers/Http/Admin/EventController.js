@@ -1,9 +1,11 @@
 'use strict'
 const Event = use('App/Models/Event')
 const perPage = 10
+const Database = use('Database')
 
 class EventController {
   async index({view}){  
+
     return view.render('admin.events.index')
   }
 

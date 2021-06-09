@@ -22,6 +22,7 @@ $(() => {
   });
   $(document).on('click', $("#btn-reset-cover-photo"), function() {
     $("#cover_photo_prev").attr("src", cover_photo_src);
+    $("#cover_photo").val("");
   });
 
 })

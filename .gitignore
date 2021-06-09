@@ -16,3 +16,4 @@ database/*.sqlite
 .idea
 
 public/student_files
+public/events

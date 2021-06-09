@@ -60,6 +60,9 @@ function validatorMessages(validator, elem) {
   $(".validate").hide()
   $.each(validator, (key, value) => {
     $(`#validate-${value["field"]}`).text(value['message']).show()
+    if(value["field"] == "file_attachments.0"){
+      $(`#validate-file_attachments_arr`).text(value['message']).show()
+    }
     // elem.append(value['message'] + '<br>')
   })
 

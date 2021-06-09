@@ -16,17 +16,33 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 const Course = use('App/Models/Course')
+const Event = use('App/Models/Event')
+const moment = require('moment')
+const Database = use('Database')
 
 Route.get('/', async ({ view }) => {
      const courses = await Course
      .query()
      .with('courseType')
      .paginate(1,6)
+     const main_event = await Event.query()
+     .where('event_date', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
+     .orderBy('event_date', 'asc')
+     .first()
+     const other_events = await Database
+     .table('events')
+     .where('event_date', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
+     .orderBy('event_date', 'asc')
+     .offset(1)
+     .limit(3)
      return view
      .render('Student.home.index', {
-          courses:courses.toJSON().data
+          courses:courses.toJSON().data,
+          main_event: main_event,
+          other_events: other_events
      })
 })
+
 Route.on('/about/history').render('Student.about.history') 
 Route.on('/about/missionvision').render('Student.about.missionvision') 
 Route.on('/about/hymn').render('Student.about.hymn') 
@@ -34,22 +50,13 @@ Route.on('/about/personnel').render('Student.about.personnel')
 
 Route.on('/contact').render('Student.contact.index')  
 
-Route.get('/courses', async ({ view }) => {
-     const courses = await Course
-     .query()
-     .where('status',true)
-     .with('courseType')
-     .fetch()
-
-     return view
-     .render('student.courses.index', {
-          courses:courses.toJSON()
-     })
-})
+Route.get('/courses', 'Student/ContentController.courseIndex')
+Route.get('/events', 'Student/ContentController.eventIndex')
 
 Route.get('/admission', 'Student/AdmissionController.index')
 Route.post('/admission/submission', 'Student/AdmissionController.submission').validator('AdmissionApplication')   
 Route.get('/admission/confirmation', 'Student/AdmissionController.confirmation')
+
 
 Route.get('/login', 'Admin/LoginController.index').middleware('isAuthenticated')
 Route.post('/onLogin', 'Admin/LoginController.onLogin')
@@ -82,5 +89,5 @@ Route.get('/admin/events', 'Admin/EventController.index')
      .middleware('isNotAuthenticated')
 Route.post('/admin/events/fetchEvents', 'Admin/EventController.fetchEvents')
 Route.post('/admin/events/getEventDetails', 'Admin/EventController.getEventDetails')
-Route.post('/admin/events/addEvent', 'Admin/EventController.addEvent')
-Route.post('/admin/events/updateEvent', 'Admin/EventController.updateEvent')
+Route.post('/admin/events/addEvent', 'Admin/EventController.addEvent').validator('AddEvent')   
+Route.post('/admin/events/updateEvent', 'Admin/EventController.updateEvent').validator('UpdateEvent')   

@@ -2187,7 +2187,7 @@ section {
   color: #fff;
 }
 
-#btn_submit {
+.btn_submit {
   background: #EC1C24;
   border: 0;
   border-radius: 50px;
@@ -2196,7 +2196,7 @@ section {
   transition: 0.4s;
 }
 
-#btn_submit:hover {
+.btn_submit:hover {
   background: #EC1C24;
 }
 
