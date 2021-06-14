@@ -25,7 +25,11 @@
 
     <div class="entry-meta">
       <ul>
-        <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{moment(event.event_date).format('YYYY-MM-DD') }}</time></a></li>
+        <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="/events/{{event.id}}">
+          <time datetime="{{moment(event.date_created).format('YYYY-MM-DD') }}">
+            {{moment(event.date_created).format('MMMM DD, YYYY') }}
+          </time></a>
+        </li>
       </ul>
     </div>
 
@@ -34,13 +38,13 @@
         {{{event.description}}}
       </p>
       <div class="read-more">
-        <a href="/events/{{event.id}}">Go to page</a>
+        <a href="/events/{{event.id}}">View All</a>
       </div>
     </div>
 
   </article><!-- End blog entry -->
 @endeach
-  @if(result)
+  @if(result.data)
   @include('/admin/layouts/pagination')
   @else
   <h2 class="entry-title">No Event</h2>

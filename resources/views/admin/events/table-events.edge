@@ -6,7 +6,7 @@
       <tr>
           <th scope="col">Id</th>
           <th scope="col">Title</th>
-          <th scope="col">Event Date</th>
+          <th scope="col">Status</th>
           <th scope="col">Date Created</th>
           <th scope="col">Action</th>
       </tr>
@@ -17,7 +17,10 @@
       <tr>
           <th scope="row">{{event.id}}</th>
           <td>{{event.title}}</td>
-          <td>{{moment(event.event_date).format('YYYY-MM-DD') }}</td>
+          <td>
+            <span class="badge badge-{{event.status==1?'success':'danger'}}">{{event.status==1? 'Active':'Inactive'}}</span>
+          </td>
+          {{--  <td>{{moment(event.event_date).format('YYYY-MM-DD') }}</td>  --}}
           <td>{{moment(event.date_created).format('YYYY-MM-DD') }}</td>
           <td>
             <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getEventDetails({{event.id}})">

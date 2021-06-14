@@ -53,7 +53,7 @@ class Event extends Model {
         const result =  new Event()
         result.title = request.body.title
         result.description = request.body.description
-        result.event_date = request.body.event_date
+        // result.event_date = request.body.event_date
         result.created_by =auth.user.id
         await result.save(trx)
 
@@ -95,7 +95,8 @@ class Event extends Model {
       const result = await Event.query().where('id', '=', request.body.event_id).first()
             result.title = request.body.title
             result.description = request.body.description
-            result.event_date = request.body.event_date
+            // result.event_date = request.body.event_date
+            result.status = request.body.status
             result.created_by =auth.user.id
 
             const cover_photo = request.file('cover_photo', {

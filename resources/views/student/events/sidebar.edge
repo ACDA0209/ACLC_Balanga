@@ -8,7 +8,9 @@
                 <div class="post-item clearfix">
                   <img src="{{recent_event.cover_photo ? '/events/'+recent_event.cover_photo : ''}}" alt="">
                   <h4><a href="/events/{{recent_event.id}}">{{recent_event.title}}</a></h4>
-                  <time datetime="{{moment(recent_event.event_date).format('YYYY-MM-DD') }}">{{moment(recent_event.event_date).format('MMMM DD, YYYY') }}</time>
+                  <time datetime="{{moment(recent_event.date_created).format('YYYY-MM-DD') }}">
+                    {{moment(recent_event.date_created).format('MMMM DD, YYYY') }}
+                  </time>
                 </div>
                 @endeach
             

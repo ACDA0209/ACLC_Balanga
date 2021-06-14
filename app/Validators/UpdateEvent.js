@@ -9,7 +9,8 @@ class UpdateEvent {
     return{
       title         : 'escape|trim',
       description   : 'escape|trim',
-      event_date    : 'escape|trim'
+      status   : 'escape|trim',
+      // event_date    : 'escape|trim'
     }
   }
 
@@ -18,7 +19,8 @@ class UpdateEvent {
       title         : 'required',
       description   : 'required',
       cover_photo   : 'file_ext:jpg,jpeg,png',
-      event_date    : 'required|date'
+      status   : 'required',
+      // event_date    : 'required|date'
     }
   }
 
@@ -26,8 +28,9 @@ class UpdateEvent {
      return{
        'title.required'         : 'Title must not be empty!',
        'description.required'   : 'Description must not be empty!',
-       'event_date.required'    : 'Event Date must not be empty!',
-       'event_date.date'        : 'Event Date must be date',
+      //  'event_date.required'    : 'Event Date must not be empty!',
+       'status.required'   : 'Status must not be empty!',
+      //  'event_date.date'        : 'Event Date must be date',
      }
    }
 

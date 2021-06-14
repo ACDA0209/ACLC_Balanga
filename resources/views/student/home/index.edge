@@ -5,13 +5,14 @@
   .p_event_description{
   display: block; /* Fallback for non-webkit */
   display: -webkit-box;
-  height: 250px; /* Fallback for non-webkit */
+  height: 180px; /* Fallback for non-webkit */
   margin: 0 auto;
   -webkit-line-clamp: 5px;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 15px;
+  margin-bottom: 15px;
   }
   </style>
     @include('student/layouts/carousel')
@@ -34,16 +35,19 @@
               <img src="{{main_event.cover_photo ? '/events/'+main_event.cover_photo : ''}}" class="img-fluid" alt="">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 content event_description" id="event-content-{{main_event.id}}">
-              <h3>{{main_event.title}}</h3>
+              <h3><a href="/events/{{main_event.id}}">{{main_event.title}}</a></h3>
               <small>
                 <i class="icofont-wall-clock"></i>
-                <time datetime="{{moment(event.event_date).format('YYYY-MM-DD') }}">
-                  {{moment(main_event.event_date).format('MMMM DD, YYYY') }}
+                <time datetime="{{moment(event.date_created).format('YYYY-MM-DD') }}">
+                  {{moment(main_event.date_created).format('MMMM DD, YYYY') }}
                 </time>
               </small>
               <p class="p_event_description">
                 {{{main_event.description}}}
               </p>
+              <div class="read-more">
+                <a href="/events/{{main_event.id}}">View All</a>
+              </div>
             </div>
           </div>
           @endif
@@ -62,10 +66,13 @@
                 <h3 style="margin: 17px 0px 3px 0px;"><a href="/events/{{event.id}}">{{event.title}}</a></h3>
                 <small> 
                   <i class="icofont-wall-clock"></i>
-                  <time datetime=" {{moment(event.event_date).format('YYYY-MM-DD') }}">
-                    {{moment(event.event_date).format('MMMM DD, YYYY') }}
+                  <time datetime=" {{moment(event.date_created).format('YYYY-MM-DD') }}">
+                    {{moment(event.date_created).format('MMMM DD, YYYY') }}
                   </time>
                 </small>
+                <div class="read-more">
+                  <a href="/events/{{event.id}}">View All</a>
+                </div>
                 </div>
           </div>
           @endeach

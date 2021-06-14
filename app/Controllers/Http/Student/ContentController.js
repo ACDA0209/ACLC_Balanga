@@ -48,7 +48,7 @@ class ContentController {
   }
 
   async eventIndex({view}){
-    const events = await Event.all()
+     const events = await Event.query().where('status',1).orderBy('date_created', 'asc').fetch()
     return view
     .render('student.events.index', {
          events:events.toJSON()
@@ -58,10 +58,19 @@ class ContentController {
   async fetchEvents ({ request, view, response }) {
     const events = await Event
     .query()
+    .where('status',1)
+    .where(function () {
+      if(request.body.search){
+        this.orWhere('title', 'like', `%${request.body.search}%`)
+        this.orWhere('description', 'like', `%${request.body.search}%`)
+      }
+    })
+    .orderBy('date_created', 'desc')
     .paginate(request.body.page, eventPerPage)
 
     const recent_events = await Event
     .query()
+    .where('status',1).orderBy('date_created', 'desc')
     .paginate(1, 10)
 
       return response.json({

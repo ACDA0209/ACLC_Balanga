@@ -9,7 +9,7 @@ class AddEvent {
     return{
       title         : 'escape|trim',
       description   : 'escape|trim',
-      event_date    : 'escape|trim'
+      // event_date    : 'escape|trim'
     }
   }
 
@@ -18,7 +18,7 @@ class AddEvent {
       title         : 'required',
       description   : 'required',
       cover_photo   : 'required|file_ext:jpg,jpeg,png',
-      event_date    : 'required|date'
+      // event_date    : 'required|date'
     }
   }
 
@@ -28,7 +28,7 @@ class AddEvent {
        'description.required'   : 'Description must not be empty!',
        'cover_photo.required'   : 'Cover Photo must not be empty!',
        'event_date.required'    : 'Event Date must not be empty!',
-       'event_date.date'        : 'Event Date must be date'
+      //  'event_date.date'        : 'Event Date must be date'
      }
    }
 

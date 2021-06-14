@@ -34,9 +34,9 @@
             <div class="sidebar">
               <h3 class="sidebar-title">Search</h3>
               <div class="sidebar-item search-form">
-                <form action="">
-                  <input type="text">
-                  <button type="submit"><i class="icofont-search"></i></button>
+                <form id="search_form">
+                  <input type="text" id="search">
+                  <button type="button" onclick="getEvents(1)"><i class="icofont-search"></i></button>
                 </form>
                 <div id="recent_events">
                   @include('student/events/sidebar')

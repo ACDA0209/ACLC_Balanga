@@ -62,16 +62,27 @@
                 </div>
               </div>
 
+              {{--  <div class="form-row">  --}}
+                {{--  <div class="col form-group">  --}}
+                  {{--  <label for="">Event Date:</label>  --}}
+                  {{--  <input  type="date"   --}}
+                          {{--  value="{{moment(event.event_date).format('YYYY-MM-DD')}}"  --}}
+                          {{--  class="form-control"   --}}
+                          {{--  name="event_date"    --}}
+                          {{--  min="{{moment().format('YYYY-MM-DD')}}"  --}}
+                          {{--  />  --}}
+                  {{--  <div class="validate" id="validate-update-event_date"></div>  --}}
+                {{--  </div>  --}}
+              {{--  </div>  --}}
               <div class="form-row">
                 <div class="col form-group">
-                  <label for="">Event Date:</label>
-                  <input  type="date" 
-                          value="{{moment(event.event_date).format('YYYY-MM-DD')}}"
-                          class="form-control" 
-                          name="event_date"  
-                          min="{{moment().format('YYYY-MM-DD')}}"
-                          />
-                  <div class="validate" id="validate-update-event_date"></div>
+                  <label for="">Status:</label>
+                  <select class="form-control" name="status">
+                    <option value="">Select Event Status</option>
+                    <option value="1"  {{event.status == '1' ? "selected" : ""}}>Active</option>
+                    <option value="0" {{event.status == '0' ? "selected" : ""}}>Inactive</option>
+                  </select>
+                  <div class="validate" id="validate-update-status"></div>
                 </div>
               </div>
 

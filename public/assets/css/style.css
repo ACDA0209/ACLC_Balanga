@@ -2206,3 +2206,22 @@ section {
 .file-caption-name{
   padding: 0px !important;
 }
+
+.read-more {
+  -moz-text-align-last: right;
+  text-align-last: right;
+}
+
+.read-more a {
+  display: inline-block;
+  background: #EC1C24;
+  color: #fff;
+  padding: 6px 20px 8px 20px;
+  transition: 0.3s;
+  font-size: 14px;
+  border-radius: 50px;
+}
+
+.read-more a:hover {
+  background: #EC1C24;
+}
