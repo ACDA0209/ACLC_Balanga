@@ -1,7 +1,19 @@
 
 @layout('student/layouts/main')
 @section('content')
-
+<style>
+  .p_event_description{
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 250px; /* Fallback for non-webkit */
+  margin: 0 auto;
+  -webkit-line-clamp: 5px;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 15px;
+  }
+  </style>
     @include('student/layouts/carousel')
 
     <main id="main">
@@ -21,10 +33,16 @@
             <div class="col-lg-6">
               <img src="{{main_event.cover_photo ? '/events/'+main_event.cover_photo : ''}}" class="img-fluid" alt="">
             </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 content">
+            <div class="col-lg-6 pt-4 pt-lg-0 content event_description" id="event-content-{{main_event.id}}">
               <h3>{{main_event.title}}</h3>
-              <p>
-                {{main_event.description}}
+              <small>
+                <i class="icofont-wall-clock"></i>
+                <time datetime="{{moment(event.event_date).format('YYYY-MM-DD') }}">
+                  {{moment(main_event.event_date).format('MMMM DD, YYYY') }}
+                </time>
+              </small>
+              <p class="p_event_description">
+                {{{main_event.description}}}
               </p>
             </div>
           </div>
@@ -39,13 +57,16 @@
           <div class="row">
             @each(event in other_events)
           <div class="col-lg-4 mt-4 mt-lg-0">
-              <div class="icon-box">
+              <div class="icon-box " id="event-content-{{event.id}}">
                 <img src="{{event.cover_photo ? '/events/'+event.cover_photo : ''}}" class="img-fluid" alt="">
-                <h3><a href="">{{event.title}}</a></h3>
-                <p>
-                  {{event.description}}
-                </p>
-              </div>
+                <h3 style="margin: 17px 0px 3px 0px;"><a href="/events/{{event.id}}">{{event.title}}</a></h3>
+                <small> 
+                  <i class="icofont-wall-clock"></i>
+                  <time datetime=" {{moment(event.event_date).format('YYYY-MM-DD') }}">
+                    {{moment(event.event_date).format('MMMM DD, YYYY') }}
+                  </time>
+                </small>
+                </div>
           </div>
           @endeach
 
@@ -55,34 +76,51 @@
       </section><!-- End Featured Section -->
 
 
-
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services">
-        <div class="container">
-
-          <div class="section-title" data-aos="fade-up">
-            <h2>Our Courses</h2>
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio services">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Our Courses</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              @each(course_type in course_types)
+              <li data-filter=".course_type_id_{{course_type.id}}">{{course_type.course_type}}</li>
+              @endeach
+            </ul>
           </div>
+        </div>
 
-          <div class="row">
-            @each(course in courses)
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+        <div class="row portfolio-container">
+          @each(course in courses)
+          <div class="col-lg-4 col-md-6 portfolio-item course_type_id_{{course.course_type_id}}">
+            <div class="portfolio-wrap1">
               <div class="icon-box">
-                <div class="icon"><i class="bx bx-file"></i></div>
                 <h4>{{course.course}}</h4>
-                <span class="badge badge-info">{{course.courseType.course_type}}</span>
+                <span class="badge badge-danger">{{course.courseType.course_type}}</span>
                 <p>{{course.description}}</p>
               </div>
             </div>
-        @endeach
-
-
           </div>
+          @endeach
 
         </div>
-      </section><!-- End Services Section -->
+
+      </div>
+    </section><!-- End Portfolio Section -->
 
 
     </main><!-- End #main -->  
-
+    <script>
+      parseEventDescription()
+      function parseEventDescription(){
+        $('.event_description').each(function(index,item){
+          var html_content = $(this).find('p').text()
+          console.log(html_content)
+          $(this).find('p').html($.parseHTML(decodeURI(html_content)));
+      });
+      }
+    </script>
 @endsection

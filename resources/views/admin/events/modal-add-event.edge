@@ -1,6 +1,13 @@
-
+<style>
+  .ck-editor__editable {
+    min-height: 100px;
+  }
+  .ck.ck-editor__editable_inline{
+    border: 1px solid #e9ecef;
+  }
+</style>
 <!-- Modal -->
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg" role="document" style="max-width:1000px !important">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
@@ -39,10 +46,13 @@
               <div class="form-row">
                 <div class="col form-group">
                   <label for="">Description:</label>
+                  <div id="toolbar-container_add"></div>
+                  <div id="event_description_add" class="card-body"></div>
                   <textarea  type="text" 
-                          class="form-control" 
+                          class="form-control d-none" 
                           name="description" 
                           rows="5"
+                          id="event_description"
                           placeholder="Enter Description" ></textarea>
                   <div class="validate" id="validate-description"></div>
                 </div>

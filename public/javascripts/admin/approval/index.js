@@ -108,12 +108,13 @@ function showAdmissionStatus(status, student_id, reference_no){
 }
 
 function mapStudentInfo(form_approval, res){
+  var bdate = new Date(res.student.birthdate).toISOString().split('T')[0];
   form_approval.find("input[name=firstname]").val(res.student.firstname);
   form_approval.find("input[name=middlename]").val(res.student.middlename);
   form_approval.find("input[name=lastname]").val(res.student.lastname);
   form_approval.find("select[name=gender]").val(res.student.gender);
   form_approval.find("input[name=address]").val(res.student.address);
-  form_approval.find("input[name=birthdate]").val(res.student.birthdate);
+  form_approval.find("input[name=birthdate]").val(bdate);
   form_approval.find("input[name=birth_place]").val(res.student.birth_place);
   form_approval.find("input[name=email]").val(res.student.email);
   form_approval.find("input[name=contact]").val(res.student.contact);
@@ -183,19 +184,30 @@ function updateStudentStatus(student_id, status_id, note = null) {
       {uploaded_files: uploaded_files()},
 
     ]
-
+      $("#form_approval").find("input[name=admission_status_id]").val(status_id);
       // ajaxRequestForm(`${URL}/updateStudentStatus`, $('#form_approval'))
       ajaxFormRequestWithData(`${URL}/updateStudentStatus`, $('#form_approval'), data)
-      .then(res => {
-          $("#student_details").modal("hide")
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Successfully Updated!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          getStudents(currentPage)
+      .then(response => {
+        if (response.validator) {
+          validatorMessages(response.validator, $('#add-validator'))
+          $(".validate").css("color", "#EC1C24")
+        }else{
+          if(response.err == 0){
+            $("#student_details").modal("hide")
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Successfully Updated!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            getStudents(currentPage)
+          }else if(response.err == 2){
+            $(`#validate-email`).text(" "+response.text).show()
+            $(".validate").css("color", "#EC1C24")
+          }
+        }
+
         })
         .catch(err => {
           console.log(err)
@@ -254,13 +266,17 @@ function reasonOfRejection(student_id, status_id){
         {uploaded_files: uploaded_files()},
   
       ]
+        $("#form_approval").find("input[name=admission_status_id]").val(status_id);
   
         // ajaxRequestForm(`${URL}/updateStudentStatus`, $('#form_approval'))
         ajaxFormRequestWithData(`${URL}/updateStudentStatus`, $('#form_approval'), data)
-        .then(res => {
-          $("#student_details").modal("hide")
+        .then(response => {
+          console.log(response)
+          if(!response){
+            return false;
+          }
           getStudents(currentPage)
-          return response
+          return true
           })
           .catch(err => {
             console.log(err)
@@ -272,14 +288,26 @@ function reasonOfRejection(student_id, status_id){
     },
     allowOutsideClick: () => !Swal.isLoading()
   }).then((result) => {
+    
     if (result.isConfirmed) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Email successfully sent!',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      if(result.value){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Email successfully sent!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        $("#student_details").modal("hide")
+      }else{
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please leave some note',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+
     }
   })
 }

@@ -48,7 +48,7 @@ class AdmissionController {
             let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
                             Your application was successfully submitted. </p>
                             <p>Please wait for the confirmation result.</p>`
-            // const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+            const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
 
             return response.json({
                 err: '0',

@@ -1,13 +1,15 @@
 'use strict'
 const Course = use('App/Models/Course')
+const CourseType = use('App/Models/CourseType')
 const Event = use('App/Models/Event')
 const moment = require('moment')
 const Database = use('Database')
 const Nodemailer = use('App/Helpers/Nodemailer')
-
+const eventPerPage = 5
 class ContentController {
 
   async mainIndex({view}){
+    const course_types = await CourseType.all()
     const courses = await Course
     .query()
     .with('courseType')
@@ -24,9 +26,10 @@ class ContentController {
     .limit(3)
     return view
     .render('Student.home.index', {
-         courses:courses.toJSON().data,
-         main_event: main_event,
-         other_events: other_events
+        course_types:course_types.toJSON(),
+        courses:courses.toJSON().data,
+        main_event: main_event,
+        other_events: other_events
     })
   }
 
@@ -36,10 +39,11 @@ class ContentController {
     .where('status',true)
     .with('courseType')
     .fetch()
-
+    const course_types = await CourseType.all()
     return view
     .render('student.courses.index', {
-         courses:courses.toJSON()
+         courses:courses.toJSON(),
+         course_types: course_types.toJSON()
     })
   }
 
@@ -50,6 +54,28 @@ class ContentController {
          events:events.toJSON()
     })
   }  
+
+  async fetchEvents ({ request, view, response }) {
+    const events = await Event
+    .query()
+    .paginate(request.body.page, eventPerPage)
+
+    const recent_events = await Event
+    .query()
+    .paginate(1, 10)
+
+      return response.json({
+
+        entries: view.render('student.events.entries', {
+          result: events.toJSON(),
+          function_name: "getEvents"
+        }),
+        recent_events: view.render('student.events.sidebar', {
+          recent_events: recent_events.toJSON().data,
+          function_name: "getEvents"
+        }),
+      })       
+  }
 
 
 

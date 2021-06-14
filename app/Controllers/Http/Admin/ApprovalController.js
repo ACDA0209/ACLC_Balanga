@@ -18,7 +18,12 @@ class ApprovalController {
     // .query()
     // .where('id','=','1')
     // .first()
-
+    return view
+      .render('admin.approval.index', {
+        pending: await Student.query().where('admission_status_id', 1).getCount(),
+        approved: await Student.query().where('admission_status_id', 2).getCount(),
+        rejected: await Student.query().where('admission_status_id', 3).getCount(),
+      })
     return view.render('admin.approval.index')
   }
 
@@ -55,13 +60,30 @@ class ApprovalController {
       })
   }
 
-  async updateStudentStatus ({ request, view, auth }) {
+  async updateStudentStatus ({ request, response, auth }) {
     var data = JSON.parse(request.body.data)
     request.body.student_id = data[0].student_id
     request.body.status_id = data[1].status_id
     request.body.note = data[2].note
     request.body.uploaded_files = data[3].uploaded_files
     // console.log(request.file('file_attachments'))
+    if(request.body.status_id == 3 && !request.body.note){
+      if(!request.body.note)
+      return false
+      var result = await Student.rejectApplication(request, auth.user.id)
+      if(!result) return false
+      return true
+    }
+
+    var email_not_unique = await Student.checkStudentEmail(request)
+    if(email_not_unique){
+      return response.json({
+        err: '2',
+        icon: 'warning',
+        title: 'Error',
+        text: 'Email not available!'
+      })
+    }
 
     var check_student_files = await StudentFile
     .query()
@@ -118,7 +140,12 @@ class ApprovalController {
       message = student.note
       const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
     }
-    return result
+    return response.json({
+      err: '0',
+      icon: 'success',
+      title: '',
+      text: 'Successfully Approved!'
+    })
   }
 }
 

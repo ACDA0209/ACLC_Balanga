@@ -1,11 +1,32 @@
 const URL = `${APP_URL}/admin/events`
 var currentPage = 1;
 var cover_photo_src = ""
-
+let event_description;
+let event_description_update;
 $("#page_title").text("Events")
 $("#breadcrumb_item").text("Events")
 
 $(() => {
+  // ClassicEditor
+  // .create( document.querySelector( '#event_description' ),{
+    
+  // } )
+  // .then( newEditor => {
+  //   event_description = newEditor;
+  // } )
+  // .catch( error => {
+  //     console.error( error );
+  // } );
+  DecoupledEditor
+  .create( document.querySelector( '#event_description_add' ) )
+  .then( editor => {
+      const toolbarContainer = document.querySelector( '#toolbar-container_add' );
+      event_description = editor;
+      toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+  } )
+  .catch( error => {
+      console.error( error );
+  } );
   clearAddForm()
   getEvents(1)
 
@@ -59,6 +80,9 @@ function getEventDetails(event_id) {
         // $.fn.modal.Constructor.prototype._enforceFocus = function() {};
         $("#event_details").modal("show")
         cover_photo_src = $("#cover_photo_prev").attr("src");
+        set_event_description_update()
+
+
         // $('#table-students').html(res)
         // hideOverlay()
 
@@ -72,9 +96,32 @@ function getEventDetails(event_id) {
   }
 }
 
+function set_event_description_update(){
+  // ClassicEditor
+  // .create( document.querySelector( '#event_description_update' ) )
+  // .then( newEditor => {
+  //   event_description_update = newEditor;
+  // } )
+  // .catch( error => {
+  //     console.error( error );
+  // } );
+
+  DecoupledEditor
+  .create( document.querySelector( '#event_description_update' ) )
+  .then( editor => {
+      const toolbarContainer_update = document.querySelector( '#toolbar-container_update' );
+      event_description_update = editor;
+      toolbarContainer_update.appendChild( editor.ui.view.toolbar.element );
+  } )
+  .catch( error => {
+      console.error( error );
+  } );
+}
+
 function addEvent() {
   showOverlay();
   $(".validate").text("")
+  $('#form_add_event').find("textarea[name=description]").val(event_description.getData());
   ajaxRequestForm(`${URL}/addEvent`, $('#form_add_event'))
   .then(response => {
       hideOverlay()
@@ -114,7 +161,9 @@ function clearAddForm(){
 function updateEvent() {
   showOverlay();
   $(".validate").text("")
-  ajaxRequestForm(`${URL}/updateEvent`, $('#form_event'))
+  $('#form_update_event').find("textarea[name=description]").val(event_description_update.getData());
+
+  ajaxRequestForm(`${URL}/updateEvent`, $('#form_update_event'))
   .then(response => {
       hideOverlay()
       

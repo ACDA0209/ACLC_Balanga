@@ -6,7 +6,7 @@
       <tr>
           <th scope="col">Id</th>
           <th scope="col">Course</th>
-          <th scope="col">Description</th>
+          {{--  <th scope="col">Description</th>  --}}
           <th scope="col">Type</th>
           <th scope="col">Status</th>
           <th scope="col">Date Created</th>
@@ -19,7 +19,7 @@
       <tr>
           <th scope="row">{{course.id}}</th>
           <td>{{course.course}}</td>
-          <td>{{course.description}}</td>
+          {{--  <td>{{course.description}}</td>  --}}
           <td>{{course.courseType.course_type}}</td>
           <td>
             <span class="badge badge-{{course.status==1?'success':'danger'}}">{{course.status==1? 'Active':'Inactive'}}</span>

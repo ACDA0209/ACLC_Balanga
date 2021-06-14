@@ -16,15 +16,19 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 const Course = use('App/Models/Course')
+const CourseType = use('App/Models/CourseType')
 const Event = use('App/Models/Event')
 const moment = require('moment')
 const Database = use('Database')
 
 Route.get('/', async ({ view }) => {
+     const course_types = await CourseType.all()
      const courses = await Course
      .query()
+     .where('status', true)
      .with('courseType')
-     .paginate(1,6)
+     .fetch()
+     // .paginate(1,6)
      const main_event = await Event.query()
      .where('event_date', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
      .orderBy('event_date', 'asc')
@@ -37,7 +41,9 @@ Route.get('/', async ({ view }) => {
      .limit(3)
      return view
      .render('Student.home.index', {
-          courses:courses.toJSON().data,
+          course_types:course_types.toJSON(),
+          courses:courses.toJSON(),
+          // courses:courses.toJSON().data,
           main_event: main_event,
           other_events: other_events
      })
@@ -52,6 +58,16 @@ Route.on('/contact').render('Student.contact.index')
 
 Route.get('/courses', 'Student/ContentController.courseIndex')
 Route.get('/events', 'Student/ContentController.eventIndex')
+Route.get('/events/:id', async ({ params, view }) => {
+     const event =await Event.query().where('id', params.id).first()
+     return view
+     .render('Student.events.single-event', {
+          event: event
+     })
+   })
+   
+Route.post('/events/fetchEvents', 'Student/ContentController.fetchEvents')
+
 
 Route.get('/admission', 'Student/AdmissionController.index')
 Route.post('/admission/submission', 'Student/AdmissionController.submission').validator('AdmissionApplication')   
@@ -74,7 +90,7 @@ Route.get('/admin/approval', 'Admin/ApprovalController.index')
      .middleware('isNotAuthenticated')
 Route.post('/admin/approval/fetchStudents', 'Admin/ApprovalController.fetchStudents')
 Route.post('/admin/approval/getStudentDetails', 'Admin/ApprovalController.getStudentDetails')
-Route.post('/admin/approval/updateStudentStatus', 'Admin/ApprovalController.updateStudentStatus')
+Route.post('/admin/approval/updateStudentStatus', 'Admin/ApprovalController.updateStudentStatus').validator('Approval')   
 
 
 Route.get('/admin/courses', 'Admin/CourseController.index')

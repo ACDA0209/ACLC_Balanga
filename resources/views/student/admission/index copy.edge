@@ -1,0 +1,294 @@
+@layout('student/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/student/admission/index.js') }}
+@endsection
+
+@section('content')
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Admission</li>
+        </ol>
+        <h2>Admission</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="info-box mb-4">
+              <i class="icofont-info-square"></i>
+              <h3>Application Form</h3>
+              <p></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <form method="post" role="form" class="php-email-form" id="form_admission" enctype="multipart/form-data" >
+              <label for="">Personal Info:</label>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for=""><small>First Name:</small></label>
+                  <input  type="text" 
+                          name="firstname" 
+                          value="Test FN"
+                          class="form-control" 
+                          placeholder="Enter First Name" />
+                  <div class="validate" id="validate-firstname"></div>
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Middle Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          value="Test MN"
+                          name="middlename" 
+                          placeholder="Enter Middle Name" />
+                  <div class="validate" id="validate-middlename"></div>
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Last Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          value="Test LN"
+                          name="lastname" 
+                          placeholder="Enter Last Name" />
+                  <div class="validate" id="validate-lastname"></div>
+                </div>
+              </div>
+
+                <div class="form-row">
+                  <div class="col-4 form-group">
+                    <label for="">Gender:</label>
+                    <select class="form-control" name="gender">
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                    <div class="validate" id="validate-gender"></div>
+                  </div>
+                  <div class="col form-group">
+                    <label for=""><small>Address:</small></label>
+                    <input  type="text" 
+                            class="form-control" 
+                            value="Test Student Address"
+                            name="address" 
+                            placeholder="Enter Complete Address" />
+                    <div class="validate" id="validate-address"></div>
+                  </div>
+                </div>
+
+              <div class="form-row">
+                <div class="col-4 form-group">
+                  <label for=""><small>Birth Date:</small></label>
+                  <input  type="date" 
+                          name="birthdate" 
+                          class="form-control" 
+                          placeholder="Enter Birth Date" />
+                  <div class="validate" id="validate-birthdate"></div>
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Birth Place:</small></label>
+                  <input type="text" 
+                          class="form-control" 
+                          value="Test Birth Place"
+                          name="birth_place" 
+                          placeholder="Enter Birth Place" />
+                  <div class="validate" id="validate-birth_place"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for=""><small>Email Address:</small></label>
+                  <input  type="email" 
+                          class="form-control" 
+                          value="testemail@gmail.com1"
+                          name="email" 
+                          placeholder="Enter Email Adress" />
+                    <div class="validate" id="validate-email"></div>
+                </div>
+                <div class="col-4 form-group">
+                  <label for=""><small>Contact:</small></label>
+                  <input  type="text" 
+                          name="contact" 
+                          value="000000000001"
+                          class="form-control" 
+                          placeholder="Enter Contact" />
+                  <div class="validate" id="validate-contact"></div>
+                </div>
+              </div>
+
+              <br>
+              <hr />
+
+              <label for="">Father's Info:</label>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for=""><small>First Name:</small></label>
+                  <input  type="text" 
+                          name="f_firstname" 
+                          value="Test F FN"
+                          class="form-control" 
+                          placeholder="Enter First Name" />
+                    <div class="validate" id="validate-f_firstname"></div>          
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Middle Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          value="Test F MN"
+                          name="f_middlename" 
+                          placeholder="Enter Middle Name" />
+                    <div class="validate" id="validate-f_middlename"></div>        
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Last Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          name="f_lastname" 
+                          value="Test F LN"
+                          placeholder="Enter Last Name" />
+                    <div class="validate" id="validate-f_lastname"></div> 
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Occupation:</label>
+                  <select class="form-control" name="f_occupation">
+                    <option value="">Select Occupation</option>
+                    <option>Occupation 1</option>
+                    <option>Occupation 2</option>
+                    <option>Occupation 3</option>
+                    <option>Occupation 4</option>
+                    <option>Occupation 5</option>
+                  </select>
+                  <div class="validate" id="validate-f_occupation"></div> 
+                </div>
+                <div class="col-4 form-group">
+                  <label for=""><small>Contact:</small></label>
+                  <input  type="text" 
+                          name="f_contact" 
+                          value="00000000001"
+                          class="form-control" 
+                          placeholder="Enter Contact" />
+                    <div class="validate" id="validate-f_contact"></div> 
+                </div>
+              </div>
+              
+              <br>
+              <hr />
+
+              <label for="">Mother's Info:</label>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for=""><small>First Name:</small></label>
+                  <input  type="text" 
+                          name="m_firstname" 
+                          value="Test M FN"
+                          class="form-control" 
+                          placeholder="Enter First Name" />
+                    <div class="validate" id="validate-m_firstname"></div> 
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Middle Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          name="m_middlename" 
+                          value="Test M MN"
+                          placeholder="Enter Middle Name" />
+                    <div class="validate" id="validate-m_middlename"></div> 
+                </div>
+                <div class="col form-group">
+                  <label for=""><small>Last Name:</small></label>
+                  <input  type="text" 
+                          class="form-control" 
+                          name="m_lastname" 
+                          value="Test L LN"
+                          placeholder="Enter Last Name" />
+                    <div class="validate" id="validate-m_lastname"></div> 
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Occupation:</label>
+                  <select class="form-control" name="m_occupation">
+                    <option value="">Select Occupation</option>
+                    <option>Occupation 1</option>
+                    <option>Occupation 2</option>
+                    <option>Occupation 3</option>
+                    <option>Occupation 4</option>
+                    <option>Occupation 5</option>
+                  </select>
+                    <div class="validate" id="validate-m_occupation"></div> 
+                </div>
+                <div class="col-4 form-group">
+                  <label for=""><small>Contact:</small></label>
+                  <input  type="text" 
+                          name="m_contact" 
+                          value="000000000001"
+                          class="form-control" 
+                          placeholder="Enter Contact" />
+                    <div class="validate" id="validate-m_contact"></div> 
+                </div>
+              </div>
+              
+              <br>
+              <hr />
+
+              
+              <div class="form-group">
+                <label for="">File Attachment:</label>
+                {{--  <input  type="file"   --}}
+                        {{--  class="form-control"   --}}
+                        {{--  name="file_attachments[]"   --}}
+                        {{--  placeholder="BC, F137, F138, PSA, High School Diploma, etc.."   --}}
+                        {{--  multiple />  --}}
+                <div class="file-loading">
+                  <input id="file_attachments" name="file_attachments[]" type="file"  data-show-upload="false" multiple>
+                </div>
+                  <div class="validate" id="validate-file_attachments"></div> 
+                  <div class="validate" id="validate-file_attachments_arr"></div> 
+              </div>
+
+
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Successfully submitted</div>
+              </div>
+              <div class="text-center">
+                <button 
+                  type="button" 
+                  class="btn btn-primary btn_submit" 
+                  id="btn_submit">
+                  <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+              </div>
+            </form>
+            <div id="add-validator"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+
+@endsection

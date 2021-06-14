@@ -8,7 +8,7 @@ class UpdateCourse {
   get sanitizationRules () {
     return{
       course            : 'escape|trim',
-      description       : 'escape|trim',
+      // description       : 'escape|trim',
       status       : 'escape|trim',
       course_type_id    : 'escape|trim'
     }
@@ -16,7 +16,7 @@ class UpdateCourse {
 
   get rules () {
     return{
-      description       : 'required',
+      // description       : 'required',
       course            : 'required',
       status            : 'required',
       course_type_id    : 'required'
@@ -26,7 +26,7 @@ class UpdateCourse {
    get messages () {
      return{
        'course.required'        : 'Course must not be empty!',
-       'description.required'   : 'Description must not be empty!',
+      //  'description.required'   : 'Description must not be empty!',
        'status.required'   : 'Status must not be empty!',
       'course_type_id.required' : 'Course Type is Required!'
      }

@@ -1,0 +1,67 @@
+  <style>
+      .p_event_description{
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 250px; /* Fallback for non-webkit */
+  margin: 0 auto;
+  -webkit-line-clamp: 5px;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 15px;
+  }
+  </style>
+  
+  @each(event in result.data)
+  <article class="entry">
+
+    <div class="entry-img">
+      <img src="{{event.cover_photo ? '/events/'+event.cover_photo : ''}}" alt="" class="img-fluid">
+    </div>
+
+    <h2 class="entry-title">
+      <a href="/events/{{event.id}}">{{event.title}}</a>
+    </h2>
+
+    <div class="entry-meta">
+      <ul>
+        <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{moment(event.event_date).format('YYYY-MM-DD') }}</time></a></li>
+      </ul>
+    </div>
+
+    <div class="entry-content">
+      <p class="p_event_description">
+        {{{event.description}}}
+      </p>
+      <div class="read-more">
+        <a href="/events/{{event.id}}">Go to page</a>
+      </div>
+    </div>
+
+  </article><!-- End blog entry -->
+@endeach
+  @if(result)
+  @include('/admin/layouts/pagination')
+  @else
+  <h2 class="entry-title">No Event</h2>
+  @endif
+  {{--  <div class="blog-pagination">  --}}
+    {{--  <ul class="justify-content-center">  --}}
+      {{--  <li class="disabled"><i class="icofont-rounded-left"></i></li>  --}}
+      {{--  <li><a href="#">1</a></li>  --}}
+      {{--  <li class="active"><a href="#">2</a></li>  --}}
+      {{--  <li><a href="#">3</a></li>  --}}
+      {{--  <li><a href="#"><i class="icofont-rounded-right"></i></a></li>  --}}
+    {{--  </ul>  --}}
+  {{--  </div>  --}}
+
+  <script>
+    parseEventDescription()
+    function parseEventDescription(){
+      $('.entry-content').each(function(index,item){
+        var html_content = $(this).find('p').text()
+        console.log(html_content)
+        $(this).find('p').html($.parseHTML(decodeURI(html_content)));
+    });
+    }
+  </script>

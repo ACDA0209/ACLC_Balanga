@@ -623,12 +623,13 @@ section {
   transition: all ease-in-out 0.3s;
 }
 
-.featured .icon-box i {
+/* .featured .icon-box i {
   color: #EC1C24;
   font-size: 42px;
   margin-bottom: 15px;
   display: block;
-}
+} */
+
 
 .featured .icon-box h3 {
   font-weight: 700;
@@ -690,7 +691,8 @@ section {
 .services .icon-box {
   text-align: center;
   border: 1px solid #ededed;
-  padding: 80px 20px;
+  /* padding: 80px 20px; */
+  padding: 50px 15px;
   transition: all ease-in-out 0.3s;
 }
 

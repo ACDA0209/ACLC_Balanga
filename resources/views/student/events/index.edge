@@ -1,5 +1,8 @@
 
 @layout('student/layouts/main')
+@section('javascripts')
+{{ script('javascripts/student/events/index.js') }}
+@endsection
 @section('content')
 
   <!-- ======= Breadcrumbs ======= -->
@@ -14,61 +17,42 @@
 
     </div>
   </section><!-- End Breadcrumbs -->
-    <main id="main">
-    <!-- ======= Blog Section ======= -->
+    <main id="main" style="min-height:100px;">
+
+          <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container">
 
         <div class="row">
 
-          <div class="col-lg-12 entries">
-
-            @each(event in events)
-              <article class="entry">
-
-                <div class="entry-img">
-                  <img src="{{event.cover_photo ? '/events/'+event.cover_photo : ''}}" alt="" class="img-fluid">
-                </div>
-
-                <h2 class="entry-title">
-                  <a href="blog-single.html">{{event.title}}</a>
-                </h2>
-
-                <div class="entry-meta">
-                  <ul>
-                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> 
-                      <a href="blog-single.html"><time datetime="2020-01-01">{{moment(event.event_date).format('MMMM DD, YYYY') }}</time></a></li>
-                  </ul>
-                </div>
-
-                <div class="entry-content">
-                  <p>
-                    {{event.description}}
-                  </p>
-                  <div class="read-more">
-                    <a href="blog-single.html">Read More</a>
-                  </div>
-                </div>
-
-              </article><!-- End blog entry -->
-            @endeach
-
-            {{--  <div class="blog-pagination">  --}}
-              {{--  <ul class="justify-content-center">  --}}
-                {{--  <li class="disabled"><i class="icofont-rounded-left"></i></li>  --}}
-                {{--  <li><a href="#">1</a></li>  --}}
-                {{--  <li class="active"><a href="#">2</a></li>  --}}
-                {{--  <li><a href="#">3</a></li>  --}}
-                {{--  <li><a href="#"><i class="icofont-rounded-right"></i></a></li>  --}}
-              {{--  </ul>  --}}
-            {{--  </div>  --}}
-
+          <div class="col-lg-8 entries" id="entries">
+            @include('student/events/entries')
           </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form action="">
+                  <input type="text">
+                  <button type="submit"><i class="icofont-search"></i></button>
+                </form>
+                <div id="recent_events">
+                  @include('student/events/sidebar')
+                </div>
+              </div><!-- End sidebar search formn-->
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
 
         </div>
 
       </div>
     </section><!-- End Blog Section -->
+
     </main><!-- End #main -->  
 
 @endsection
+

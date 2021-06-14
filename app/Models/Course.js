@@ -29,7 +29,7 @@ class Course extends Model {
       await this
         .create({
           course: request.body.course,
-          description: request.body.description,
+          // description: request.body.description,
           course_type_id: request.body.course_type_id,
           status: 1,
           created_by: auth.user.id
@@ -55,7 +55,7 @@ class Course extends Model {
         .where('id', '=', request.body.course_id)
         .update({
           course: request.body.course,
-          description: request.body.description,
+          // description: request.body.description,
           course_type_id: request.body.course_type_id,
           status:  request.body.status,
           created_by: auth.user.id

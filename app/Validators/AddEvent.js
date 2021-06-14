@@ -17,7 +17,7 @@ class AddEvent {
     return{
       title         : 'required',
       description   : 'required',
-      cover_photo   : 'required|file_ext:jpg, jpeg, png',
+      cover_photo   : 'required|file_ext:jpg,jpeg,png',
       event_date    : 'required|date'
     }
   }

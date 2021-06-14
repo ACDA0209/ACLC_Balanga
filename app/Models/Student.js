@@ -180,6 +180,39 @@ class Student extends Model {
         }
       }
 
+
+      static async rejectApplication (request, admin_id) {
+
+        const trx = await Database.beginTransaction()
+        try {
+          const studentInfo =
+          await this
+          .query()
+            .where('id', '=', request.body.student_id)
+            .update({
+              admission_status_id: request.body.admission_status_id,
+              note: request.body.note,
+              updated_by: admin_id
+            }, trx)
+       
+          await trx.commit()
+          return studentInfo
+        //   return true
+        } catch (err) {
+            console.log("error in rejectApplication")
+            console.log(err)
+          await trx.rollback()
+          return false
+        }
+      }
+      static async checkStudentEmail (request) {
+        var check = await Student.query()
+        .where('id', '!=', request.body.student_id)
+        .where('email', '=', request.body.email)
+        .first()
+        if(check) return true
+        return false
+      }
 }
 
 module.exports = Student

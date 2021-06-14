@@ -8,14 +8,14 @@ class AddCourse {
   get sanitizationRules () {
     return{
       course            : 'escape|trim',
-      description       : 'escape|trim',
+      // description       : 'escape|trim',
       course_type_id    : 'escape|trim'
     }
   }
 
   get rules () {
     return{
-      description       : 'required',
+      // description       : 'required',
       course            : 'required|unique: courses,course',
       course_type_id    : 'required'
     }
@@ -25,7 +25,7 @@ class AddCourse {
      return{
        'course.required'        : 'Course must not be empty!',
        'course.unique'          : 'Course already exists!',
-       'description.required'   : 'Description must not be empty!',
+      //  'description.required'   : 'Description must not be empty!',
       'course_type_id.required' : 'Course Type is Required!'
      }
    }

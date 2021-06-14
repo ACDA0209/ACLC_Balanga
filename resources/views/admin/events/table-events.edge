@@ -6,7 +6,6 @@
       <tr>
           <th scope="col">Id</th>
           <th scope="col">Title</th>
-          <th scope="col">Description</th>
           <th scope="col">Event Date</th>
           <th scope="col">Date Created</th>
           <th scope="col">Action</th>
@@ -18,7 +17,6 @@
       <tr>
           <th scope="row">{{event.id}}</th>
           <td>{{event.title}}</td>
-          <td>{{event.description}}</td>
           <td>{{moment(event.event_date).format('YYYY-MM-DD') }}</td>
           <td>{{moment(event.date_created).format('YYYY-MM-DD') }}</td>
           <td>

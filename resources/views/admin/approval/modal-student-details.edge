@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg" role="document" style="max-width:1000px !important">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Student Info</h5>
@@ -11,7 +11,7 @@
       <div class="modal-body">
         
         <form method="post" role="form" class="php-email-form" id="form_approval" enctype="multipart/form-data" >
-
+          <input type="hidden" name="admission_status_id" >
           <div id="accordion">
             <div class="card">
               <div class="card-header" id="headingOne">
@@ -273,6 +273,8 @@
                   <div class="file-loading">
                     <input id="file_attachments" name="file_attachments[]" type="file"  data-show-upload="false" multiple>
                   </div>
+                  <div class="validate" id="validate-file_attachments"></div> 
+                  <div class="validate" id="validate-file_attachments_arr"></div> 
                 </div>
               </div>
             </div>
