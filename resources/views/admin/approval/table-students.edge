@@ -2,11 +2,10 @@
 @if(result)
 @include('/admin/layouts/pagination')
 @endif
-
 <table class="table table-hover">
   <thead>
       <tr>
-          <th scope="col">Id</th>
+          {{--  <th scope="col">Id</th>  --}}
           <th scope="col">Firstname</th>
           <th scope="col">Middlename</th>
           <th scope="col">Lastname</th>
@@ -23,11 +22,11 @@
     @each(student in result.data)
 
       <tr>
-          <th scope="row">{{student.id}}</th>
+          {{--  <th scope="row">{{student.id}}</th>  --}}
           <td>{{student.firstname}}</td>
           <td>{{student.middlename}}</td>
           <td>{{student.lastname}}</td>
-          <td>{{student.address}}</td>
+          <td ><p class="ellipsis_overflow">{{student.address}}</p></td>
           <td>{{student.gender}}</td>
           <td>{{student.email}}</td>
           <td>{{student.contact}}</td>
@@ -36,7 +35,7 @@
             <span class="badge badge-{{ student.admissionStatus.id == 1 ? 'warning' : student.admissionStatus.id == 3 ? 'danger': 'primary' }}">{{student.admissionStatus.status_name}}</span>
           </td>
           <td>
-              <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getStudentDetails({{student.id}})">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getStudentDetails('{{student.encryptedId}}')">
                 <i class="me-2 mdi mdi-eye"></i>
               </button>
               {{--  <button type="button" class="btn btn-primary" ><i class="me-2 mdi mdi-history" data-toggle="tooltip" data-placement="top" title="Logs"></i></button>  --}}

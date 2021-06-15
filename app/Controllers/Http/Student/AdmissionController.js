@@ -2,16 +2,17 @@
 const Student = use('App/Models/Student')
 const StudentFile = use('App/Models/StudentFile')
 const Nodemailer = use('App/Helpers/Nodemailer')
-
+const Encryption = use('Encryption')
 class AdmissionController {
     async index({view}){
         return view.render('student.admission.index')
     }
 
-    async confirmation({view}){
+    async confirmation({view, params}){
+        const student = await Student.findBy('id',params.id)
         return view
         .render('student.admission.confirmation-message', {
-          student_name: "First Last"
+          student: student
         })
     }
 
@@ -54,7 +55,8 @@ class AdmissionController {
                 err: '0',
                 icon: 'success',
                 title: '',
-                text: 'Successfully submitted!'
+                text: 'Successfully submitted!',
+                encrypted_id: Encryption.encrypt(newStudent.id)
               })
         }
 

@@ -12,7 +12,11 @@ class Student extends Model {
     static get table () {
         return 'students'
     } 
-
+    static get computed () {
+      return [
+        'encryptedId'
+      ]
+    }
     static get createdAtColumn () {
         return null
     }
@@ -20,6 +24,10 @@ class Student extends Model {
     static get updatedAtColumn () {
         return null
     } 
+
+    getEncryptedId ({ id }) {
+      return Encryption.encrypt(id)
+    }
 
     /*Setters*/
     setFirstname (firstname) {
@@ -205,6 +213,7 @@ class Student extends Model {
           return false
         }
       }
+
       static async checkStudentEmail (request) {
         var check = await Student.query()
         .where('id', '!=', request.body.student_id)
@@ -212,6 +221,14 @@ class Student extends Model {
         .first()
         if(check) return true
         return false
+      }
+
+      static async getApprovalCount () {
+        return {
+          pending: await this.query().where('admission_status_id', 1).getCount(),
+          approved: await this.query().where('admission_status_id', 2).getCount(),
+          rejected: await this.query().where('admission_status_id', 3).getCount(),
+        }
       }
 }
 

@@ -73,7 +73,7 @@ Route.post('/events/fetchEvents', 'Student/ContentController.fetchEvents')
 
 Route.get('/admission', 'Student/AdmissionController.index')
 Route.post('/admission/submission', 'Student/AdmissionController.submission').validator('AdmissionApplication')   
-Route.get('/admission/confirmation', 'Student/AdmissionController.confirmation')
+Route.get('/admission/confirmation/:id', 'Student/AdmissionController.confirmation').middleware('idDecryption')
 
 
 Route.get('/login', 'Admin/LoginController.index').middleware('isAuthenticated')
@@ -92,7 +92,10 @@ Route.get('/admin/approval', 'Admin/ApprovalController.index')
      .middleware('isNotAuthenticated')
 Route.post('/admin/approval/fetchStudents', 'Admin/ApprovalController.fetchStudents')
 Route.post('/admin/approval/getStudentDetails', 'Admin/ApprovalController.getStudentDetails')
-Route.post('/admin/approval/updateStudentStatus', 'Admin/ApprovalController.updateStudentStatus').validator('Approval')   
+     .middleware('idDecryption')
+Route.post('/admin/approval/updateStudentStatus', 'Admin/ApprovalController.updateStudentStatus')
+     .middleware('idDecryption')
+     .validator('Approval')   
 
 
 Route.get('/admin/courses', 'Admin/CourseController.index')

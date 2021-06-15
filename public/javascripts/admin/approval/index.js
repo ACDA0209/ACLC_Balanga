@@ -19,7 +19,8 @@ function getStudents(page) {
     })
       .then(res => {
         currentPage = page
-        $('#table_students').html(res)
+        $('#table_students').html(res.students)
+        updateApprovalCount(res.approvalCount);
         hideOverlay()
       })
       .catch(err => {
@@ -29,7 +30,11 @@ function getStudents(page) {
   $('[data-toggle="tooltip"]').tooltip()
 
 }
-
+function updateApprovalCount(approvalCount){
+  $("#approval_pending").text(approvalCount.pending)
+  $("#approval_approved").text(approvalCount.approved)
+  $("#approval_rejected").text(approvalCount.rejected)
+}
 function getStudentDetails(student_id) {
 
   hideStatusButtons();
@@ -51,11 +56,7 @@ function getStudentDetails(student_id) {
         }
         mapStudentFiles(res);
 
-        showAdmissionStatus(res.student.admission_status_id, res.student.id, res.student.reference_no);      
-
-        console.log(res.student)
-        console.log(res.student.firstname)
-
+        showAdmissionStatus(res.student.admission_status_id, res.student.encryptedId, res.student.reference_no);      
 
         // $('#student_details').html(res)
         $.fn.modal.Constructor.prototype._enforceFocus = function() {};
@@ -87,8 +88,8 @@ function showAdmissionStatus(status, student_id, reference_no){
   switch (status) {
     
     case 1:
-      $("#btn-reject").attr("onClick", "reasonOfRejection("+student_id+", 3)");
-      $("#btn-approve").attr("onClick", "updateStudentStatus("+student_id+", 2)");
+      $("#btn-reject").attr("onClick", "reasonOfRejection('"+student_id+"', 3)");
+      $("#btn-approve").attr("onClick", "updateStudentStatus('"+student_id+"', 2)");
       $("#btn-reject").show();
       $("#btn-approve").show();
       break;
@@ -97,7 +98,7 @@ function showAdmissionStatus(status, student_id, reference_no){
       $("#reference-area").find("span").text(reference_no);
       break;
     case 3:
-      $("#btn-update-approve").attr("onClick", "updateStudentStatus("+student_id+", 4)");
+      $("#btn-update-approve").attr("onClick", "updateStudentStatus('"+student_id+"', 4)");
       $("#btn-update-approve").show();
       break;
     default:

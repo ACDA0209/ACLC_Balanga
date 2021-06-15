@@ -57,11 +57,12 @@ function storeUser() {
           validatorMessages(response.validator, $('#add-validator'))
         
         }else{
-          Swal.fire({
-            icon: response.icon,
-            title: response.title,
-            text: response.text,
-          })
+          // Swal.fire({
+          //   icon: response.icon,
+          //   title: response.title,
+          //   text: response.text,
+          // })
+          location.href = "/admission/confirmation/"+response.encrypted_id
         }
 
     })

@@ -4,35 +4,34 @@ const AdmissionStatus = use('App/Models/AdmissionStatus')
 const StudentFile = use('App/Models/StudentFile')
 const Nodemailer = use('App/Helpers/Nodemailer')
 const perPage = 10
-
+const Encryption = use('Encryption')
 const Drive = use('Drive')
 const Helpers = use('Helpers')
 
 
 class ApprovalController {
   async index({view}){
-    // const result = await Student.findBy('id', 1) 
-    // result.admission_status_id = 3
-    // await result.save()
-    // const student = await Student
-    // .query()
-    // .where('id','=','1')
-    // .first()
     return view
       .render('admin.approval.index', {
-        pending: await Student.query().where('admission_status_id', 1).getCount(),
-        approved: await Student.query().where('admission_status_id', 2).getCount(),
-        rejected: await Student.query().where('admission_status_id', 3).getCount(),
+        approvalCount: await Student.getApprovalCount()
       })
     return view.render('admin.approval.index')
   }
 
-  async fetchStudents ({ request, view }) {
+  async fetchStudents ({ request, view, response }) {
     const students = await Student
     .query()
     .with('parents')
     .with('admissionStatus')
     .paginate(request.body.page, perPage)
+
+    return response.json({
+      approvalCount: await Student.getApprovalCount(),
+      students: view.render('admin.approval.table-students', {
+        result: students.toJSON(),
+        function_name: "getStudents"
+      })
+    })    
 
     return view
       .render('admin.approval.table-students', {
@@ -62,12 +61,12 @@ class ApprovalController {
 
   async updateStudentStatus ({ request, response, auth }) {
     var data = JSON.parse(request.body.data)
-    request.body.student_id = data[0].student_id
+    request.body.student_id =Encryption.decrypt(data[0].student_id)
     request.body.status_id = data[1].status_id
     request.body.note = data[2].note
     request.body.uploaded_files = data[3].uploaded_files
     // console.log(request.file('file_attachments'))
-    if(request.body.status_id == 3 && !request.body.note){
+    if(request.body.status_id == 3){
       if(!request.body.note)
       return false
       var result = await Student.rejectApplication(request, auth.user.id)

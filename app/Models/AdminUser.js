@@ -18,7 +18,9 @@ class AdminUser extends Model {
     static get updatedAtColumn () {
         return null
     }    
-
+    getEncryptedId ({ id }) {
+      return Encryption.encrypt(id)
+    }
     /*Setters*/
     setName (name) {
         return  name.charAt(0).toUpperCase() + name.slice(1)

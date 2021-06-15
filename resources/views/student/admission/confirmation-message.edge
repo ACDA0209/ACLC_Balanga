@@ -17,13 +17,17 @@ $(() => {
     <div class="container">
       <div class="row center">
         <div class="col-lg-12 pt-4 pt-lg-5 content">
+         <h3> <i class="icofont-info-square"></i> </h3>
           <h3>   
-            <i class="icofont-info-square"></i> 
             Application Submitted Successfully!
           </h3>
+          <br>
           <p>
-            Hi <b>{{student_name}}!</b>  We will email you about your approval.
+            Hi <b>{{student.firstname +" "+student.lastname}}!</b>  
           </p>
+          <p style="margin-top: -12px">You have succesfully submitted you application.</p>
+            <p style="margin-top: -12px">We will email you in <b>{{student.email}}</b> about your approval.</p>
+          <p style="margin-top: -12px">Thank You!</p>
           
           <a class="btn btn-danger mt-lg-5" href="/admission" role="button">Go Back to Admission Page</a>
         </div>
