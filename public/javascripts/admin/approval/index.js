@@ -44,19 +44,21 @@ function getStudentDetails(student_id) {
     ajaxRequest(`${URL}/getStudentDetails`, {
       student_id: student_id
     })
-      .then(res => {
+      .then(response => {
+        $('#approval_options').html(response.options)
+        hideStatusButtons();
         var form_approval = $("#form_approval");
-        mapStudentInfo(form_approval, res);
-        if(res.student.parents[0].type == "father"){
-          mapFatherInfo(form_approval, res.student.parents[0]);
-          mapMotherInfo(form_approval, res.student.parents[1]);
+        mapStudentInfo(form_approval, response);
+        if(response.student.parents[0].type == "father"){
+          mapFatherInfo(form_approval, response.student.parents[0]);
+          mapMotherInfo(form_approval, response.student.parents[1]);
         }else{
-          mapFatherInfo(form_approval, res.student.parents[1]);
-          mapMotherInfo(form_approval, res.student.parents[0]);
+          mapFatherInfo(form_approval, response.student.parents[1]);
+          mapMotherInfo(form_approval, response.student.parents[0]);
         }
-        mapStudentFiles(res);
-
-        showAdmissionStatus(res.student.admission_status_id, res.student.encryptedId, res.student.reference_no);      
+        mapGuardianInfo(form_approval, response.student.guardian)
+        mapStudentFiles(response);
+        showAdmissionStatus(response.student.admission_status_id, response.student.encryptedId, response.student.reference_no);      
 
         // $('#student_details').html(res)
         $.fn.modal.Constructor.prototype._enforceFocus = function() {};
@@ -110,31 +112,44 @@ function showAdmissionStatus(status, student_id, reference_no){
 
 function mapStudentInfo(form_approval, res){
   var bdate = new Date(res.student.birthdate).toISOString().split('T')[0];
+  form_approval.find("select[name=enrollment_type_id]").val(res.student.enrollment_type_id);
+  form_approval.find("select[name=course_id]").val(res.student.course_id);
   form_approval.find("input[name=firstname]").val(res.student.firstname);
   form_approval.find("input[name=middlename]").val(res.student.middlename);
   form_approval.find("input[name=lastname]").val(res.student.lastname);
-  form_approval.find("select[name=gender]").val(res.student.gender);
-  form_approval.find("input[name=address]").val(res.student.address);
+  form_approval.find("input[name=suffix]").val(res.student.suffix);
   form_approval.find("input[name=birthdate]").val(bdate);
   form_approval.find("input[name=birth_place]").val(res.student.birth_place);
+  // form_approval.find("radio[name=marital_status]").val(res.student.marital_status);
+  // form_approval.find("radio[name=gender]").val(res.student.gender);
+  form_approval.find('input[name=marital_status][value="' + res.student.marital_status + '"]').prop('checked', true);
+  form_approval.find('input[name=gender][value="' + res.student.gender + '"]').prop('checked', true);
+  form_approval.find("input[name=height]").val(res.student.height);
+  form_approval.find("input[name=weight]").val(res.student.weight);
+  form_approval.find("input[name=citizenship]").val(res.student.citizenship);
+  form_approval.find("input[name=address]").val(res.student.address);
   form_approval.find("input[name=email]").val(res.student.email);
   form_approval.find("input[name=contact]").val(res.student.contact);
+  form_approval.find("input[name=last_school]").val(res.student.contact);
 }
 
 function mapFatherInfo(form_approval, father){
-  form_approval.find("input[name=f_firstname]").val(father.firstname);
-  form_approval.find("input[name=f_middlename]").val(father.middlename);
-  form_approval.find("input[name=f_lastname]").val(father.lastname);
-  form_approval.find("select[name=f_occupation]").val(father.occupation);
-  form_approval.find("input[name=f_contact]").val(father.contact);
+  var f_bdate = new Date(father.birthdate).toISOString().split('T')[0];
+  form_approval.find("input[name=f_fullname]").val(father.fullname);
+  form_approval.find("input[name=f_occupation]").val(father.occupation);
+  form_approval.find("input[name=f_birthdate]").val(f_bdate);
 }
 
 function mapMotherInfo(form_approval, mother){
-  form_approval.find("input[name=m_firstname]").val(mother.firstname);
-  form_approval.find("input[name=m_middlename]").val(mother.middlename);
-  form_approval.find("input[name=m_lastname]").val(mother.lastname);
-  form_approval.find("select[name=m_occupation]").val(mother.occupation);
-  form_approval.find("input[name=m_contact]").val(mother.contact);
+  var m_bdate = new Date(mother.birthdate).toISOString().split('T')[0];
+  form_approval.find("input[name=m_fullname]").val(mother.fullname);
+  form_approval.find("input[name=m_occupation]").val(mother.occupation);
+  form_approval.find("input[name=m_birthdate]").val(m_bdate);
+}
+function mapGuardianInfo(form_approval, guardian){
+  form_approval.find("input[name=g_fullname]").val(guardian.fullname);
+  form_approval.find("input[name=g_address]").val(guardian.address);
+  form_approval.find("input[name=g_contact]").val(guardian.contact);
 }
 
 function mapStudentFiles(res){

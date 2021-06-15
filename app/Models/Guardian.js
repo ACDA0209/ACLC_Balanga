@@ -3,15 +3,15 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class Parent extends Model {
+class Guardian extends Model {
     static get table() {
-        return 'parents'
+        return 'guardians'
     }
 
     static get createdAtColumn () {
         return null
     }
-    
+
     static get updatedAtColumn () {
         return null
     } 
@@ -21,10 +21,6 @@ class Parent extends Model {
         return  fullname.charAt(0).toUpperCase() + fullname.slice(1)
     }
 
-    setType (type) {
-        return type.toLowerCase()
-    }
-    /*Setters*/
 }
 
-module.exports = Parent
+module.exports = Guardian

@@ -6,6 +6,7 @@ const Database = use('Database')
 const Encryption = use('Encryption')
 
 const Parent = use('App/Models/Parent')
+const Guardian = use('App/Models/Guardian')
 
 
 class Student extends Model {
@@ -49,6 +50,9 @@ class Student extends Model {
     parents() {
         return this.hasMany('App/Models/Parent', 'id', 'student_id')
       }
+    guardian() {
+        return this.hasOne('App/Models/Guardian', 'id', 'student_id')
+      }
 
     admissionStatus() {
         return this.hasOne('App/Models/AdmissionStatus', 'admission_status_id', 'id')
@@ -75,42 +79,56 @@ class Student extends Model {
           const studentInfo =
           await this
             .create({
+              last_school: request.body.last_school,
               firstname: request.body.firstname,
               middlename: request.body.middlename,
               lastname: request.body.lastname,
-              gender: request.body.gender,
-              address: request.body.address,
+              suffix: request.body.suffix,
               birthdate: request.body.birthdate,
               birth_place: request.body.birth_place,
+              marital_status: request.body.marital_status,
+              gender: request.body.gender,
+              height: request.body.height,
+              weight: request.body.weight,
+              citizenship: request.body.citizenship,
+              address: request.body.address,
               email: request.body.email,
               contact: request.body.contact,
+              enrollment_type_id: request.body.enrollment_type_id,
+              course_id: request.body.course_id,
+              semester_id: 1,
               admission_status_id: 1
             }, trx)
             const motherInfo =
                 await Parent
                 .create({
-                    firstname: request.body.m_firstname,
-                    middlename: request.body.m_middlename,
-                    lastname: request.body.m_lastname,
-                    occupation: request.body.m_occupation,
-                    contact: request.body.m_contact,
-                    type: "mother",
-                    student_id: studentInfo.id
+                    fullname    : request.body.m_fullname,
+                    occupation  : request.body.m_occupation,
+                    birthdate   : request.body.m_birthdate,
+                    type        : "mother",
+                    student_id  : studentInfo.id
                 }, trx)
             const fatherInfo =
                 await Parent
                 .create({
-                    firstname: request.body.f_firstname,
-                    middlename: request.body.f_middlename,
-                    lastname: request.body.f_lastname,
-                    occupation: request.body.f_occupation,
-                    contact: request.body.f_contact,
-                    type: "father",
-                    student_id: studentInfo.id
+                    fullname        : request.body.f_fullname,
+                    occupation      : request.body.f_occupation,
+                    birthdate       : request.body.f_birthdate,
+                    type          : "father",
+                    student_id    : studentInfo.id
+                }, trx)
+            const guardianInfo =
+                await Guardian
+                .create({
+                    fullname        : request.body.g_fullname,
+                    address         : request.body.g_address,
+                    contact         : request.body.g_contact,
+                    student_id    : studentInfo.id
                 }, trx)
             console.log("student id: " + studentInfo.id)
             console.log("mother id: " + motherInfo.id)
             console.log("father id: " + fatherInfo.id)
+            console.log("guardianInfo id: " + guardianInfo.id)
           await trx.commit()
           return studentInfo
         //   return true
@@ -132,15 +150,24 @@ class Student extends Model {
           .query()
             .where('id', '=', request.body.student_id)
             .update({
+              last_school: request.body.last_school,
               firstname: request.body.firstname,
               middlename: request.body.middlename,
               lastname: request.body.lastname,
-              gender: request.body.gender,
-              address: request.body.address,
+              suffix: request.body.suffix,
               birthdate: request.body.birthdate,
               birth_place: request.body.birth_place,
+              marital_status: request.body.marital_status,
+              gender: request.body.gender,
+              height: request.body.height,
+              weight: request.body.weight,
+              citizenship: request.body.citizenship,
+              address: request.body.address,
               email: request.body.email,
               contact: request.body.contact,
+              enrollment_type_id: request.body.enrollment_type_id,
+              course_id: request.body.course_id,
+              semester_id: 1,
               admission_status_id: request.body.admission_status_id,
               reference_no: request.body.reference_no,
               note: request.body.note,
@@ -152,13 +179,11 @@ class Student extends Model {
             .where('student_id', '=', studentInfo)
             .where('type', '=', "mother")
             .update({
-                firstname: request.body.m_firstname,
-                middlename: request.body.m_middlename,
-                lastname: request.body.m_lastname,
-                occupation: request.body.m_occupation,
-                contact: request.body.m_contact,
-                student_id: studentInfo,
-                updated_by: admin_id
+                fullname    : request.body.m_fullname,
+                occupation  : request.body.m_occupation,
+                birthdate   : request.body.m_birthdate,
+                student_id  : studentInfo,
+                updated_by  : admin_id
             }, trx)
           const fatherInfo =
           await Parent
@@ -166,13 +191,22 @@ class Student extends Model {
             .where('student_id', '=', studentInfo)
             .where('type', '=', "father")
             .update({
-                firstname: request.body.f_firstname,
-                middlename: request.body.f_middlename,
-                lastname: request.body.f_lastname,
-                occupation: request.body.f_occupation,
-                contact: request.body.f_contact,
-                student_id: studentInfo,
-                updated_by: admin_id
+                fullname    : request.body.f_fullname,
+                occupation  : request.body.f_occupation,
+                birthdate   : request.body.f_birthdate,
+                student_id  : studentInfo,
+                updated_by  : admin_id
+            }, trx)
+          const guardianInfo =
+          await Guardian
+          .query()
+            .where('student_id', '=', studentInfo)
+            .update({
+                fullname    : request.body.g_fullname,
+                address     : request.body.g_address,
+                contact     : request.body.g_contact,
+                student_id  : studentInfo,
+                updated_by  : admin_id
             }, trx)
         console.log("student id: " + studentInfo)
         console.log("mother id: " + motherInfo)

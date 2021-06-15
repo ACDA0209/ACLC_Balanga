@@ -1,0 +1,304 @@
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document" style="max-width:1000px !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Student Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_approval" enctype="multipart/form-data" >
+          <input type="hidden" name="admission_status_id" >
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#div_personal_info" aria-expanded="true" aria-controls="collapseOne">
+                    Personal Info 
+                  </button>
+                </h5>
+              </div>
+          
+              <div id="div_personal_info" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text" 
+                              value=""
+                              class="form-control" 
+                              name="firstname" 
+                              placeholder="Enter First Name" />
+                      <div class="validate" id="validate-firstname"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value=""                      
+                              class="form-control" 
+                              name="middlename" 
+                              placeholder="Enter Middle Name" />
+                      <div class="validate" id="validate-middlename"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value=""  
+                              class="form-control" 
+                              name="lastname" 
+                              placeholder="Enter Last Name" />
+                      <div class="validate" id="validate-lastname"></div>
+                    </div>
+                  </div>
+
+                    <div class="form-row">
+                      <div class="col-4 form-group">
+                        <label for="">Gender:</label>
+                        <select class="form-control" name="gender">
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                        <div class="validate" id="validate-gender"></div>
+                      </div>
+                      <div class="col form-group">
+                        <label for=""><small>Address:</small></label>
+                        <input  type="text" 
+                                value=""                          
+                                class="form-control" 
+                                name="address" 
+                                placeholder="Enter Complete Address" />
+                        <div class="validate" id="validate-address"></div>
+                      </div>
+                    </div>
+
+                  <div class="form-row">
+                    <div class="col-4 form-group">
+                      <label for=""><small>Birth Date:</small></label>
+                      <input  type="date" 
+                              value=""  
+                              name="birthdate" 
+                              class="form-control" 
+                              placeholder="Enter Birth Date" />
+                      <div class="validate" id="validate-birthdate"></div>
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Birth Place:</small></label>
+                      <input  type="text" 
+                              value=""  
+                              class="form-control" 
+                              name="birth_place" 
+                              placeholder="Enter Birth Place" />
+                      <div class="validate" id="validate-birth_place"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>Email Address:</small></label>
+                      <input  type="email" 
+                              value=""                       
+                              class="form-control" 
+                              name="email" 
+                              placeholder="Enter Email Adress" />
+                        <div class="validate" id="validate-email"></div>
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text"
+                              value=""  
+                              name="contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                      <div class="validate" id="validate-contact"></div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+  
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_father_info" aria-expanded="false" aria-controls="collapseTwo">
+                    Father's Info
+                  </button>
+                </h5>
+              </div>
+              <div id="div_father_info" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text"
+                              value="" 
+                              name="f_firstname" 
+                              class="form-control" 
+                              placeholder="Enter First Name" />
+                        <div class="validate" id="validate-f_firstname"></div>          
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value=""                       
+                              class="form-control" 
+                              name="f_middlename" 
+                              placeholder="Enter Middle Name" />
+                        <div class="validate" id="validate-f_middlename"></div>        
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value=""     
+                              class="form-control" 
+                              name="f_lastname" 
+                              placeholder="Enter Last Name" />
+                        <div class="validate" id="validate-f_lastname"></div> 
+                    </div>
+                  </div>
+    
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Occupation:</label>
+                      <select class="form-control" name="f_occupation">
+                        <option value="">Select Occupation</option>
+                        <option>Occupation 1</option>
+                        <option>Occupation 2</option>
+                        <option>Occupation 3</option>
+                        <option>Occupation 4</option>
+                        <option>Occupation 5</option>
+                      </select>
+                      <div class="validate" id="validate-f_occupation"></div> 
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text" 
+                              value=""     
+                              name="f_contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                        <div class="validate" id="validate-f_contact"></div> 
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+  
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_mother_info" aria-expanded="false" aria-controls="collapseThree">
+                    Mother's Info
+                  </button>
+                </h5>
+              </div>
+              <div id="div_mother_info" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for=""><small>First Name:</small></label>
+                      <input  type="text" 
+                              value=""     
+                              name="m_firstname" 
+                              class="form-control" 
+                              placeholder="Enter First Name" />
+                        <div class="validate" id="validate-m_firstname"></div> 
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Middle Name:</small></label>
+                      <input  type="text" 
+                              value=""     
+                              class="form-control" 
+                              name="m_middlename" 
+                              placeholder="Enter Middle Name" />
+                        <div class="validate" id="validate-m_middlename"></div> 
+                    </div>
+                    <div class="col form-group">
+                      <label for=""><small>Last Name:</small></label>
+                      <input  type="text" 
+                              value=""    
+                              class="form-control" 
+                              name="m_lastname" 
+                              placeholder="Enter Last Name" />
+                        <div class="validate" id="validate-m_lastname"></div> 
+                    </div>
+                  </div>
+    
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Occupation:</label>
+                      <select class="form-control" name="m_occupation">
+                        <option value="">Select Occupation</option>
+                        <option>Occupation 1</option>
+                        <option>Occupation 2</option>
+                        <option>Occupation 3</option>
+                        <option>Occupation 4</option>
+                        <option>Occupation 5</option>
+                      </select>
+                        <div class="validate" id="validate-m_occupation"></div> 
+                    </div>
+                    <div class="col-4 form-group">
+                      <label for=""><small>Contact:</small></label>
+                      <input  type="text" 
+                              value=""     
+                              name="m_contact" 
+                              class="form-control" 
+                              placeholder="Enter Contact" />
+                        <div class="validate" id="validate-m_contact"></div> 
+                    </div>
+                  </div>  
+
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#div_student_files" aria-expanded="false" aria-controls="collapseFour">
+                    Student Files
+                  </button>
+                </h5>
+              </div>
+              <div id="div_student_files" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="file-loading">
+                    <input id="file_attachments" name="file_attachments[]" type="file"  data-show-upload="false" multiple>
+                  </div>
+                  <div class="validate" id="validate-file_attachments"></div> 
+                  <div class="validate" id="validate-file_attachments_arr"></div> 
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        {{--  @if(student.admission_status_id == 1)  --}}
+        <button type="button" class="btn btn-danger" id="btn-reject" onClick="">Reject</button>
+        <button type="button" class="btn btn-primary" id="btn-approve" onClick="">Approve</button>
+        {{--  @elseif(student.admission_status_id == 3)  --}}
+        <button type="button" class="btn btn-primary" id="btn-update-approve" onClick="" >Update and Approve</button>
+        {{--  @endif    --}}
+        {{--  @if(student.admission_status_id == 2)  --}}
+        <div id="reference-area">
+          <small>Reference No: </small> <span class="badge badge-pill badge-danger"></span>
+        </div>
+        {{--  @endif  --}}
+      </div>
+    </div>
+  </div>
+
+<script>
+
+</script>

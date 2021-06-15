@@ -3,24 +3,22 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class ParentsSchema extends Schema {
+class GuardianSchema extends Schema {
   up () {
-    this.create('parents', (table) => {
+    this.create('guardians', (table) => {
       table.increments()
       table.string('fullname', 100).nullable()
-      table.string('occupation', 254).nullable()
-      // table.string('contact', 16).nullable()
-      table.date('birthdate').nullable()
-      table.string('type', 10).nullable()
+      table.string('address', 254).nullable()
+      table.string('contact', 16).nullable()
       table.integer('student_id').unsigned().notNullable().references('students.id')
       table.integer('updated_by').unsigned().nullable().references('admin_users.id')
-      table.datetime('date_created').defaultTo(this.fn.now())
+      table.datetime('date_created').defaultTo(this.fn.now()) 
     })
   }
 
   down () {
-    this.drop('parents')
+    this.drop('guardians')
   }
 }
 
-module.exports = ParentsSchema
+module.exports = GuardianSchema

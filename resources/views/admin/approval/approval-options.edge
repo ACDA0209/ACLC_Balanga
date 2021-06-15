@@ -1,0 +1,31 @@
+<label for="">Enrollment Type:</label>
+<div class="form-row">
+  <div class="col form-group">
+    <select class="form-control" name="enrollment_type_id">
+      <option value="">Select Enrollment Type</option>
+      @each(enrollment_type in enrollment_types)
+        <option value="{{enrollment_type.id}}">{{enrollment_type.enrollment_type}}</option>
+      @endeach
+    </select>
+    <div class="validate" id="validate-enrollment_type_id"></div>
+  </div>
+</div>
+<label for="">Academic Program:</label>
+<div class="form-row">
+  <div class="col form-group">
+    <select class="form-control" name="course_id">
+      <option value="">Select Academic Program</option>
+        @each(course_type in course_types)
+          @set('course_type_id', course_type.id)
+            <optgroup label="{{course_type.course_type}}">
+              @each(course in courses)
+                @if(course.course_type_id == course_type_id)
+                  <option value="{{course.id}}">{{course.course}}</option>
+                @endif
+              @endeach
+            </optgroup>
+        @endeach
+    </select>
+    <div class="validate" id="validate-course_id"></div>
+  </div>
+</div>

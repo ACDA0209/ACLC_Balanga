@@ -1,11 +1,23 @@
 'use strict'
 const Student = use('App/Models/Student')
 const StudentFile = use('App/Models/StudentFile')
+const EnrollmentType = use('App/Models/EnrollmentType')
+const Course = use('App/Models/Course')
+const CourseType = use('App/Models/CourseType')
 const Nodemailer = use('App/Helpers/Nodemailer')
 const Encryption = use('Encryption')
 class AdmissionController {
     async index({view}){
-        return view.render('student.admission.index')
+        // return view.render('student.admission.index')
+        const enrollment_types = await EnrollmentType.query().where('status', 1).fetch()
+        const courses = await Course.query().where('status', 1).fetch()
+        const course_types = await CourseType.all()
+        return view
+        .render('student.admission.index', {
+            enrollment_types: enrollment_types.toJSON(),
+            courses: courses.toJSON(),
+            course_types: course_types.toJSON(),
+        })
     }
 
     async confirmation({view, params}){
