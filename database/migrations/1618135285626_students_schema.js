@@ -32,6 +32,7 @@ class StudentsSchema extends Schema {
       table.string('reference_no', 10).nullable().unique()
       table.integer('updated_by').unsigned().nullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
+      table.datetime('date_updated').nullable()
     })
   }
 

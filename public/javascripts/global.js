@@ -110,3 +110,11 @@ function startWebSocket(){
     console.log('not connected to ws server')
   })
 }
+
+function updateBFIicons(){
+  $(".btn-fullscreen").html(`<i class="fa fa-fw fa-expand-arrows-alt"></i>`)
+  $(".btn-toggleheader").hide()
+  $(".btn-borderless").html(`<i class="fa fa-fw fa-arrows-alt"></i>`)
+  $(".btn-close").html(`<i class="fa fa-fw fa-window-close"></i>`)
+}
+

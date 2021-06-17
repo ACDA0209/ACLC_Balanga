@@ -5,6 +5,16 @@ let event_description;
 let event_description_update;
 $("#page_title").text("Events")
 $("#breadcrumb_item").text("Events")
+var toolbar_option = [ 
+  'heading', '|',
+  'fontfamily', 'fontsize', '|',
+  'alignment', '|',
+  'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+  'link', '|',
+  'outdent', 'indent', '|',
+  'bulletedList', 'numberedList', 'todoList', '|',
+  'undo', 'redo'
+]
 
 $(() => {
   // ClassicEditor
@@ -18,7 +28,9 @@ $(() => {
   //     console.error( error );
   // } );
   DecoupledEditor
-  .create( document.querySelector( '#event_description_add' ) )
+  .create( document.querySelector( '#event_description_add' ),{
+      toolbar: toolbar_option
+    })
   .then( editor => {
       const toolbarContainer = document.querySelector( '#toolbar-container_add' );
       event_description = editor;
@@ -107,7 +119,9 @@ function set_event_description_update(){
   // } );
 
   DecoupledEditor
-  .create( document.querySelector( '#event_description_update' ) )
+  .create( document.querySelector( '#event_description_update' ),{
+    toolbar: toolbar_option
+  } )
   .then( editor => {
       const toolbarContainer_update = document.querySelector( '#toolbar-container_update' );
       event_description_update = editor;

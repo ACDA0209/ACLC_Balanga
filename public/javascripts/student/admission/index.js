@@ -6,7 +6,11 @@ $(() => {
 
     $(document).on('click', '#btn_submit', () => {
         storeUser()
-      })
+    })
+
+    $(document).on("click",".kv-file-zoom",function() {
+      updateBFIicons()
+    });
 })
 
 $("#file_attachments").fileinput({

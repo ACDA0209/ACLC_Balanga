@@ -7,8 +7,21 @@ $("#breadcrumb_item").text("Student Approval")
 
 $(() => {
   getStudents(1)
-
+  // $(".modal").on("hidden.bs.modal", function () {
+  // });
+  $(document).on("hidden.bs.modal",".modal",function() {
+    $("body").css("overflow-y", "auto");
+  });
+  
+  $(document).on("click",".kv-file-zoom",function() {
+    updateBFIicons()
+  });
 })
+
+function fixModalFreeze(){
+  $(".modal").css("overflow-y", "auto");
+  $("body").css("overflow-y", "hidden");
+}
 
 function getStudents(page) {
   if (page) {
@@ -166,6 +179,11 @@ function mapStudentFiles(res){
   });
 
   initPlugin(initialPreviews);
+  updateBFIicons();
+}
+function modalflow(){
+  $(".modal").css('overflow-y', 'auto')
+  $("body.modal-open").css('overflow-y', 'hidden')
 }
 
 
@@ -218,9 +236,8 @@ function updateStudentStatus(student_id, status_id, note = null) {
               timer: 1500
             })
             getStudents(currentPage)
-          }else if(response.err == 2){
-            $(`#validate-email`).text(" "+response.text).show()
-            $(".validate").css("color", "#EC1C24")
+          }else{
+            console.log("response.err != 0")
           }
         }
 
@@ -320,7 +337,10 @@ function reasonOfRejection(student_id, status_id){
           icon: 'warning',
           title: 'Please leave some note',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          onClose: () => {
+            fixModalFreeze();
+          }
         })
       }
 

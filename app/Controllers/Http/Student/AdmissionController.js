@@ -62,13 +62,14 @@ class AdmissionController {
                             Your application was successfully submitted. </p>
                             <p>Please wait for the confirmation result.</p>`
             const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
-
+            const enc_id = Encryption.encrypt(newStudent.id)
+            const mod_enc_id = enc_id.replace("/", "---");
             return response.json({
                 err: '0',
                 icon: 'success',
                 title: '',
                 text: 'Successfully submitted!',
-                encrypted_id: Encryption.encrypt(newStudent.id)
+                encrypted_id: mod_enc_id
               })
         }
 

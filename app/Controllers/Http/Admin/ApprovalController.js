@@ -10,10 +10,12 @@ const perPage = 10
 const Encryption = use('Encryption')
 const Drive = use('Drive')
 const Helpers = use('Helpers')
-
+const moment = use('moment')
+//moment().format('YYYY-MM-DD HH:mm:ss')
 
 class ApprovalController {
   async index({view}){
+
     return view
       .render('admin.approval.index', {
         approvalCount: await Student.getApprovalCount()
@@ -76,50 +78,37 @@ class ApprovalController {
   }
 
   async updateStudentStatus ({ request, response, auth }) {
+
     var data = JSON.parse(request.body.data)
     request.body.student_id =Encryption.decrypt(data[0].student_id)
     request.body.status_id = data[1].status_id
     request.body.note = data[2].note
     request.body.uploaded_files = data[3].uploaded_files
-    const studentFiles = request.file('file_attachments', {
-      types: ['image']
-    })
-    if(request.body.status_id == 2 || request.body.status_id == 4){
-      if(!request.body.uploaded_files.length && !studentFiles){
-        return response.json({
-          validator:[{
-            message: "required!",
-            field: "file_attachments",
-            validation: "required!"
-          }]
-        })
-      }
-    }
-    // return response.json({
-    //   validator:[{
-    //     message: "required",
-    //     field: "file_attachments",
-    //     validation: "required"
-    //   }]
-    // })
-    // console.log(request.file('file_attachments'))
+
+    //if rejected
     if(request.body.status_id == 3){
-      if(!request.body.note)
-      return false
+      if(!request.body.note) return false
+      
       var result = await Student.rejectApplication(request, auth.user.id)
       if(!result) return false
+      
       return true
     }
 
-    var email_not_unique = await Student.checkStudentEmail(request)
-    if(email_not_unique){
-      return response.json({
-        err: '2',
-        icon: 'warning',
-        title: 'Error',
-        text: 'Email not available!'
-      })
+    const studentFiles = request.file('file_attachments', {
+      types: ['image']
+    })
+
+    //upon update or approval dapat may file, either saved or new
+    if(request.body.status_id == 2 || request.body.status_id == 4){
+      if(!request.body.uploaded_files.length && !studentFiles){
+        return response.json(this.setValidator("required!", "file_attachments", "required"))
+      }
     }
+
+    var email_not_unique = await Student.checkStudentEmail(request)
+    if(email_not_unique)
+    return response.json(this.setValidator("Email not available!", "email", "required"))
 
     var check_student_files = await StudentFile
     .query()
@@ -139,29 +128,29 @@ class ApprovalController {
     let reference_no = Math.random().toString(20).substr(2, 10).toUpperCase();  
     let check_reference_no = await Student.checkReferenceNo(reference_no)
     
-    if(request.body.status_id == 2 || request.body.status_id == 4){
-      while(check_reference_no){
-        reference_no = Math.random().toString(20).substr(2, 10).toUpperCase();  
-        check_reference_no = await Student.checkReferenceNo(reference_no)
-      }
+    while(check_reference_no){
+      reference_no = Math.random().toString(20).substr(2, 10).toUpperCase();  
+      check_reference_no = await Student.checkReferenceNo(reference_no)
     }
+    request.body.reference_no = reference_no
 
     if(request.body.status_id == 4){
-      request.body.admission_status_id = 2
-      request.body.reference_no = reference_no
       request.body.note = "update and approved"
+      var uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, request.body.student_id)
+      //update lahat ng fields
       var result = await Student.updateStudent(request, auth.user.id)
-    }else{
-
-      const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, request.body.student_id)
+    }else if(request.body.status_id == 2){
+      var uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, request.body.student_id)
+      //selected fields lang yung iuupdate
       var result = await Student.findBy('id', request.body.student_id) 
-      result.admission_status_id = request.body.admission_status_id
-      result.updated_by = auth.user.id
-      result.note = request.body.note
-      result.reference_no = reference_no
+          result.admission_status_id = request.body.admission_status_id
+          result.updated_by = auth.user.id
+          result.note = request.body.note
+          result.date_updated = moment().format('YYYY-MM-DD HH:mm:ss')
       await result.save()
     }
 
+    //if successfull yung update sa info ng student magsend ng confirmation email
     if(result){
       const student = await Student.findBy('id', request.body.student_id) 
       // let sendTo = 'macamoonlight05@gmail.com'
@@ -173,12 +162,24 @@ class ApprovalController {
       message = student.note
       const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
     }
+
     return response.json({
       err: '0',
       icon: 'success',
       title: '',
       text: 'Successfully Approved!'
     })
+
+  }
+
+  setValidator(message, field, validation) {
+    return {
+      validator:[{
+        message: message,
+        field: field,
+        validation: validation
+      }]
+    }
   }
 }
 

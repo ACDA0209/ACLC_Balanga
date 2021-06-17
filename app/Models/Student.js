@@ -7,7 +7,7 @@ const Encryption = use('Encryption')
 
 const Parent = use('App/Models/Parent')
 const Guardian = use('App/Models/Guardian')
-
+const moment = use('moment')
 
 class Student extends Model {
     static get table () {
@@ -171,7 +171,8 @@ class Student extends Model {
               admission_status_id: request.body.admission_status_id,
               reference_no: request.body.reference_no,
               note: request.body.note,
-              updated_by: admin_id
+              updated_by: admin_id,
+              date_updated: moment().format('YYYY-MM-DD HH:mm:ss')
             }, trx)
           const motherInfo =
           await Parent 
@@ -234,7 +235,8 @@ class Student extends Model {
             .update({
               admission_status_id: request.body.admission_status_id,
               note: request.body.note,
-              updated_by: admin_id
+              updated_by: admin_id,
+              date_updated: moment().format('YYYY-MM-DD HH:mm:ss')
             }, trx)
        
           await trx.commit()
