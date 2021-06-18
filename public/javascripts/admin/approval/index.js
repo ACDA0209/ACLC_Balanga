@@ -125,6 +125,7 @@ function showAdmissionStatus(status, student_id, reference_no){
 
 function mapStudentInfo(form_approval, res){
   var bdate = new Date(res.student.birthdate).toISOString().split('T')[0];
+  form_approval.find("select[name=semester_id]").val(res.student.semester_id);
   form_approval.find("select[name=enrollment_type_id]").val(res.student.enrollment_type_id);
   form_approval.find("select[name=course_id]").val(res.student.course_id);
   form_approval.find("input[name=firstname]").val(res.student.firstname);

@@ -12,6 +12,7 @@ class EventController {
   async fetchEvents ({ request, view }) {
     const events = await Event
     .query()
+    .orderBy('date_created', 'desc')
     .paginate(request.body.page, perPage)
 
     return view

@@ -7,6 +7,7 @@ class Approval {
 
   get sanitizationRules () {
     return {
+      semester_id     : 'escape|trim',
       last_school     : 'escape|trim',
       firstname         : 'escape|trim',
       middlename        : 'escape|trim',
@@ -40,6 +41,7 @@ class Approval {
 
   get rules () {
     return {
+      semester_id           : 'required',
       last_school           : 'required_when:admission_status_id,2,4',
       firstname             : 'required_when:admission_status_id,2,4',
       lastname              : 'required_when:admission_status_id,2,4',
@@ -51,7 +53,7 @@ class Approval {
       weight                : 'required_when:admission_status_id,2,4',
       citizenship           : 'required_when:admission_status_id,2,4',
       address               : 'required_when:admission_status_id,2,4',
-      email                 : 'required_when:admission_status_id,2,4|email',
+      email                 : 'required|email',
       contact               : 'required_when:admission_status_id,2,4',
 
       f_fullname            : 'required_when:admission_status_id,2,4',
@@ -73,6 +75,7 @@ class Approval {
 
   get messages () {
     return {
+      'semester_id.required'            : 'required!',
       'last_school.required_when'       : 'required!',
       'firstname.required_when'         : 'required!',
       'lastname.required_when'          : 'required!',
@@ -84,21 +87,21 @@ class Approval {
       'weight.required_when'            : 'required!',
       'citizenship.required_when'       : 'required!',
       'address.required_when'           : 'required!',
-      'email.required_when'             : 'required!',
+      'email.required'                  : 'required!',
       'email.email'                     : 'Email is invalid!',
       'contact.required_when'           : 'required.',
 
-      'f_fullname.required_when'    : 'required!',
-      'f_birthdate.required_when'   : 'required!',
-      'f_occupation.required_when'  : 'required!',
+      'f_fullname.required_when'        : 'required!',
+      'f_birthdate.required_when'       : 'required!',
+      'f_occupation.required_when'      : 'required!',
 
-      'm_fullname.required_when'    : 'required!',
-      'm_birthdate.required_when'   : 'required!',
-      'm_occupation.required_when'  : 'required!',
+      'm_fullname.required_when'        : 'required!',
+      'm_birthdate.required_when'       : 'required!',
+      'm_occupation.required_when'      : 'required!',
 
-      'g_fullname.required_when'    : 'required!',
-      'g_address.required_when'     : 'required!',
-      'g_contact.required_when'     : 'required!',
+      'g_fullname.required_when'        : 'required!',
+      'g_address.required_when'         : 'required!',
+      'g_contact.required_when'         : 'required!',
 
       // 'file_attachments.required_when'    : 'required!',
     }

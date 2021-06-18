@@ -87,6 +87,11 @@ Route.post('/admin/user/addNewAdmin', 'Admin/UserController.addNewAdmin').valida
 
 Route.get('/admin', 'Admin/DashboardController.index')
      .middleware('isNotAuthenticated')
+Route.post('/admin/fetchSemesterList', 'Admin/DashboardController.fetchSemesterList')
+Route.post('/admin/fetchSemesters', 'Admin/DashboardController.fetchSemesters')
+Route.post('/admin/addSemester', 'Admin/DashboardController.addSemester')
+Route.post('/admin/activateSemester', 'Admin/DashboardController.activateSemester')
+// Route.post('/admin/editSemester', 'Admin/DashboardController.editSemester')
 
 Route.get('/admin/approval', 'Admin/ApprovalController.index')
      .middleware('isNotAuthenticated')

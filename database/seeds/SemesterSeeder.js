@@ -20,6 +20,7 @@ class SemesterSeeder {
       semester: "1st Semester",
       from_year: 2021,
       to_year: 2022,
+      active_status:1,
       created_by: 1
     })
   }

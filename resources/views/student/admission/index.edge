@@ -30,7 +30,11 @@
             <div class="info-box mb-4">
               <i class="icofont-info-square"></i>
               <h3>ACLC COLLEGE OF BALANGA ONLINE APPLICATION</h3>
-              <p>1ST SEMESTER S.Y. 2021-2022</p>
+              @if(semester)
+              <p>{{semester.semester}} year {{semester.from_year + "-" +semester.to_year}}</p>
+              @else
+              <p>No year selected</p>
+              @endif
             </div>
           </div>
         </div>

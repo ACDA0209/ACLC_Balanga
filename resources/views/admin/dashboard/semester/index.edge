@@ -1,0 +1,30 @@
+<div class="col-lg-12">
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title mb-1">Semester Year</h5>
+          <br>
+          <form method="post" 
+                role="form" 
+                id="form_semester_year" 
+                enctype="multipart/form-data" >
+
+                <div class="form-row" id="semester-list">
+                  @include('admin/dashboard/semester/form-row')
+                </div>
+                
+                <button class="btn btn-primary btn-block" 
+                data-toggle="modal" 
+                data-target="#modal_edit_semester" 
+                type="button"
+                onclick="getSemesters(1)">
+                  Edit Semester
+                </button>
+                
+        </form>
+        <div class="modal fade" id="modal_edit_semester" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          @include('admin/dashboard/semester/modal-edit-semester')
+        </div>
+
+      </div>
+  </div>
+</div>

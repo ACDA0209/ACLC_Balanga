@@ -3,6 +3,7 @@ const Student = use('App/Models/Student')
 const StudentFile = use('App/Models/StudentFile')
 const EnrollmentType = use('App/Models/EnrollmentType')
 const Course = use('App/Models/Course')
+const Semester = use('App/Models/Semester')
 const CourseType = use('App/Models/CourseType')
 const Nodemailer = use('App/Helpers/Nodemailer')
 const Encryption = use('Encryption')
@@ -12,11 +13,13 @@ class AdmissionController {
         const enrollment_types = await EnrollmentType.query().where('status', 1).fetch()
         const courses = await Course.query().where('status', 1).fetch()
         const course_types = await CourseType.all()
+        const semester = await Semester.query().where('active_status', 1).first()
         return view
         .render('student.admission.index', {
             enrollment_types: enrollment_types.toJSON(),
             courses: courses.toJSON(),
             course_types: course_types.toJSON(),
+            semester: semester
         })
     }
 

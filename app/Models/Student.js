@@ -7,6 +7,7 @@ const Encryption = use('Encryption')
 
 const Parent = use('App/Models/Parent')
 const Guardian = use('App/Models/Guardian')
+const Semester = use('App/Models/Semester')
 const moment = use('moment')
 
 class Student extends Model {
@@ -73,7 +74,7 @@ class Student extends Model {
 
     static async addStudent (request) {
         console.log("enter addStudent")
-
+        var active_semester =  await Semester.query().select('id').where('active_status', 1).first()
         const trx = await Database.beginTransaction()
         try {
           const studentInfo =
@@ -96,7 +97,7 @@ class Student extends Model {
               contact: request.body.contact,
               enrollment_type_id: request.body.enrollment_type_id,
               course_id: request.body.course_id,
-              semester_id: 1,
+              semester_id: active_semester.id,
               admission_status_id: 1
             }, trx)
             const motherInfo =
@@ -167,7 +168,7 @@ class Student extends Model {
               contact: request.body.contact,
               enrollment_type_id: request.body.enrollment_type_id,
               course_id: request.body.course_id,
-              semester_id: 1,
+              semester_id: request.body.semester_id,
               admission_status_id: request.body.admission_status_id,
               reference_no: request.body.reference_no,
               note: request.body.note,

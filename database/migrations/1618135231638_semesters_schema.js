@@ -8,9 +8,9 @@ class SemestersSchema extends Schema {
     this.create('semesters', (table) => {
       table.increments()
       table.string('semester', 254).nullable()
-      table.integer('from_year', 5).nullable()
-      table.integer('to_year', 5).nullable()
-      table.boolean('active_status').defaultTo(1)
+      table.string('from_year', 10).nullable()
+      table.string('to_year', 10).nullable()
+      table.boolean('active_status').defaultTo(0)
       table.integer('created_by').unsigned().notNullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
     })

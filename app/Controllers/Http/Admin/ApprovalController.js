@@ -4,6 +4,7 @@ const AdmissionStatus = use('App/Models/AdmissionStatus')
 const StudentFile = use('App/Models/StudentFile')
 const EnrollmentType = use('App/Models/EnrollmentType')
 const Course = use('App/Models/Course')
+const Semester = use('App/Models/Semester')
 const CourseType = use('App/Models/CourseType')
 const Nodemailer = use('App/Helpers/Nodemailer')
 const perPage = 10
@@ -57,6 +58,7 @@ class ApprovalController {
     const enrollment_types = await EnrollmentType.query().where('status', 1).fetch()
     const courses = await Course.query().where('status', 1).fetch()
     const course_types = await CourseType.all()
+    const semesters = await Semester.query().orderBy('date_created', 'desc').fetch()
 
     return response.json({
       student: student.toJSON(),
@@ -64,6 +66,7 @@ class ApprovalController {
         enrollment_types: enrollment_types.toJSON(),
         courses: courses.toJSON(),
         course_types: course_types.toJSON(),
+        semesters: semesters.toJSON(),
       })
     })    
 
@@ -135,6 +138,7 @@ class ApprovalController {
     request.body.reference_no = reference_no
 
     if(request.body.status_id == 4){
+      request.body.admission_status_id = 2
       request.body.note = "update and approved"
       var uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, request.body.student_id)
       //update lahat ng fields
@@ -146,6 +150,8 @@ class ApprovalController {
           result.admission_status_id = request.body.admission_status_id
           result.updated_by = auth.user.id
           result.note = request.body.note
+          result.reference_no = request.body.reference_no
+          result.semester_id = request.body.semester_id
           result.date_updated = moment().format('YYYY-MM-DD HH:mm:ss')
       await result.save()
     }

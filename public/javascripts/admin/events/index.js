@@ -70,6 +70,7 @@ function getEvents(page) {
       .then(res => {
         currentPage = page
         $('#table_events').html(res)
+        event_description.setData('');
         hideOverlay()
       })
       .catch(err => {
@@ -135,8 +136,9 @@ function set_event_description_update(){
 function addEvent() {
   showOverlay();
   $(".validate").text("")
-  $('#form_add_event').find("textarea[name=description]").val(event_description.getData());
-  ajaxRequestForm(`${URL}/addEvent`, $('#form_add_event'))
+  var this_form = $('#form_add_event');
+  this_form.find("textarea[name=description]").val(event_description.getData());
+  ajaxRequestForm(`${URL}/addEvent`, this_form)
   .then(response => {
       hideOverlay()
       if (response.validator) {
@@ -151,6 +153,7 @@ function addEvent() {
         $("#modal_add_event").modal("hide")
         $('.modal-backdrop').remove();
         clearAddForm();
+        this_form.find("input[name=cover_photo]").val("");
         getEvents(1);
       }
 
@@ -175,9 +178,10 @@ function clearAddForm(){
 function updateEvent() {
   showOverlay();
   $(".validate").text("")
-  $('#form_update_event').find("textarea[name=description]").val(event_description_update.getData());
+  var this_form = $('#form_update_event');
+  this_form.find("textarea[name=description]").val(event_description_update.getData());
 
-  ajaxRequestForm(`${URL}/updateEvent`, $('#form_update_event'))
+  ajaxRequestForm(`${URL}/updateEvent`, this_form)
   .then(response => {
       hideOverlay()
       
@@ -191,6 +195,7 @@ function updateEvent() {
           text: response.text,
         })
         $("#event_details").modal("hide")
+        this_form.find("input[name=cover_photo]").val("");
         getEvents(currentPage);
       }
 

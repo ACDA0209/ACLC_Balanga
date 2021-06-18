@@ -1,0 +1,27 @@
+@if(result)
+@include('/admin/layouts/pagination')
+@endif
+<table class="table table-hover">
+  <thead>
+      <tr>
+          <th scope="col">Semester</th>
+          <th scope="col">Active</th>
+          <th scope="col">Date Created</th>
+       
+      </tr>
+  </thead>
+  <tbody>
+    @each(semester in result.data)
+      <tr>
+          <td>{{semester.semester + " " +semester.from_year + "-" + semester.to_year }}</td>
+          <td>
+            @if(semester.active_status == 1)
+            <span class="badge badge-success">Yes</span>
+            @endif
+          </td>
+
+          <td>{{moment(semester.date_created).format('YYYY-MM-DD') }}</td>
+      </tr>
+      @endeach
+  </tbody>
+</table>

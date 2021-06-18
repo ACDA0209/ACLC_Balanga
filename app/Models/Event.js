@@ -8,6 +8,8 @@ const Encryption = use('Encryption')
 const Helpers = use('Helpers')
 const Drive = use('Drive')
 
+const moment = use('moment')
+
 class Event extends Model {
   static get table () {
     return 'events'
@@ -98,6 +100,7 @@ class Event extends Model {
             // result.event_date = request.body.event_date
             result.status = request.body.status
             result.created_by =auth.user.id
+            result.date_created = moment().format('YYYY-MM-DD HH:mm:ss')
 
             const cover_photo = request.file('cover_photo', {
               types: ['image'],

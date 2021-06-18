@@ -1,0 +1,19 @@
+<div class="col-md-10 form-group">
+  <div class="input-group mb-3">
+    <select class="form-control" name="id" id="semester_select">
+      @each(semester in semesters)
+      <option value="{{semester.id}}" data-status="{{semester.active_status}}" {{semester.active_status == 1 ? "selected" : ""}}>
+        {{semester.semesterYr}}
+      </option>
+      @endeach
+    </select>
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="semester_active_stat"></span>
+    </div>
+  </div>
+  <div class="validate" id="validate-course_type_id"></div>
+</div>
+
+<div class="col-md-2 form-group">
+  <button class="btn btn-success btn-block" type="button" onclick="activateSemester()">Activate</button>
+</div>
