@@ -18,6 +18,7 @@ const Route = use('Route')
 const Course = use('App/Models/Course')
 const CourseType = use('App/Models/CourseType')
 const Event = use('App/Models/Event')
+const Carousel = use('App/Models/Carousel')
 const moment = require('moment')
 const Database = use('Database')
 
@@ -41,13 +42,18 @@ Route.get('/', async ({ view }) => {
      .orderBy('date_created', 'desc')
      .offset(1)
      .limit(3)
+     const carousels = await Carousel
+     .query()
+     .orderBy('order', 'asc')
+     .fetch()
      return view
      .render('Student.home.index', {
           course_types:course_types.toJSON(),
           courses:courses.toJSON(),
           // courses:courses.toJSON().data,
           main_event: main_event,
-          other_events: other_events
+          other_events: other_events,
+          carousels: carousels.toJSON()
      })
 })
 
@@ -92,6 +98,12 @@ Route.post('/admin/fetchSemesters', 'Admin/DashboardController.fetchSemesters')
 Route.post('/admin/addSemester', 'Admin/DashboardController.addSemester')
 Route.post('/admin/activateSemester', 'Admin/DashboardController.activateSemester')
 // Route.post('/admin/editSemester', 'Admin/DashboardController.editSemester')
+Route.post('/admin/fetchCarousels', 'Admin/DashboardController.fetchCarousels')
+Route.post('/admin/addCarouselItem', 'Admin/DashboardController.addCarouselItem').validator('AddCarousel')   
+Route.post('/admin/getCarouselDetails', 'Admin/DashboardController.getCarouselDetails')
+Route.post('/admin/updateCarousel', 'Admin/DashboardController.updateCarousel').validator('UpdateCarousel')   
+Route.post('/admin/deleteCarouselItem', 'Admin/DashboardController.deleteCarouselItem')
+
 
 Route.get('/admin/approval', 'Admin/ApprovalController.index')
      .middleware('isNotAuthenticated')

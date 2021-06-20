@@ -2,6 +2,7 @@
 const Course = use('App/Models/Course')
 const CourseType = use('App/Models/CourseType')
 const Event = use('App/Models/Event')
+const Carousel = use('App/Models/Carousel')
 const moment = require('moment')
 const Database = use('Database')
 const Nodemailer = use('App/Helpers/Nodemailer')
@@ -24,12 +25,17 @@ class ContentController {
     .orderBy('event_date', 'asc')
     .offset(1)
     .limit(3)
+    const carousels = await Carousel
+    .query()
+    .orderBy('order', 'asc')
+    .fetch()
     return view
     .render('Student.home.index', {
         course_types:course_types.toJSON(),
         courses:courses.toJSON().data,
         main_event: main_event,
-        other_events: other_events
+        other_events: other_events,
+        carousels: carousels.toJSON()
     })
   }
 

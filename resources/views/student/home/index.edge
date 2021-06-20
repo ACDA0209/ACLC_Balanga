@@ -3,18 +3,18 @@
 @section('content')
 <style>
   .p_event_description{
-  display: block; /* Fallback for non-webkit */
-  display: -webkit-box;
-  height: 150px; /* Fallback for non-webkit */
-  margin: 0 auto;
-  -webkit-line-clamp: 5px;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    height: 150px; /* Fallback for non-webkit */
+    margin: 0 auto;
+    -webkit-line-clamp: 5px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
   </style>
     @include('student/layouts/carousel')
@@ -129,7 +129,7 @@
           var html_content = $(this).find('p').text()
           console.log(html_content)
           $(this).find('p').html($.parseHTML(decodeURI(html_content)));
-      });
+        });
       }
     </script>
 @endsection

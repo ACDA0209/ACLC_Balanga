@@ -1,0 +1,82 @@
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document" style="max-width:1000px !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Carousel Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_update_carousel" enctype="multipart/form-data" >
+          <input type="hidden" name="carousel_id" value="{{carousel.id}}" />
+
+          <div id="div_carousel_info" >
+            <div class="card-body">
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Title :</label>
+                  <input  type="text" 
+                          value="{{carousel.title}}"
+                          class="form-control" 
+                          name="title" 
+                          placeholder="Enter Title" />
+                  <div class="validate" id="validate-update-title"></div>
+                </div>
+                <div class="col-md-2 form-group">
+                  <label for="">Order :</label>
+                  <input  type="text" 
+                          value="{{carousel.order}}"
+                          class="form-control" 
+                          name="order" 
+                          placeholder="Enter Order" />
+                  <div class="validate" id="validate-update-order"></div>
+                </div>
+              </div>
+              
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Cover Photo:</label>
+                  <img src="{{carousel.cover_photo ? '/carousels/'+carousel.cover_photo : ''}}" class="img-fluid" alt="Responsive image" id="cover_photo_prev">
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control"  
+                      name="cover_photo" 
+                      id="cover_photo"
+                      aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" id="btn-reset-cover-photo">Reset</button>
+                      </div>
+                  </div>
+                  <div class="validate" id="validate-update-cover_photo"></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Description:</label>
+                  <textarea  type="text" 
+                          class="form-control" 
+                          name="description" 
+                          rows="5"
+                          id="description"
+                          placeholder="Enter Description" >{{carousel.description}}</textarea>
+                  <div class="validate" id="validate-update-description"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          </div>
+          
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onClick="updateCarousel()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

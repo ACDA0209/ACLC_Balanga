@@ -10474,3 +10474,10 @@ File: scss
   overflow: hidden;
   text-overflow: ellipsis; 
 }
+
+.carousel_description{
+  white-space: nowrap; 
+  width: 350px !important; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}

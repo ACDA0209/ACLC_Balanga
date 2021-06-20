@@ -13,40 +13,27 @@
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Welcome to <span>ACLC Balanga</span></h2>
                 <p class="animate__animated animate__fadeInUp">
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
-                  sample text sample text sample text sample text sample text
                 </p>
                 {{--  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>  --}}
               </div>
             </div>
           </div>
 
+          @each(carousel in carousels)
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background: url(assets/img/slide/slide-2.jpg)">
+          <div class="carousel-item" style="background: url(carousels/{{carousel.cover_photo}})">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated fanimate__adeInDown">M<span>ission</span></h2>
+                <h2 class="animate__animated fanimate__adeInDown">
+                  {{carousel.title.charAt(0).toUpperCase()}}<span>{{carousel.title.slice(1)}}</span></h2>
                 <p class="animate__animated animate__fadeInUp">
-                  The global mission of ACLC College is to providea holistic, quality, computer-based education in all levels and disciplines with the objective of producing professionals and leader responsive to the needs of science and the international community for the honor and glory of God Almighty.
+                      {{carousel.description}}
                 </p>
                 {{--  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>  --}}
               </div>
             </div>
           </div>
-
-          <!-- Slide 3 -->
-          <div class="carousel-item" style="background: url(assets/img/slide/slide-3.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">V<span>ision</span></h2>
-                <p class="animate__animated animate__fadeInUp">
-                  The vision of the ACLC/ACLC College is to become the leader and dominant provider of quality and excellent information technology – based business education and related services in the global market.
-                </p>
-                {{--  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>  --}}
-              </div>
-            </div>
-          </div>
+          @endeach
 
         </div>
 

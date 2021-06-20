@@ -13,12 +13,22 @@
     }
 </style>
 <div class="container-fluid">
+
   <div class="row">
 		@include('admin/dashboard/semester/index')
 	</div>
-  <div class="row">
 
+  <div class="row">
+		@include('admin/dashboard/carousel/index')
+		
 	</div>
+	
+</div>
+
+
+<div class="modal fade" id="modal_edit_semester" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	@include('admin/dashboard/semester/modal-edit-semester')
 </div>
 
 @endsection
+

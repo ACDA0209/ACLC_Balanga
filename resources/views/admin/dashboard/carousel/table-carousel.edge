@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  @if(result)
+@include('/admin/layouts/pagination')
+@endif
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Order</th>
+          <th scope="col">Date Created</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    @each(carousel in result.data)
+
+      <tr>
+        <td>{{carousel.title}}</td>
+        <td style="width: 100px"><p class="carousel_description">{{carousel.description}}</p></td>
+        <th>{{carousel.order}}</th>
+          <td>{{moment(course.date_created).format('YYYY-MM-DD') }}</td>
+          <td>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getCarouselDetails({{carousel.id}})">
+              <i class="me-2 mdi mdi-eye"></i>
+            </button>
+            <button type="button" class="btn btn-danger" onClick="deleteCarouselItem({{carousel.id}})">
+              <i class="me-2 mdi mdi-delete"></i>
+            </button>
+          </td>
+      </tr>
+      @endeach
+  </tbody>
+</table>
+</div>
+
