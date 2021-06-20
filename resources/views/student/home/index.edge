@@ -123,6 +123,8 @@
 
     </main><!-- End #main -->  
     <script>
+      $("#navBar li").removeClass("active")
+      $("#nav_home").addClass("active")
       parseEventDescription()
       function parseEventDescription(){
         $('.event_description').each(function(index,item){

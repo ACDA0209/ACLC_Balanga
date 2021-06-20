@@ -16,6 +16,10 @@ $(() => {
   $(document).on("click",".kv-file-zoom",function() {
     updateBFIicons()
   });
+
+  $(document).on("click",".btn-close",function() {
+    fixModalFreeze()
+  });
 })
 
 function fixModalFreeze(){
