@@ -13,7 +13,7 @@ class NodeMailer{
           pass:Env.get('GMAIL_PASSWORD')
       }
     })
-    sendTo = 'macamoonlight05@gmail.com'
+    // sendTo = 'macamoonlight05@gmail.com'
     //step 2
     let mailOptions = {
       from: Env.get('GMAIL_USERNAME'),

@@ -6,14 +6,13 @@
   <thead>
       <tr>
           {{--  <th scope="col">Id</th>  --}}
-          <th scope="col">Firstname</th>
-          <th scope="col">Middlename</th>
-          <th scope="col">Lastname</th>
+          <th scope="col">Student Name</th>
           <th scope="col">Address</th>
           <th scope="col">Gender</th>
           <th scope="col">Email</th>
           <th scope="col">Contact</th>
           <th scope="col">Date Created</th>
+          <th scope="col">Reference No</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
       </tr>
@@ -23,14 +22,17 @@
 
       <tr>
           {{--  <th scope="row">{{student.id}}</th>  --}}
-          <td>{{student.firstname}}</td>
-          <td>{{student.middlename}}</td>
-          <td>{{student.lastname}}</td>
+          <td>{{student.fullName}}</td>
           <td ><p class="ellipsis_overflow">{{student.address}}</p></td>
           <td>{{student.gender}}</td>
           <td>{{student.email}}</td>
           <td>{{student.contact}}</td>
           <td>{{moment(student.date_created).format('YYYY-MM-DD') }}</td>
+          <td>
+            @if(student.reference_no)
+            <span class="badge badge-danger">{{student.reference_no}}</span>
+            @endif
+          </td>
           <td>
             <span class="badge badge-{{ student.admissionStatus.id == 1 ? 'warning' : student.admissionStatus.id == 3 ? 'danger': 'primary' }}">{{student.admissionStatus.status_name}}</span>
           </td>

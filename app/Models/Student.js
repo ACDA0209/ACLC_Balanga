@@ -16,7 +16,8 @@ class Student extends Model {
     } 
     static get computed () {
       return [
-        'encryptedId'
+        'encryptedId',
+        'fullName'
       ]
     }
     static get createdAtColumn () {
@@ -32,6 +33,13 @@ class Student extends Model {
     }
 
     /*Setters*/
+    getFullName ({firstname, middlename, lastname}) {
+      var fname = firstname.charAt(0).toUpperCase() + firstname.slice(1)
+      var mname = middlename.charAt(0).toUpperCase() 
+      var lname = lastname.charAt(0).toUpperCase() + lastname.slice(1)
+      return  `${fname} ${mname} ${lname} `
+  }
+
     setFirstname (firstname) {
         return  firstname.charAt(0).toUpperCase() + firstname.slice(1)
     }
