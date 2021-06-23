@@ -1,0 +1,84 @@
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Course Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_course" enctype="multipart/form-data" >
+          <input type="hidden" name="course_id" value="{{course.id}}" />
+
+          <div id="div_course_info" >
+            <div class="card-body">
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Course</label>:</label>
+                  <input  type="text" 
+                          value="{{course.course}}"
+                          class="form-control" 
+                          name="course" 
+                          placeholder="Enter Course" />
+                  <div class="validate" id="validate-update-course"></div>
+                </div>
+              </div>
+              
+              {{--  <div class="form-row">  --}}
+                {{--  <div class="col form-group">  --}}
+                  {{--  <label for="">Description:</label>  --}}
+                  {{--  <textarea  type="text"   --}}
+                          {{--  class="form-control"   --}}
+                          {{--  name="description"   --}}
+                          {{--  rows="5"  --}}
+                          {{--  placeholder="Enter First Name" > {{course.description}}</textarea>  --}}
+                  {{--  <div class="validate" id="validate-update-description"></div>  --}}
+                {{--  </div>  --}}
+              {{--  </div>  --}}
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Course Type:</label>
+                  <select class="form-control" name="course_type_id">
+                    <option value="">Select Course Type</option>
+                    @each(type in course_types)
+                      <option value="{{type.id}}" {{course.course_type_id == type.id ? "selected" : ""}}>{{type.course_type}}</option>
+                    @endeach
+                  </select>
+                  <div class="validate" id="validate-update-course_type_id"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Status:</label>
+                  <select class="form-control" name="status">
+                    <option value="">Select Course Status</option>
+                    <option value="1"  {{course.status == '1' ? "selected" : ""}}>Active</option>
+                    <option value="0" {{course.status == '0' ? "selected" : ""}}>Inactive</option>
+                  </select>
+                  <div class="validate" id="validate-update-status"></div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          </div>
+          
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onClick="updateCourse()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+</script>

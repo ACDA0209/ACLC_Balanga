@@ -10,6 +10,12 @@ class AdminUser extends Model {
     static get table () {
         return 'admin_users'
     } 
+    
+    static get computed () {
+      return [
+        'encryptedId',
+      ]
+    }
 
     static get createdAtColumn () {
         return null

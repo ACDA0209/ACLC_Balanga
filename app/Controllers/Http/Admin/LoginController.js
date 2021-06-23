@@ -22,7 +22,12 @@ class LoginController {
         message: 'Credentials does not match'
       })
     }  
-
+    if(adminUser.status != 1){
+      return response.json({
+        result: false,
+        message: 'This user is inactive'
+      })
+    }
     await auth.login(adminUser)
     return response.json({
       result: true,

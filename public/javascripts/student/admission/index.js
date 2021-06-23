@@ -11,6 +11,12 @@ $(() => {
     $(document).on("click",".kv-file-zoom",function() {
       updateBFIicons()
     });
+
+    $(document).on("click",".btn-req",function() {
+      console.log($(this).data("target"))
+      var id = $(this).data("target");
+      $(id).collapse('toggle')
+    });
 })
 
 $("#file_attachments").fileinput({

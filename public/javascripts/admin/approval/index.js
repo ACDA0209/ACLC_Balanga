@@ -20,6 +20,17 @@ $(() => {
   $(document).on("click",".btn-close",function() {
     fixModalFreeze()
   });
+  $("#form_search_student").submit(function(e) {
+    e.preventDefault();
+  });
+  $(document).on('keypress', '#search', (e) => {
+    if (e.which == 13) {
+      getStudents(1)
+    }
+  })
+  $(document).on('change', '#to_date, #from_date, #enrollment_type, #admission_status, #semester', () => {
+    getStudents(1)
+  })
 })
 
 function fixModalFreeze(){
@@ -32,7 +43,13 @@ function getStudents(page) {
     showOverlay()
     currentPage = page
     ajaxRequest(`${URL}/fetchStudents`, {
-      page: page
+      page: page,
+      search: $("#form_search_student").find("#search").val() || "",
+      from_date: $("#form_search_student").find("#from_date").val() || "",
+      to_date: $("#form_search_student").find("#to_date").val() || "",
+      enrollment_type: $("#form_search_student").find("#enrollment_type").val() || "",
+      admission_status: $("#form_search_student").find("#admission_status").val() || "",
+      semester: $("#form_search_student").find("#semester").val() || "",
     })
       .then(res => {
         currentPage = page

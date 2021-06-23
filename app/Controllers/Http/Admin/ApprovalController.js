@@ -16,10 +16,16 @@ const moment = use('moment')
 
 class ApprovalController {
   async index({view}){
-
+    const enrollment_types = await EnrollmentType.query().where('status', 1).fetch()
+    const admission_statuses = await AdmissionStatus.query().fetch()
+    const semesters = await Semester.query().fetch()
+    
     return view
       .render('admin.approval.index', {
-        approvalCount: await Student.getApprovalCount()
+        approvalCount: await Student.getApprovalCount(),
+        enrollment_types: enrollment_types.toJSON(),
+        admission_statuses: admission_statuses.toJSON(),
+        semesters: semesters.toJSON(),
       })
     return view.render('admin.approval.index')
   }
@@ -27,8 +33,7 @@ class ApprovalController {
   async fetchStudents ({ request, view, response }) {
     const students = await Student
     .query()
-    .with('parents')
-    .with('admissionStatus')
+    .studentList(request)
     .paginate(request.body.page, perPage)
 
     return response.json({

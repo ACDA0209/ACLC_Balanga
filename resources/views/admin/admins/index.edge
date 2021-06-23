@@ -1,0 +1,44 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/admins/index.js') }}
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+
+          @if(auth.user.id == 1)
+            <div class="row p-20 pt-0">
+              <div class="col-md-4 offset-md-8">
+                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_add_admin">
+                  Add User 
+                </button>
+              </div>
+            </div>
+            <div  class="modal fade" id="modal_add_admin" 
+                  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              @include('admin/admins/modal-add-admin')
+            </div>
+            @endif
+            <div class="table-responsive" id="table_admins">
+              @include('admin/admins/table-admins')
+            </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+</div>
+
+@endsection
+

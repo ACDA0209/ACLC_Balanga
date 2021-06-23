@@ -1,0 +1,41 @@
+@if(result)
+@include('/admin/layouts/pagination')
+@endif
+<table class="table table-hover">
+  <caption>List of Admin Users</caption>
+  <thead>
+      <tr>
+          <th scope="col">Admin Name</th>
+          {{--  <th scope="col">Description</th>  --}}
+          <th scope="col">Username</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date Created</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    @each(admin in result.data)
+
+      <tr>
+          <td>{{admin.name}}</td>
+          {{--  <td>{{course.description}}</td>  --}}
+          <td>{{admin.username}}</td>
+          <td>
+            <span class="badge badge-{{admin.status==1?'success':'danger'}}">{{admin.status==1? 'Active':'Inactive'}}</span>
+          </td>
+          <td>{{moment(admin.date_created).format('YYYY-MM-DD') }}</td>
+
+          <td>
+            @if(auth.user.id == 1 && admin.id != 1)
+            <button type="button" class="btn btn-{{admin.status==1?'danger':'primary'}}" data-toggle="modal" 
+            onClick="updateAdminUser('{{admin.encryptedId}}', '{{admin.status}}')">
+              <i class="mdi mdi-account-{{admin.status==1?'off':'outline'}} "></i>
+            </button>
+            @endif
+          </td>
+
+      </tr>
+      @endeach
+  </tbody>
+</table>
+

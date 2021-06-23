@@ -1,0 +1,112 @@
+    <style>
+      .requirements{
+       margin-top: -14px;
+      }
+      .requirements label{
+        padding-left:10px;
+        font-weight: bold;
+      }
+      .requirements .card-body{
+        border: 1px solid #EC1C24;
+      }
+      .requirements ul{
+        font-size: 12px; 
+      }
+      .requirements ul li{
+        border: none;
+        padding: 1px;
+      }
+      .requirements .sub_title{
+        font-weight: 600;
+        font-size: 18px;
+        color: #2E3191;
+      }
+      .requirements ul i{
+        padding-right: 4px;
+        padding-left: 4px;
+        color: #EC1C24;
+      }
+
+      .trans_cred{
+        padding-left: 45px;
+      }
+    </style>
+
+    <p>
+      <button class="btn btn-outline-danger btn-block btn-sm btn-req" 
+              type="button" 
+              {{--  data-toggle="collapse"   --}}
+              data-target="#sh_student" 
+              aria-expanded="true" 
+              aria-controls="collapseExample">
+        <label><small><b>Requirements For Senior High School Students</b></small></label> 
+      </button>
+    </p>
+  
+      <div class="collapse requirements" id="sh_student">
+        <div class="card card-body">
+          <div class="form-row ">
+          <div class="col-md-6">
+            <label class="sub_title"><small><b>FRESHMEN:</b></small></label> 
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="icofont-check-circled"></i>PSA Birth Certificate (Photocopy)</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>F-138 (Card)</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>F-137-A</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>Diploma (Senior High School)</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>Good Moral Certificate</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>2x2 Picture</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <label class="sub_title"><small><b>Transferee:</b></small></label>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="icofont-check-circled"></i>PSA Birth Certificate (Photocopy)</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>2x2 Picture</li>
+              <li class="list-group-item"><i class="icofont-check-circled"></i>Transferee Credentials</li>
+              <li class="list-group-item trans_cred"><i class="icofont-check"></i>Good Moral Certificate (previous school)</li>
+              <li class="list-group-item trans_cred"><i class="icofont-check"></i>TOR copy for ACLC</li>
+              <li class="list-group-item trans_cred"><i class="icofont-check"></i>Honorable Dismissal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p>
+      <button class="btn btn-outline-danger btn-block btn-sm btn-req" 
+              type="button" 
+              {{--  data-toggle="collapse"   --}}
+              data-target="#fsh_student" 
+              aria-expanded="false" 
+              aria-controls="collapseExample">
+        <label><small><b>Requirements For Freshmen</b></small></label> 
+      </button>
+    </p>
+    <div class="collapse requirements" id="fsh_student">
+      <div class="card card-body">
+        <div class="form-row ">
+        <div class="col-md-6">
+          <label class="sub_title"><small><b>SHS Grade 11 (NEW):</b></small></label> 
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="icofont-check-circled"></i>PSA Birth Certificate (Photocopy)</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>F-138 (Card)</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>F-137-A</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>Diploma (Junior High School)</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>Good Moral Certificate</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>2x2 Picture</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <label class="sub_title"><small><b>Transferee (G12):</b></small></label>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="icofont-check-circled"></i>PSA Birth Certificate (Photocopy)</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>2x2 Picture</li>
+            <li class="list-group-item"><i class="icofont-check-circled"></i>Transferee Credentials</li>
+            <li class="list-group-item trans_cred"><i class="icofont-check"></i>Good Moral Certificate</li>
+            <li class="list-group-item trans_cred"><i class="icofont-check"></i>F-138 (Card</li>
+            <li class="list-group-item trans_cred"><i class="icofont-check"></i>F-137-A</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

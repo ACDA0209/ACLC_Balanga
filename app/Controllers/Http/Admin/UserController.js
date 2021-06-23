@@ -1,8 +1,31 @@
 'use strict'
 const AdminUser = use('App/Models/AdminUser')
+const perPage = 10
 
 class UserController {
-  
+
+  async index({view}){  
+    const admins = await AdminUser.all()
+    return view
+    .render('admin.admins.index', {
+      admins: admins.toJSON()
+    })
+
+    return view.render('admin.courses.index')
+  }
+
+  async fetchAdmins ({ request, view }) {
+    const admins = await AdminUser
+    .query()
+    .paginate(request.body.page, perPage)
+
+    return view
+      .render('admin.admins.table-admins', {
+        result: admins.toJSON(),
+        function_name: "getAdmins"
+      })
+  }
+
   async myProfile({view, auth}) {
     const admin = await AdminUser.findBy('id', auth.user.id)
     return view
@@ -35,6 +58,21 @@ class UserController {
       title: '',
       text: 'Successfully updated!'
     })
+  }
+
+  async updateAdminStatus({view, request, response, auth}) {
+    const result = await AdminUser
+    .query()
+    .where('id', '=', request.body.id)
+    .first()
+    var new_status = result.status == 1 ?0:1
+    result.status = new_status
+    result.created_by = auth.user.id
+    await result.save()
+    if(result)
+    return true
+
+    return false
   }
 
   async update({request, response, auth}){

@@ -10,6 +10,7 @@ class AdminUsersSchema extends Schema {
       table.string('name', 50).nullable()
       table.string('username', 80).notNullable().unique()
       table.string('password', 60).notNullable()
+      table.boolean('status').defaultTo(1)
       table.integer('created_by').unsigned().notNullable().references('admin_users.id')
       table.datetime('date_created').defaultTo(this.fn.now())
     })

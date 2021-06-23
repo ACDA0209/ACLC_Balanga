@@ -38,7 +38,7 @@ class Student extends Model {
       var mname = middlename.charAt(0).toUpperCase() 
       var lname = lastname.charAt(0).toUpperCase() + lastname.slice(1)
       return  `${fname} ${mname} ${lname} `
-  }
+    }
 
     setFirstname (firstname) {
         return  firstname.charAt(0).toUpperCase() + firstname.slice(1)
@@ -263,6 +263,7 @@ class Student extends Model {
         var check = await Student.query()
         .where('id', '!=', request.body.student_id)
         .where('email', '=', request.body.email)
+        .where('semester_id', '=', request.body.semester_id)
         .first()
         if(check) return true
         return false
@@ -274,6 +275,48 @@ class Student extends Model {
           approved: await this.query().where('admission_status_id', 2).getCount(),
           rejected: await this.query().where('admission_status_id', 3).getCount(),
         }
+      }
+      
+      static scopeStudentList(query, request) {
+        query
+        .with('parents')
+        .with('admissionStatus')
+
+        if (request.body.search) {
+          query
+            .where(function () {
+              var whereRaw = `CONCAT(firstname, " ", lastname) like ?`
+              this
+                .orWhere('firstName', 'like', `%${request.body.search}%`)
+                .orWhere('lastName', 'like', `%${request.body.search}%`)
+                .orWhereRaw(whereRaw, [`%${request.body.search}%`])
+                .orWhere('email', 'like', `%${request.body.search}%`)
+                .orWhere('contact', 'like', `%${request.body.search}%`)
+                .orWhere('reference_no', 'like', `%${request.body.search}%`)
+            })
+        }
+
+        if (request.body.from_date) {
+          query
+            .where('date_created', '>=', `${request.body.from_date} 00:00:00`)
+        }
+        if (request.body.to_date) {
+          query
+            .where('date_created', '<=', `${request.body.to_date} 23:53:53`)
+        }
+        if (request.body.admission_status) {
+          query
+            .where('admission_status_id', '=', `${request.body.admission_status}`)
+        }
+        if (request.body.enrollment_type) {
+          query
+            .where('enrollment_type_id', '=', `${request.body.enrollment_type}`)
+        }
+        if (request.body.semester) {
+          query
+            .where('semester_id', '=', `${request.body.semester}`)
+        }
+        return query.orderBy('id', 'asc')
       }
 }
 

@@ -13,26 +13,24 @@
     <div class="col-12">
       <div class="card">
           <div class="card-body">
-              <h4 class="card-title">Course List</h4>
-             <!-- Button trigger modal -->
-
-          </div>
-          
-          <div class="row p-20 pt-0">
-            <div class="col-md-4 offset-md-8">
-              <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modal_add_course">Add Course</button>
-            </div>
-          </div>
-          <div class="table-responsive" id="table_courses">
-            @include('admin/courses/table-courses')
-          </div>
-
-          <div class="modal fade" id="modal_add_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            @include('admin/courses/modal-add-course')
-          </div>
-
-          <div class="modal fade" id="course_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            @include('admin/courses/modal-course-details')
+              <div class="row p-20 pt-0">
+                <div class="col-md-4 offset-md-8">
+                  <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_add_course">
+                    Add Course
+                  </button>
+                </div>
+              </div>
+              <div class="table-responsive" id="table_courses">
+                @include('admin/courses/table-courses')
+              </div>
+    
+              <div class="modal fade" id="modal_add_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @include('admin/courses/modal-add-course')
+              </div>
+    
+              <div class="modal fade" id="course_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @include('admin/courses/modal-course-details')
+              </div>
           </div>
       </div>
   </div>

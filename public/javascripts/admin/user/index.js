@@ -38,31 +38,3 @@ function updateMyProfile(admin_id) {
   })
 }
 
-function addAdminUser() {
-  showOverlay();
-  $(".validate").text("")
-  ajaxRequestForm(`${URL}/addNewAdmin`, $('#form_add_admin'))
-  .then(response => {
-      hideOverlay()
-      
-      if (response.validator) {
-        validatorMessages(response.validator, $('#add-validator'))
-        $(".validate").css("color", "#EC1C24")
-      }else{
-        Swal.fire({
-          icon: response.icon,
-          title: response.title,
-          text: response.text,
-        })
-      }
-
-  })
-  .catch(err => {
-      Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-      })
-    console.log(err)
-  })
-}

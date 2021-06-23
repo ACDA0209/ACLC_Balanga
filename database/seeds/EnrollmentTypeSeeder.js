@@ -17,6 +17,10 @@ const EnrollmentType = use('App/Models/EnrollmentType')
 class EnrollmentTypeSeeder {
   async run () {
     await EnrollmentType.create({
+      enrollment_type: "Current Student",
+      created_by: 1
+    })
+    await EnrollmentType.create({
       enrollment_type: "College Freshman/Incoming First Year (SHS GRADUATE)",
       created_by: 1
     })
