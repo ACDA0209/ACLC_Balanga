@@ -21,55 +21,55 @@ const Event = use('App/Models/Event')
 const Carousel = use('App/Models/Carousel')
 const moment = require('moment')
 const Database = use('Database')
-Route.on('/').render('welcome')
-// Route.get('/', async ({ view }) => {
-//      const course_types = await CourseType.all()
-//      const courses = await Course
-//      .query()
-//      .where('status', true)
-//      .with('courseType')
-//      .fetch()
-//      // .paginate(1,6)
-//      const main_event = await Event.query()
-//      // .where('date_created', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
-//      .where('status', 1)
-//      .orderBy('date_created', 'desc')
-//      .first()
-//      const other_events = await Database
-//      .table('events')
-//      // .where('date_created', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
-//      .where('status', 1)
-//      .orderBy('date_created', 'desc')
-//      .offset(1)
-//      .limit(3)
-//      const carousels = await Carousel
-//      .query()
-//      .orderBy('order', 'asc')
-//      .fetch()
-//      return view
-//      .render('Student.home.index', {
-//           course_types:course_types.toJSON(),
-//           courses:courses.toJSON(),
-//           // courses:courses.toJSON().data,
-//           main_event: main_event,
-//           other_events: other_events,
-//           carousels: carousels.toJSON()
-//      })
-// })
+// Route.on('/').render('welcome')
+Route.get('/', async ({ view }) => {
+     const course_types = await CourseType.all()
+     const courses = await Course
+     .query()
+     .where('status', true)
+     .with('courseType')
+     .fetch()
+     // .paginate(1,6)
+     const main_event = await Event.query()
+     // .where('date_created', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
+     .where('status', 1)
+     .orderBy('date_created', 'desc')
+     .first()
+     const other_events = await Database
+     .table('events')
+     // .where('date_created', '>=', moment().format('YYYY-MM-DD HH:mm:ss'))
+     .where('status', 1)
+     .orderBy('date_created', 'desc')
+     .offset(1)
+     .limit(3)
+     const carousels = await Carousel
+     .query()
+     .orderBy('order', 'asc')
+     .fetch()
+     return view
+     .render('student.home.index', {
+          course_types:course_types.toJSON(),
+          courses:courses.toJSON(),
+          // courses:courses.toJSON().data,
+          main_event: main_event,
+          other_events: other_events,
+          carousels: carousels.toJSON()
+     })
+})
 
 Route.on('/about/history').render('student.about.history') 
-Route.on('/about/missionvision').render('Student.about.missionvision') 
-Route.on('/about/hymn').render('Student.about.hymn') 
-Route.on('/about/personnel').render('Student.about.personnel')  
+Route.on('/about/missionvision').render('student.about.missionvision') 
+Route.on('/about/hymn').render('student.about.hymn') 
+Route.on('/about/personnel').render('student.about.personnel')  
 
-Route.on('/contact').render('Student.contact.index')  
+Route.on('/contact').render('student.contact.index')  
 
 Route.get('/courses', 'Student/ContentController.courseIndex')
 Route.get('/events', 'Student/ContentController.eventIndex')
 Route.get('/events/:id', async ({ params, view }) => {
      const event =await Event.query().where('id', params.id).first()
      return view
-     .render('Student.events.single-event', {
+     .render('student.events.single-event', {
           event: event
      })
    })
