@@ -42,7 +42,7 @@ const namedMiddleware = {
   guest: 'Adonis/Middleware/AllowGuestOnly',
   isAuthenticated: 'App/Middleware/IsAuthenticated',
   idDecryption: 'App/Middleware/IdDecryption',
-  isNotAuthenticated: 'App/Middleware/isNotAuthenticated',
+  isNotAuthenticated: 'App/Middleware/IsNotAuthenticated',
 }
 
 /*
