@@ -19,7 +19,7 @@ module.exports = {
   // origin: false,
   origin: function (currentOrigin) {
     return currentOrigin === 'http://aclcbalangademo.xyz'
-  }
+  },
   /*
   |--------------------------------------------------------------------------
   | Methods
