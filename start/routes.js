@@ -57,7 +57,7 @@ Route.on('/').render('welcome')
 //      })
 // })
 
-Route.on('/about/history').render('Student.about.history') 
+Route.on('/about/history').render('student.about.history') 
 Route.on('/about/missionvision').render('Student.about.missionvision') 
 Route.on('/about/hymn').render('Student.about.hymn') 
 Route.on('/about/personnel').render('Student.about.personnel')  
