@@ -28,7 +28,8 @@ class LoginController {
         message: 'This user is inactive'
       })
     }
-    await auth.login(adminUser)
+    // await auth.login(adminUser)
+    await auth.loginViaId(adminUser.id)
     return response.json({
       result: true,
       message: ''
