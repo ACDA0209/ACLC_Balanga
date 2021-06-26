@@ -17,3 +17,4 @@ database/*.sqlite
 
 public/student_files
 public/events
+public/carousels

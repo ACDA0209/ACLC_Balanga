@@ -100,6 +100,12 @@ class ApprovalController {
       var result = await Student.rejectApplication(request, auth.user.id)
       if(!result) return false
       
+      const rej_student = await Student.findBy('id', request.body.student_id) 
+      let sendTo = rej_student.email
+      let title = 'ACLC Admission Application'
+      let message = rej_student.note
+      const rejsendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+
       return true
     }
 
