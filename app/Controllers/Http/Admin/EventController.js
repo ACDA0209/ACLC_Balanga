@@ -75,6 +75,26 @@ class EventController {
     })
   }
 
+  async deleteEvent({request, response, auth}) {
+    const result = await Event.find(request.body.id)
+    await result.delete()
+
+    if(!result) {
+      return response.json({
+        err: '2',
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong!'
+      })
+    }
+
+    return response.json({
+      err: '0',
+      icon: 'success',
+      title: '',
+      text: 'Successfully updated!'
+    })
+  }
 
 }
 

@@ -7,7 +7,8 @@ $("#breadcrumb_item").text("Admin Users")
 
 $(() => {
   // clearAddForm()
-  getAdmins(1)
+  getAdmins(1);
+  $('[data-toggle="tooltip"]').tooltip(); 
 })
 
 function getAdmins(page) {
@@ -19,7 +20,8 @@ function getAdmins(page) {
     })
       .then(res => {
         currentPage = page
-        $('#table_admins').html(res)
+        $('#table_admins').html(res);
+        $('[data-toggle="tooltip"]').tooltip(); 
         hideOverlay()
       })
       .catch(err => {
@@ -42,7 +44,7 @@ function getCourseDetails(course_id) {
         // $.fn.modal.Constructor.prototype._enforceFocus = function() {};
         $("#course_details").modal("show")
         // $('#table-students').html(res)
-        // hideOverlay()
+        hideOverlay()
 
         // $('#student_details').on('hidden.bs.modal', function (e) {
         //   $el4.fileinput('reset');
@@ -59,7 +61,6 @@ function addAdminUser() {
   $(".validate").text("")
   ajaxRequestForm(`${URL}/addNewAdmin`, $('#form_add_admin'))
   .then(response => {
-      hideOverlay()
       
       if (response.validator) {
         validatorMessages(response.validator, $('#add-validator'))

@@ -21,10 +21,12 @@
         <th>{{carousel.order}}</th>
           <td>{{moment(course.date_created).format('YYYY-MM-DD') }}</td>
           <td>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getCarouselDetails({{carousel.id}})">
+            <button type="button" class="btn btn-secondary" onClick="getCarouselDetails({{carousel.id}})"
+            data-toggle="tooltip" data-placement="top" title="Edit Item">
               <i class="me-2 mdi mdi-eye"></i>
             </button>
-            <button type="button" class="btn btn-danger" onClick="deleteCarouselItem({{carousel.id}})">
+            <button type="button" class="btn btn-danger" onClick="deleteCarouselItem({{carousel.id}})"
+            data-toggle="tooltip" data-placement="top" title="Delete Item">
               <i class="me-2 mdi mdi-delete"></i>
             </button>
           </td>

@@ -259,6 +259,21 @@ class Student extends Model {
         }
       }
 
+
+      static async checkAvailableEmail (request) {
+        var active_semester = await Semester.query().where("active_status", true).first();
+
+        if(!active_semester)
+        return false
+
+        var check = await Student.query()
+        .where('semester_id', '=', active_semester.id)
+        .where('email', '=', request.body.email)
+        .first()
+        if(check) return true
+        return false
+      }
+
       static async checkStudentEmail (request) {
         var check = await Student.query()
         .where('id', '!=', request.body.student_id)

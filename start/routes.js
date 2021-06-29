@@ -137,3 +137,5 @@ Route.post('/admin/events/fetchEvents', 'Admin/EventController.fetchEvents')
 Route.post('/admin/events/getEventDetails', 'Admin/EventController.getEventDetails')
 Route.post('/admin/events/addEvent', 'Admin/EventController.addEvent').validator('AddEvent')   
 Route.post('/admin/events/updateEvent', 'Admin/EventController.updateEvent').validator('UpdateEvent')   
+Route.post('/admin/events/deleteEvent', 'Admin/EventController.deleteEvent')
+

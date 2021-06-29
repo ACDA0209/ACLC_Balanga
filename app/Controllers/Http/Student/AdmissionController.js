@@ -36,18 +36,10 @@ class AdmissionController {
         console.log("-------------")
         console.log(request.body)
 
-        const checkEmail = await Student
-                                .query()
-                                .where('email', request.body.email)
-                                .first()
-        if(checkEmail){
-            return response.json({
-                err: '1',
-                icon: 'warning',
-                title: 'Warning',
-                text: 'Email already exists!'
-              })
-        }
+        var email_not_unique = await Student.checkAvailableEmail(request)
+        if(email_not_unique)
+        return response.json(this.setValidator("Email not available!", "email", "required"))
+
         const newStudent = await Student.addStudent(request)
 
         if(newStudent){
@@ -66,7 +58,8 @@ class AdmissionController {
                             <p>Please wait for the confirmation result.</p>`
             const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
             const enc_id = Encryption.encrypt(newStudent.id)
-            const mod_enc_id = enc_id.replace("/", "---");
+            // const mod_enc_id = enc_id.replace("/", "---");
+            const mod_enc_id = enc_id.split("/").join("---");
             return response.json({
                 err: '0',
                 icon: 'success',
@@ -84,6 +77,16 @@ class AdmissionController {
           })
 
     }
+
+    setValidator(message, field, validation) {
+        return {
+          validator:[{
+            message: message,
+            field: field,
+            validation: validation
+          }]
+        }
+      }
 }
 
 module.exports = AdmissionController

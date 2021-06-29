@@ -91,10 +91,12 @@ function hideModal(modalId) {
 
 function showOverlay() {
   $('#overlay').attr('class', 'loading')
+  $(".preloader").show();
 }
 
 function hideOverlay() {
-  $('#overlay').attr('class', '')
+  $('#overlay').attr('class', '');
+  $(".preloader").hide();
 }
 
 //connect to websocket

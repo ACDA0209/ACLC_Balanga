@@ -8,6 +8,7 @@ $("#breadcrumb_item").text("Courses")
 $(() => {
   clearAddForm()
   getCourses(1)
+  $('[data-toggle="tooltip"]').tooltip(); 
 })
 
 function getCourses(page) {
@@ -19,7 +20,8 @@ function getCourses(page) {
     })
       .then(res => {
         currentPage = page
-        $('#table_courses').html(res)
+        $('#table_courses').html(res);
+        $('[data-toggle="tooltip"]').tooltip(); 
         hideOverlay()
       })
       .catch(err => {
@@ -42,7 +44,7 @@ function getCourseDetails(course_id) {
         // $.fn.modal.Constructor.prototype._enforceFocus = function() {};
         $("#course_details").modal("show")
         // $('#table-students').html(res)
-        // hideOverlay()
+        hideOverlay();
 
         // $('#student_details').on('hidden.bs.modal', function (e) {
         //   $el4.fileinput('reset');

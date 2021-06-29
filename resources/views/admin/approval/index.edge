@@ -11,33 +11,31 @@
   <div class="row">
       <div class="col-lg-4">
           <div class="card">
-              <div class="card-body pb-0">
+              <div class="card-body pb-3">
                   <h5 class="card-title mb-1">Pending Students</h5>
-                  <h3 class="font-light" id="approval_pending">{{approvalCount.pending || 0}}</h3>
-                  <div class="mt-3 text-center">
-                     
-                  </div>
+                  <span class="badge badge-warning">
+                      <h3 class="font-light pr-1 pb-0 mb-0" id="approval_pending">{{approvalCount.pending || 0}}</h3>
+                  </span>
               </div>
           </div>
       </div>
       <div class="col-lg-4">
           <div class="card">
-              <div class="card-body pb-0">
+              <div class="card-body pb-3">
                   <h5 class="card-title mb-1">Approved Students</h5>
-                  <h3 class="font-light" id="approval_approved">{{approvalCount.approved || 0}}</h3>
-                  <div class="mt-3 text-center">
-                     
-                  </div>
+                  <span class="badge badge-primary">
+                      <h3 class="font-light pr-1 pb-0 mb-0" id="approval_approved">{{approvalCount.approved || 0}}</h3>
+                  </span>
               </div>
           </div>
       </div>
       <div class="col-lg-4">
           <div class="card">
-              <div class="card-body pb-0">
+              <div class="card-body pb-3">
                   <h5 class="card-title mb-1">Rejected Students</h5>
-                  <h3 class="font-light" id="approval_rejected">{{approvalCount.rejected || 0}}</h3>
-                  <div class="mt-3 text-center">
-                  </div>
+                  <span class="badge badge-danger">
+                      <h3 class="font-light pr-1 pb-0 mb-0" id="approval_rejected">{{approvalCount.rejected || 0}}</h3>
+                  </span>
               </div>
           </div>
       </div>
@@ -54,7 +52,8 @@
               <h4 class="card-title">Student List</h4>
                 <form class="form-horizontal" method="post" id="form_search_student">
                     <div class="row p-3">
-                        <div class="col-lg-4 offset-md-8">
+                        {{--  <div class="col-lg-4 offset-md-8">  --}}
+                        <div class="col-lg-6">
                             <small class="pl-1 text-muted">Semester</small>
                             <select class="form-control" id="semester">
                                 <option value="">All</option>
@@ -62,6 +61,16 @@
                                 <option value="{{semester.id}}">{{semester.semesterYr}}</option>
                                 @endeach
                             </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <small class="pl-1 text-muted">Search student name, email, contact, reference no</small>
+                            <div class="input-group">
+                                <input  type="text" class="form-control" id="search"
+                                        aria-describedby="basic-addon1">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="row p-3">
@@ -77,7 +86,7 @@
                         </div>
 
                     
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
                             <small class="pl-1 text-muted">Enrollment Type</small>
                             <select class="form-control" id="enrollment_type">
                                 <option value="">All</option>
@@ -86,7 +95,7 @@
                                 @endeach
                             </select>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
                             <small class="pl-1 text-muted">Status</small>
                             <select class="form-control" id="admission_status">
                                 <option value="">All</option>
@@ -96,16 +105,7 @@
                             </select>
                         </div>
 
-                        <div class="col-lg-4">
-                            <small class="pl-1 text-muted">search student name, email, contact, reference no</small>
-                            <div class="input-group">
-                                <input  type="text" class="form-control" id="search"
-                                        aria-describedby="basic-addon1">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                                </div>
-                            </div> 
-                        </div>
+
 
                         </div>
                     </div>

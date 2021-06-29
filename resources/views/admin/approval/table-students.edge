@@ -37,7 +37,8 @@
             <span class="badge badge-{{ student.admissionStatus.id == 1 ? 'warning' : student.admissionStatus.id == 3 ? 'danger': 'primary' }}">{{student.admissionStatus.status_name}}</span>
           </td>
           <td>
-              <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getStudentDetails('{{student.encryptedId}}')">
+              <button type="button" class="btn btn-secondary" onClick="getStudentDetails('{{student.encryptedId}}')"
+              data-toggle="tooltip" data-placement="top" title="Update Student">
                 <i class="me-2 mdi mdi-eye"></i>
               </button>
               {{--  <button type="button" class="btn btn-primary" ><i class="me-2 mdi mdi-history" data-toggle="tooltip" data-placement="top" title="Logs"></i></button>  --}}

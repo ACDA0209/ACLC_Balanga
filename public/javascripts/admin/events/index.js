@@ -57,7 +57,7 @@ $(() => {
     $("#cover_photo_prev").attr("src", cover_photo_src);
     $("#cover_photo").val("");
   });
-
+  $('[data-toggle="tooltip"]').tooltip(); 
 })
 
 function getEvents(page) {
@@ -71,6 +71,7 @@ function getEvents(page) {
         currentPage = page
         $('#table_events').html(res)
         event_description.setData('');
+        $('[data-toggle="tooltip"]').tooltip(); 
         hideOverlay()
       })
       .catch(err => {
@@ -97,7 +98,7 @@ function getEventDetails(event_id) {
 
 
         // $('#table-students').html(res)
-        // hideOverlay()
+        hideOverlay()
 
         // $('#student_details').on('hidden.bs.modal', function (e) {
         //   $el4.fileinput('reset');
@@ -140,7 +141,6 @@ function addEvent() {
   this_form.find("textarea[name=description]").val(event_description.getData());
   ajaxRequestForm(`${URL}/addEvent`, this_form)
   .then(response => {
-      hideOverlay()
       if (response.validator) {
         validatorMessages(response.validator, $('#add-validator'))
         $(".validate").css("color", "#EC1C24")
@@ -208,4 +208,42 @@ function updateEvent() {
       })
     console.log(err)
   })
+}
+
+function deleteEvent(id){
+  if(id){
+
+    Swal.fire({
+      title: 'Do you want to delete this event?',
+      showDenyButton: true,
+      confirmButtonText: `Yes`,
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+          ajaxRequest(`${URL}/deleteEvent`, {
+            id: id
+            })
+          .then(response => {
+            getEvents(currentPage);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Event successfully deleted.',
+                showConfirmButton: false,
+                timer: 1500
+              })
+          })
+          .catch(err => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'warning',
+              title: 'Something went wrong.',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            })
+          }
+          })
+  }
 }

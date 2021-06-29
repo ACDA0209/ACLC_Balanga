@@ -31,6 +31,8 @@ $(() => {
   $(document).on('change', '#to_date, #from_date, #enrollment_type, #admission_status, #semester', () => {
     getStudents(1)
   })
+  $('[data-toggle="tooltip"]').tooltip(); 
+  inputSanitation();
 })
 
 function fixModalFreeze(){
@@ -53,7 +55,8 @@ function getStudents(page) {
     })
       .then(res => {
         currentPage = page
-        $('#table_students').html(res.students)
+        $('#table_students').html(res.students);
+        $('[data-toggle="tooltip"]').tooltip(); 
         updateApprovalCount(res.approvalCount);
         hideOverlay()
       })
@@ -72,7 +75,7 @@ function updateApprovalCount(approvalCount){
 function getStudentDetails(student_id) {
 
   hideStatusButtons();
-
+  $(".validate").hide();
   if (student_id) {
     showOverlay()
     ajaxRequest(`${URL}/getStudentDetails`, {
@@ -98,7 +101,7 @@ function getStudentDetails(student_id) {
         $.fn.modal.Constructor.prototype._enforceFocus = function() {};
         $("#student_details").modal("show")
         // $('#table-students').html(res)
-        // hideOverlay()
+        hideOverlay();
 
         // $('#student_details').on('hidden.bs.modal', function (e) {
         //   $el4.fileinput('reset');
@@ -244,9 +247,17 @@ function updateStudentStatus(student_id, status_id, note = null) {
       // ajaxRequestForm(`${URL}/updateStudentStatus`, $('#form_approval'))
       ajaxFormRequestWithData(`${URL}/updateStudentStatus`, $('#form_approval'), data)
       .then(response => {
+        hideOverlay();
         if (response.validator) {
           validatorMessages(response.validator, $('#add-validator'))
-          $(".validate").css("color", "#EC1C24")
+          $(".validate").css("color", "#EC1C24");
+          var warning_list = "<ul>";
+          response.validator.forEach(element => {
+            warning_list += `<li>${element.message}</li>`;
+          });
+          warning_list += "</ul>";
+          $("#compile_validator_approval").removeClass("d-none");
+          $("#compile_validator_approval").find('p').html(warning_list);
         }else{
           if(response.err == 0){
             $("#student_details").modal("hide")
@@ -370,3 +381,33 @@ function reasonOfRejection(student_id, status_id){
   })
 }
 
+function inputSanitation(){
+  var inp_number = 
+  `#form_approval [name='contact'],
+   #form_approval [name='g_contact']
+  `;
+  $(document).on("keyup",
+  inp_number,function() {
+    var val = $(this).val();
+    if(isNaN(val)){
+         val = val.replace(/[^0-9]/g,'');
+    }
+    $(this).val(val); 
+  });
+
+
+  var inp_decimal = 
+  `#form_approval [name='height'], 
+   #form_approval [name='weight']
+  `;
+  $(document).on("keyup",
+  inp_decimal,function() {
+    var val = $(this).val();
+    if(isNaN(val)){
+         val = val.replace(/[^0-9\.]/g,'');
+         if(val.split('.').length>2) 
+             val =val.replace(/\.+$/,"");
+    }
+    $(this).val(val); 
+  });
+}

@@ -26,7 +26,8 @@
           </td>
           <td>{{moment(course.date_created).format('YYYY-MM-DD') }}</td>
           <td>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getCourseDetails({{course.id}})">
+            <button type="button" class="btn btn-secondary" onClick="getCourseDetails({{course.id}})"
+            data-toggle="tooltip" data-placement="top" title="Edit Course">
               <i class="me-2 mdi mdi-eye"></i>
             </button>
           </td>

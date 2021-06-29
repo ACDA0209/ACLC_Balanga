@@ -23,8 +23,13 @@
           {{--  <td>{{moment(event.event_date).format('YYYY-MM-DD') }}</td>  --}}
           <td>{{moment(event.date_created).format('YYYY-MM-DD') }}</td>
           <td>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" onClick="getEventDetails({{event.id}})">
+            <button type="button" class="btn btn-secondary" onClick="getEventDetails({{event.id}})"
+            data-toggle="tooltip" data-placement="top" title="Edit Event">
               <i class="me-2 mdi mdi-eye"></i>
+            </button>
+            <button type="button" class="btn btn-danger" onClick="deleteEvent({{event.id}})"
+            data-toggle="tooltip" data-placement="top" title="Delete Event">
+              <i class="me-2 mdi mdi-delete"></i>
             </button>
           </td>
       </tr>

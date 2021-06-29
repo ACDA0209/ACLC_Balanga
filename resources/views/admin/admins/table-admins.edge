@@ -27,8 +27,9 @@
 
           <td>
             @if(auth.user.id == 1 && admin.id != 1)
-            <button type="button" class="btn btn-{{admin.status==1?'danger':'primary'}}" data-toggle="modal" 
-            onClick="updateAdminUser('{{admin.encryptedId}}', '{{admin.status}}')">
+            <button type="button" class="btn btn-{{admin.status==1?'danger':'primary'}}"
+            onClick="updateAdminUser('{{admin.encryptedId}}', '{{admin.status}}')" 
+            data-toggle="tooltip" data-placement="top" title="{{admin.status==1?'DIsable':'Enable'}}">
               <i class="mdi mdi-account-{{admin.status==1?'off':'outline'}} "></i>
             </button>
             @endif

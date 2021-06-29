@@ -18,7 +18,8 @@ class IdDecryption {
       request.body.student_id = Encryption.decrypt(request.body.student_id)
     }
     if(params.id){
-      const mod_enc_id = params.id.replace("---", "/");
+      // const mod_enc_id = params.id.replace("---", "/");
+      const mod_enc_id = params.id.split("---").join("/");
       params.id = Encryption.decrypt(mod_enc_id)
     }
     

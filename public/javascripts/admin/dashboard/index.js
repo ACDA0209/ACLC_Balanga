@@ -17,8 +17,8 @@ $(() => {
   });
 
 
-  var imgInp = $("#cover_photo")
-  $(document).on('change', imgInp, function() {
+  var imgInp = $("#cover_photo");
+  $(document).on('change', "#cover_photo", function() {
     var file = $("#cover_photo").get(0).files[0];
     if(file){
         var reader = new FileReader();
@@ -33,7 +33,7 @@ $(() => {
     $("#cover_photo_prev").attr("src", cover_photo_src);
     $("#cover_photo").val("");
   });
-
+  $('[data-toggle="tooltip"]').tooltip(); 
 })
 
 function getCarousels(page) {
@@ -45,7 +45,8 @@ function getCarousels(page) {
     })
       .then(res => {
         currentPage = page
-        $('#table_carousel').html(res)
+        $('#table_carousel').html(res);
+        $('[data-toggle="tooltip"]').tooltip(); 
         hideOverlay();
       })
       .catch(err => {
@@ -197,15 +198,43 @@ function getSemesterList() {
 }
 
 function activateSemester() {
-  showOverlay()
-  ajaxRequest(`${URL}/activateSemester`, {
-    semester_id:  $('#form_semester_year').find("select[name=id]").find(':selected').val() || 0
-  })
-    .then(res => {
-      getSemesterList()
-    })
-    .catch(err => {
-      console.log(err)
+  // showOverlay()
+  // ajaxRequest(`${URL}/activateSemester`, {
+  //   semester_id:  $('#form_semester_year').find("select[name=id]").find(':selected').val() || 0
+  // })
+  //   .then(res => {
+  //     hideOverlay()
+  //     getSemesterList()
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+
+    Swal.fire({
+      title: 'Are you sure you want to activate this semester?',
+      showDenyButton: true,
+      confirmButtonText: `Yes, Activate`,
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        ajaxRequest(`${URL}/activateSemester`, {
+          semester_id:  $('#form_semester_year').find("select[name=id]").find(':selected').val() || 0
+        })
+          .then(res => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Successfully Activated!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            getSemesterList()
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
     })
 }
 

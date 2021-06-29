@@ -139,6 +139,7 @@ class DashboardController {
       text: 'Successfully updated!'
     })
   }
+  
   async deleteCarouselItem({request, response, auth}) {
     const result = await Carousel.find(request.body.id)
     var my_order = result.order

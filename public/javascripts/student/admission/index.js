@@ -17,6 +17,7 @@ $(() => {
       var id = $(this).data("target");
       $(id).collapse('toggle')
     });
+    inputSanitation();
 })
 
 $("#file_attachments").fileinput({
@@ -58,14 +59,20 @@ $("#file_attachments").fileinput({
 
 
 function storeUser() {
-    showOverlay();
+    // showOverlay();
     ajaxRequestForm(`${URL}/submission`, $('#form_admission'))
     .then(response => {
-        hideOverlay()
+        // hideOverlay()
         
         if (response.validator) {
           validatorMessages(response.validator, $('#add-validator'))
-        
+          var warning_list = "<ul>";
+          response.validator.forEach(element => {
+            warning_list += `<li>${element.message}</li>`;
+          });
+          warning_list += "</ul>";
+          $("#compile_validator_submission").removeClass("d-none");
+          $("#compile_validator_submission").find('p').html(warning_list);
         }else{
           // Swal.fire({
           //   icon: response.icon,
@@ -84,4 +91,36 @@ function storeUser() {
         })
       console.log(err)
     })
+  }
+
+
+  function inputSanitation(){
+    var inp_number = 
+    `#form_admission [name='contact'],
+     #form_admission [name='g_contact']
+    `;
+    $(document).on("keyup",
+    inp_number,function() {
+      var val = $(this).val();
+      if(isNaN(val)){
+           val = val.replace(/[^0-9]/g,'');
+      }
+      $(this).val(val); 
+    });
+
+
+    var inp_decimal = 
+    `#form_admission [name='height'], 
+     #form_admission [name='weight']
+    `;
+    $(document).on("keyup",
+    inp_decimal,function() {
+      var val = $(this).val();
+      if(isNaN(val)){
+           val = val.replace(/[^0-9\.]/g,'');
+           if(val.split('.').length>2) 
+               val =val.replace(/\.+$/,"");
+      }
+      $(this).val(val); 
+    });
   }
