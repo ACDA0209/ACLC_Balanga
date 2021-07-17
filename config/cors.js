@@ -16,7 +16,7 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: true,
+  origin: false,
   // origin: function (currentOrigin) {
   //   return currentOrigin === 'http://aclcbalangademo.xyz'
   // },
