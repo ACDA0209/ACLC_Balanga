@@ -56,7 +56,7 @@
   </div>
 
   @if(Env.get('NODE_ENV') == 'production')
-    <script>APP_URL = "http://www.aclcbalangademo.xyz"</script>
+    <script>APP_URL = "{{Env.get('APP_URL')}}"</script>
   @else
     <script>APP_URL = "http://localhost:3333"</script>
   @endif
