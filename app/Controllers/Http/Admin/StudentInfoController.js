@@ -75,8 +75,10 @@ class StudentInfoController {
         console.log('error upload?')
         return response.json({
           err: '2',
-          msg: 'Upload failed'
-        })
+          icon: 'error',
+          title: 'Error',
+          text: 'File Upload Failed!'
+        }) 
       }
       try {
         var excel_file_loc = Helpers.publicPath('student_info') +'\\'+ auth.user.id + '_' +file.clientName
