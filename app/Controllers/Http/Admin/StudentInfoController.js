@@ -12,6 +12,8 @@ class StudentInfoController {
   }
 
   async studentLogin({view}){  
+    // return await StudentGrade.query().where('student_id', '2021-0001')
+    // .orderBy('school_year', 'desc').fetch();
     return view.render('student.login.index')
   }
 
