@@ -1,0 +1,64 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/grades/index.js') }}
+@endsection
+
+@section('content')
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <form method="post" role="form" class="php-email-form" id="form_upload_grades" enctype="multipart/form-data" >
+              <div class="form-row">
+                <div class="col-8 form-group">
+                  <label for="">Upload Student Grades</label>:</label>
+                  <input  type="file" 
+                          class="form-control" 
+                          name="student_grades" 
+                          />
+                  <div class="validate" id="validate-student_grades"></div>
+                </div>
+                <div class="col form-group">
+                  <label for="">Template</label>:</label>
+                  <a type="button" class="btn btn-warning  btn-block" href="/template/StudentGradesTemplate.xlsx">
+                    <i class="me-2 mdi mdi-download"></i> Download
+                  </a> 
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onClick="uploadGrades()">
+                Upload Grades
+              </button>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="table-responsive" id="table_grades">
+                @include('admin/grades/table-grades')
+              </div>
+    
+              <div class="modal fade" id="modal_add_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {{--  @include('admin/courses/modal-add-course')  --}}
+              </div>
+    
+              <div class="modal fade" id="grade_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @include('admin/grades/modal-grade-details')
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+@endsection
+

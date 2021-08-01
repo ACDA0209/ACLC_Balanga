@@ -1,0 +1,86 @@
+
+<!-- Modal -->
+  <div class="modal-dialog modal-lg" role="document" style="max-width:1000px !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Student Grade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form method="post" role="form" class="php-email-form" id="form_update_grade" enctype="multipart/form-data" >
+          <input type="hidden" name="grade_id" value="{{grade.id}}" /> 
+
+          <div id="div_event_info" >
+            <div class="card-body">
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Student ID:</label>
+                  <input  type="text" 
+                          value="{{grade.student_id}}"
+                          class="form-control" 
+                          name="student_id"  />
+                  <div class="validate" id="validate-update-student_id"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Subject:</label>
+                  <input  type="text" 
+                          value="{{grade.subject}}"
+                          class="form-control" 
+                          name="subject"  />
+                  <div class="validate" id="validate-update-subject"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">Grade:</label>
+                  <input  type="text" 
+                          value="{{grade.grade}}"
+                          class="form-control" 
+                          name="grade"  />
+                  <div class="validate" id="validate-update-grade"></div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col form-group">
+                  <label for="">School Year:</label>
+                  <input  type="text" 
+                          value="{{grade.school_year}}"
+                          class="form-control" 
+                          name="school_year"  />
+                  <div class="validate" id="validate-update-school_year"></div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          </div>
+          
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onClick="updateGrade()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  parseEventDescription()
+function parseEventDescription(){
+  var html_content = $("#event_description_update").text()
+    console.log(html_content)
+    $("#event_description_update").html($.parseHTML(decodeURI(html_content)));
+}
+</script>

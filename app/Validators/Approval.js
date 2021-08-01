@@ -13,7 +13,7 @@ class Approval {
       middlename        : 'escape|trim',
       lastname          : 'escape|trim',
       suffix            : 'escape|trim',
-      birthdate         : 'to_date',
+      
       birth_place       : 'escape|trim',
       marital_status    : 'escape|trim',
       gender            : 'escape|trim',

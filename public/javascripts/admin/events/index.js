@@ -86,6 +86,7 @@ function getEvents(page) {
 function getEventDetails(event_id) {
   if (event_id) {
     showOverlay()
+    
     ajaxRequest(`${URL}/getEventDetails`, {
       event_id: event_id
     })

@@ -98,7 +98,6 @@ Route.post('/admin/users/updateAdminStatus', 'Admin/UserController.updateAdminSt
      .middleware('idDecryption')
 
 
-
 Route.get('/admin', 'Admin/DashboardController.index')
      .middleware('isNotAuthenticated')
 Route.post('/admin/fetchSemesterList', 'Admin/DashboardController.fetchSemesterList')
@@ -138,4 +137,22 @@ Route.post('/admin/events/getEventDetails', 'Admin/EventController.getEventDetai
 Route.post('/admin/events/addEvent', 'Admin/EventController.addEvent').validator('AddEvent')   
 Route.post('/admin/events/updateEvent', 'Admin/EventController.updateEvent').validator('UpdateEvent')   
 Route.post('/admin/events/deleteEvent', 'Admin/EventController.deleteEvent')
+
+Route.get('/admin/grades', 'Admin/GradeController.index')
+     .middleware('isNotAuthenticated')
+Route.post('/admin/grades/fetchGrades', 'Admin/GradeController.fetchGrades')
+Route.post('/admin/grades/uploadGrades', 'Admin/GradeController.uploadGrades') 
+Route.post('/admin/grades/getGradeDetails', 'Admin/GradeController.getGradeDetails') 
+Route.post('/admin/grades/updateGrade', 'Admin/GradeController.updateGrade').validator('UpdateGrade')
+Route.post('/admin/grades/deleteGrade', 'Admin/GradeController.deleteGrade') 
+
+Route.get('/studentLogin', 'Admin/StudentInfoController.studentLogin')
+Route.post('/info/login', 'Admin/StudentInfoController.studentGetGrades').validator('StudentInfoLogin')
+Route.get('/admin/studentinfo', 'Admin/StudentInfoController.index')
+.middleware('isNotAuthenticated')
+Route.post('/admin/studentinfo/fetchStudentInfo', 'Admin/StudentInfoController.fetchStudentInfo')
+Route.post('/admin/studentinfo/uploadStudentInfo', 'Admin/StudentInfoController.uploadStudentInfo') 
+Route.post('/admin/studentinfo/getStudentInfoDetails', 'Admin/StudentInfoController.getStudentInfoDetails') 
+Route.post('/admin/studentinfo/updateStudentInfo', 'Admin/StudentInfoController.updateStudentInfo').validator('UpdateStudentInfo')
+
 

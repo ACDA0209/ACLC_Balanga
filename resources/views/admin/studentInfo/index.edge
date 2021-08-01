@@ -1,0 +1,65 @@
+
+@layout('admin/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/admin/studentInfo/index.js') }}
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <form method="post" role="form" class="php-email-form" id="form_upload_student_info" enctype="multipart/form-data" >
+              <div class="form-row">
+                <div class="col-8 form-group">
+                  <label for="">Upload Student Info</label>:</label>
+                  <input  type="file" 
+                          class="form-control" 
+                          name="student_info" 
+                          />
+                  <div class="validate" id="validate-student_grades"></div>
+                </div>
+                <div class="col form-group">
+                  <label for="">Template</label>:</label>
+                  <a type="button" class="btn btn-warning  btn-block" href="/template/StudentInfoTemplate.xlsx">
+                    <i class="me-2 mdi mdi-download"></i> Download
+                  </a> 
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onClick="uploadStudentInfo()">
+                Upload Student Info
+              </button>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="table-responsive" id="table_studentInfo">
+                @include('admin/studentInfo/table-studentInfo')
+              </div>
+    
+              <div class="modal fade" id="modal_add_course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {{--  @include('admin/courses/modal-add-course')  --}}
+              </div>
+    
+              <div class="modal fade" id="studentInfo_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @include('admin/studentInfo/modal-studentInfo-details')
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+@endsection
+

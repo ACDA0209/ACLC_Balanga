@@ -1,0 +1,40 @@
+@if(result)
+@include('/admin/layouts/pagination')
+@endif
+<table class="table table-hover">
+  <thead>
+      <tr>
+          <th scope="col">Student ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Grade</th>
+          <th scope="col">School Year</th>
+          <th scope="col">Date Uploaded</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    @each(grade in result.data)
+
+      <tr>
+          <th scope="row">{{grade.student_id}}</th>
+          <td>{{grade.student_id}}</td>
+          <td>{{grade.subject}}</td>
+          <td>{{grade.grade}}</td>
+          <td>{{grade.school_year}}</td>
+          <td>{{moment(grade.date_created).format('YYYY-MM-DD') }}</td>
+          <td>
+            <button type="button" class="btn btn-secondary" onClick="getGradeDetails({{grade.id}})"
+            data-toggle="tooltip" data-placement="top" title="Edit Grade">
+              <i class="me-2 mdi mdi-eye"></i>
+            </button>
+            <button type="button" class="btn btn-danger" onClick="deleteGrade({{grade.id}})"
+            data-toggle="tooltip" data-placement="top" title="Delete Grade">
+              <i class="me-2 mdi mdi-delete"></i>
+            </button>
+          </td>
+      </tr>
+      @endeach
+  </tbody>
+</table>
+

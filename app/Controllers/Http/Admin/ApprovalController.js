@@ -16,6 +16,7 @@ const moment = use('moment')
 
 class ApprovalController {
   async index({view}){
+
     const enrollment_types = await EnrollmentType.query().where('status', 1).fetch()
     const admission_statuses = await AdmissionStatus.query().fetch()
     const semesters = await Semester.query().fetch()
@@ -104,7 +105,8 @@ class ApprovalController {
       let sendTo = rej_student.email
       let title = 'ACLC Admission Application'
       let message = rej_student.note
-      const rejsendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+      
+      const rejsendEmail =  await Nodemailer.sendEmail(sendTo, title, message, null)
 
       return true
     }
@@ -169,15 +171,19 @@ class ApprovalController {
 
     //if successfull yung update sa info ng student magsend ng confirmation email
     if(result){
-      const student = await Student.findBy('id', request.body.student_id) 
-      // let sendTo = 'macamoonlight05@gmail.com'
+      // const student = await Student.findBy('id', request.body.student_id)       
+      const student = await Student.query().studentEmailDetails(request.body.student_id).first();
       let sendTo = student.email
       let title = 'ACLC Admission Application'
       let message = ` <p>Hi ${student.firstname} ${student.lastname}! Your application has been approved.</p>
                       <p>Your reference number is ${student.reference_no}</p>`
+          message += await Nodemailer.setEmail(student)
+      let attachments = await Nodemailer.setAttachment(student.toJSON().studentFiles)
+
       if(student.admission_status_id == 3)
       message = student.note
-      const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+
+      const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message, attachments)
     }
 
     return response.json({

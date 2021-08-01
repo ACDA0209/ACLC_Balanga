@@ -57,19 +57,33 @@ class Student extends Model {
 
 
     parents() {
-        return this.hasMany('App/Models/Parent', 'id', 'student_id')
-      }
+      return this.hasMany('App/Models/Parent', 'id', 'student_id')
+    }
+
     guardian() {
-        return this.hasOne('App/Models/Guardian', 'id', 'student_id')
-      }
+      return this.hasOne('App/Models/Guardian', 'id', 'student_id')
+    }
 
     admissionStatus() {
-        return this.hasOne('App/Models/AdmissionStatus', 'admission_status_id', 'id')
-      }
+      return this.hasOne('App/Models/AdmissionStatus', 'admission_status_id', 'id')
+    }
 
     studentFiles() {
       return this.hasMany('App/Models/StudentFile', 'id', 'student_id')
     }
+
+    semester() {
+      return this.hasOne('App/Models/Semester', 'semester_id', 'id')
+    }
+
+    course() {
+      return this.hasOne('App/Models/Course', 'course_id', 'id')
+    }
+
+    enrollment() {
+      return this.hasOne('App/Models/EnrollmentType', 'enrollment_type_id', 'id')
+    }
+
     static async checkReferenceNo (referenceNo) {
       const result = await this
       .query()
@@ -78,6 +92,18 @@ class Student extends Model {
       
       return result ? true : false
 
+    }
+
+    static scopeStudentEmailDetails(query, student_id){
+      return query
+      .with('semester')
+      .with('enrollment')
+      .with('course')
+      .with('parents')
+      .with('guardian')
+      .with('admissionStatus')
+      .with('studentFiles')
+      .where('id', student_id)
     }
 
     static async addStudent (request) {

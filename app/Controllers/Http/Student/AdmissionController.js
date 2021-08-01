@@ -50,13 +50,23 @@ class AdmissionController {
 
             const uploadFiles = await StudentFile.uploadStudentFiles(studentFiles, newStudent.id)
 
-            // let sendTo = 'macamoonlight05@gmail.com'
-            let sendTo = newStudent.email
+            const student = await Student.query().studentEmailDetails(newStudent.id).first();
+            let sendTo = student.email
             let title = 'ACLC Admission Application'
-            let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
+            let message = `<p>Hi ${student.firstname} ${student.lastname}! 
                             Your application was successfully submitted. </p>
                             <p>Please wait for the confirmation result.</p>`
-            const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message)
+                message += await Nodemailer.setEmail(student)
+            let attachments = await Nodemailer.setAttachment(student.toJSON().studentFiles)
+      
+            // let sendTo = 'macamoonlight05@gmail.com'
+            // let sendTo = newStudent.email
+            // let title = 'ACLC Admission Application'
+            // let message = `<p>Hi ${newStudent.firstname} ${newStudent.lastname}! 
+            //                 Your application was successfully submitted. </p>
+            //                 <p>Please wait for the confirmation result.</p>`
+
+            const sendEmail =  await Nodemailer.sendEmail(sendTo, title, message, attachments)
             const enc_id = Encryption.encrypt(newStudent.id)
             // const mod_enc_id = enc_id.replace("/", "---");
             const mod_enc_id = enc_id.split("/").join("---");

@@ -213,74 +213,84 @@ function modalflow(){
 
 
 function updateStudentStatus(student_id, status_id, note = null) {
-  if (student_id) {
-    showOverlay()
-
-    // var formData = $("#form_approval").serializeArray();
-    // formData.push({name: "student_id", value: student_id});
-    // formData.push({name: "status_id", value: status_id});
-    // formData.push({name: "note", value: note});
-
-    // ajaxRequest(`${URL}/updateStudentStatus`, formData)
-    // .then(res => {
-    //     $("#student_details").modal("hide")
-    //     Swal.fire({
-    //       position: 'top-end',
-    //       icon: 'success',
-    //       title: 'Successfully Updated!',
-    //       showConfirmButton: false,
-    //       timer: 1500
-    //     })
-    //     getStudents(currentPage)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    var data = [
-      {student_id: student_id},
-      {status_id: status_id},
-      {note: note},
-      {uploaded_files: uploaded_files()},
-
-    ]
-      $("#form_approval").find("input[name=admission_status_id]").val(status_id);
-      // ajaxRequestForm(`${URL}/updateStudentStatus`, $('#form_approval'))
-      ajaxFormRequestWithData(`${URL}/updateStudentStatus`, $('#form_approval'), data)
-      .then(response => {
-        hideOverlay();
-        if (response.validator) {
-          validatorMessages(response.validator, $('#add-validator'))
-          $(".validate").css("color", "#EC1C24");
-          var warning_list = "<ul>";
-          response.validator.forEach(element => {
-            warning_list += `<li>${element.message}</li>`;
-          });
-          warning_list += "</ul>";
-          $("#compile_validator_approval").removeClass("d-none");
-          $("#compile_validator_approval").find('p').html(warning_list);
-        }else{
-          if(response.err == 0){
-            $("#student_details").modal("hide")
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Successfully Updated!',
-              showConfirmButton: false,
-              timer: 1500
+  Swal.fire({
+    title: 'Are you sure you want to update this student?',
+    showDenyButton: true,
+    confirmButtonText: `Yes, Approve`,
+    denyButtonText: `No`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      if (student_id) {
+        showOverlay()
+    
+        // var formData = $("#form_approval").serializeArray();
+        // formData.push({name: "student_id", value: student_id});
+        // formData.push({name: "status_id", value: status_id});
+        // formData.push({name: "note", value: note});
+    
+        // ajaxRequest(`${URL}/updateStudentStatus`, formData)
+        // .then(res => {
+        //     $("#student_details").modal("hide")
+        //     Swal.fire({
+        //       position: 'top-end',
+        //       icon: 'success',
+        //       title: 'Successfully Updated!',
+        //       showConfirmButton: false,
+        //       timer: 1500
+        //     })
+        //     getStudents(currentPage)
+        //   })
+        //   .catch(err => {
+        //     console.log(err)
+        //   })
+        var data = [
+          {student_id: student_id},
+          {status_id: status_id},
+          {note: note},
+          {uploaded_files: uploaded_files()},
+    
+        ]
+          $("#form_approval").find("input[name=admission_status_id]").val(status_id);
+          // ajaxRequestForm(`${URL}/updateStudentStatus`, $('#form_approval'))
+          ajaxFormRequestWithData(`${URL}/updateStudentStatus`, $('#form_approval'), data)
+          .then(response => {
+            hideOverlay();
+            if (response.validator) {
+              validatorMessages(response.validator, $('#add-validator'))
+              $(".validate").css("color", "#EC1C24");
+              var warning_list = "<ul>";
+              response.validator.forEach(element => {
+                warning_list += `<li>${element.message}</li>`;
+              });
+              warning_list += "</ul>";
+              $("#compile_validator_approval").removeClass("d-none");
+              $("#compile_validator_approval").find('p').html(warning_list);
+            }else{
+              if(response.err == 0){
+                $("#student_details").modal("hide")
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Successfully Updated!',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                getStudents(currentPage)
+              }else{
+                console.log("response.err != 0")
+              }
+            }
+    
             })
-            getStudents(currentPage)
-          }else{
-            console.log("response.err != 0")
-          }
-        }
+            .catch(err => {
+              console.log(err)
+            })
+    
+      }
+    }
+  })
 
-        })
-        .catch(err => {
-          console.log(err)
-        })
-
-
-  }
 }
 
 function uploaded_files(){

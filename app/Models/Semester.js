@@ -21,13 +21,20 @@ class Semester extends Model {
 
   static get computed () {
     return [
-      'semesterYr'
+      'semesterYr',
+      'semesterName'
     ]
   }
 
   getSemesterYr ({ semester, from_year, to_year, active_status }) {
     // var str = `${semester} ${from_year} - ${to_year}` (active_status == 1) ? "[Activated]" : ""
     var str =  `${semester} ${from_year} - ${to_year} ${(active_status == 1) ? "[ Activated ]" : ""}`
+    return str
+  }
+  
+  getSemesterName ({ semester, from_year, to_year, active_status }) {
+    // var str = `${semester} ${from_year} - ${to_year}` (active_status == 1) ? "[Activated]" : ""
+    var str =  `${semester} ${from_year} - ${to_year}`
     return str
   }
 

@@ -1,0 +1,71 @@
+
+@layout('student/layouts/main')
+
+@section('javascripts')
+{{ script('javascripts/student/info/index.js') }}
+@endsection
+@section('content')
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>Student</li>
+      </ol>
+      <h2>Login</h2>
+
+    </div>
+  </section><!-- End Breadcrumbs -->
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-lg-8">
+              <form method="post" role="form" class="php-email-form" id="form_login" enctype="multipart/form-data" >
+
+                <div class="form-row">
+                  <div class="col-md-12 form-group">
+                    <label for=""><small>Student ID:</small></label>
+                    <input  type="text" 
+                            name="student_id" 
+                            class="form-control" 
+                            />
+                    <div class="validate" id="validate-student_id"></div>
+                  </div>
+                </div>  
+                    
+                <div class="form-row">
+                  <div class="col-md-12 form-group">
+                    <label for=""><small>Password:</small></label>
+                    <input  type="text" 
+                            name="password" 
+                            class="form-control" 
+                            />
+                    <div class="validate" id="validate-password"></div>
+                  </div>
+                </div>  
+
+                <div class="validate" id="validate-login"></div>
+                <div class="text-center">
+                  <button 
+                    type="button" 
+                    class="btn btn-primary btn_submit" 
+                    id="btn_submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </section><!-- End About Section -->
+
+    </main><!-- End #main -->  
+    <script>
+      $("#navBar li").removeClass("active")
+      $("#nav_student_login").addClass("active")
+    </script>
+@endsection

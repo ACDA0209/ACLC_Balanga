@@ -18,3 +18,5 @@ database/*.sqlite
 public/student_files
 public/events
 public/carousels
+public/student_grades
+public/student_info
