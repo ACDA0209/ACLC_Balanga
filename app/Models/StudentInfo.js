@@ -90,7 +90,7 @@ class StudentInfo extends Model {
       .query()
         .where('id', '=', request.body.studentInfo_id)
         .update({
-          student_id: request.body.subject,
+          student_id: request.body.student_id,
           firstname: request.body.firstname,
           middlename: request.body.middlename,
           lastname: request.body.lastname,
