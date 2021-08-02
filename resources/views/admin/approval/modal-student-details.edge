@@ -334,15 +334,15 @@
       </div>
       <div class="modal-footer">
         {{--  @if(student.admission_status_id == 1)  --}}
+        <div id="reference-area">
+          <small>Reference No: </small> <span class="badge badge-pill badge-danger"></span>
+        </div>
         <button type="button" class="btn btn-danger" id="btn-reject" onClick="">Reject</button>
         <button type="button" class="btn btn-primary" id="btn-approve" onClick="">Approve</button>
         {{--  @elseif(student.admission_status_id == 3)  --}}
         <button type="button" class="btn btn-primary" id="btn-update-approve" onClick="" >Update and Approve</button>
         {{--  @endif    --}}
         {{--  @if(student.admission_status_id == 2)  --}}
-        <div id="reference-area">
-          <small>Reference No: </small> <span class="badge badge-pill badge-danger"></span>
-        </div>
         {{--  @endif  --}}
       </div>
     </div>

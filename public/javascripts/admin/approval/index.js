@@ -135,6 +135,8 @@ function showAdmissionStatus(status, student_id, reference_no){
       case 2:
       $("#reference-area").show();
       $("#reference-area").find("span").text(reference_no);
+      $("#btn-update-approve").attr("onClick", "updateStudentStatus('"+student_id+"', 4)");
+      $("#btn-update-approve").show();
       break;
     case 3:
       $("#btn-update-approve").attr("onClick", "updateStudentStatus('"+student_id+"', 4)");
